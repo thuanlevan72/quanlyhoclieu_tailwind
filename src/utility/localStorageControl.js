@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 
+// lấy ra tokens được lưu trong Cookies
 const getItem = (key) => {
   const data = Cookies.get(key);
 

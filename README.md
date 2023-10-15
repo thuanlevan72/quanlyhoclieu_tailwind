@@ -1,6 +1,6 @@
 # Các Thư Viện và Gói Phụ Thuộc của Dự Án quanlyhoclieu-Tailwind
 
-- - @dnd-kit/core: Thư viện cho việc kéo và thả phần tử trên trang web.
+- @dnd-kit/core: Thư viện cho việc kéo và thả phần tử trên trang web.
 
 - @dnd-kit/sortable: Một phần của DnD Kit, hỗ trợ việc sắp xếp các phần tử khi kéo và thả.
 
@@ -128,4 +128,4 @@
 
 - xlsx: Thư viện cho việc xử lý tệp tin Excel.
 
-# Danh sách này chỉ là một phần của các thư viện mà project "hexadash-tailwind" sử dụng. Mỗi thư viện có mục tiêu và tác dụng cụ thể trong việc phát triển ứng dụng React, ví dụ như quản lý trạng thái (React-Redux), việc làm việc với biểu đồ (Chart.js, ApexCharts), quản lý định tuyến (React-Router), và nhiều tính năng khác. Tác dụng cụ thể của từng thư viện cần phụ thuộc vào cách chúng được tích hợp vào project và cách chúng được sử dụng.
+# Danh sách này chỉ là một phần của các thư viện mà project "quanlyhoclieu-Tailwind" sử dụng. Mỗi thư viện có mục tiêu và tác dụng cụ thể trong việc phát triển ứng dụng React, ví dụ như quản lý trạng thái (React-Redux), việc làm việc với biểu đồ (Chart.js, ApexCharts), quản lý định tuyến (React-Router), và nhiều tính năng khác. Tác dụng cụ thể của từng thư viện cần phụ thuộc vào cách chúng được tích hợp vào project và cách chúng được sử dụng.
