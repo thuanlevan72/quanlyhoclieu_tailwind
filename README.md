@@ -36,7 +36,7 @@
 
 - feather-icons-react: Gói biểu tượng SVG dành cho React, chứa các biểu tượng vector đơn giản.
 
-f- ile-saver: Thư viện giúp tạo và tải tệp tin trong trình duyệt.
+- file-saver: Thư viện giúp tạo và tải tệp tin trong trình duyệt.
 
 - google-maps-react-18-support: Hỗ trợ cho Google Maps trong React.
 
