@@ -8,14 +8,20 @@ const login = (values, callback) => {
   return async (dispatch) => {
     try {
       dispatch(loginBegin());
-      if (values.email === 'thuanlevan72@gmail.com' && values.password === '@Anh123anh') {
-        Cookies.set('access_token', 'response.data.data.token');
-        Cookies.set('logedIn', true);
-        dispatch(loginSuccess(true));
-        callback();
-      } else {
-        dispatch(loginErr('liên hệ với thuận lê để có thể vào được administrator'));
-      }
+      const response = await DataService.post('/login/login', { email: values.email, password: values.password });
+      console.log(response.data);
+      Cookies.set('access_token', response.data.loginResponse.token);
+      Cookies.set('logedIn', true);
+      dispatch(loginSuccess(true));
+      callback();
+      // if (values.email === 'thuanlevan72@gmail.com' && values.password === '@Anh123anh') {
+      //   Cookies.set('access_token', 'response.data.data.token');
+      //   Cookies.set('logedIn', true);
+      //   dispatch(loginSuccess(true));
+      //   callback();
+      // } else {
+      //   dispatch(loginErr('liên hệ với thuận lê để có thể vào được administrator'));
+      // }
       // console.log(values);
 
       // const response = await DataService.post('/login', values);
@@ -27,8 +33,9 @@ const login = (values, callback) => {
       //   dispatch(loginSuccess(true));
       // callback();
       // }
-    } catch (err) {
-      dispatch(loginErr(err));
+    } catch (error) {
+      console.log(error);
+      dispatch(loginErr(`Error:   ${error.message}`));
     }
   };
 };

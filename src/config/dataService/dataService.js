@@ -8,7 +8,7 @@ const authHeader = () => ({
 });
 
 const client = axios.create({
-  baseURL: API_ENDPOINT,
+  baseURL: 'https://api.polyfood.store/api' || API_ENDPOINT,
   headers: {
     Authorization: `Bearer ${getItem('access_token')}`,
     'Content-Type': 'application/json',
