@@ -8,12 +8,22 @@ const login = (values, callback) => {
   return async (dispatch) => {
     try {
       dispatch(loginBegin());
-      const response = await DataService.post('/login/login', { email: values.email, password: values.password });
-      console.log(response.data);
-      Cookies.set('access_token', response.data.loginResponse.token);
+      // console.log(values);
+      const response = await DataService.post('/Account/signIn', values);
+      console.log(response);
+      if (response.data.token == null) {
+        throw new Error('đăng nhập thất bại');
+      }
+      Cookies.set('access_token', response.data.token);
       Cookies.set('logedIn', true);
-      dispatch(loginSuccess(true));
-      callback();
+      Cookies.set('decentralization', response.data.decentralization.toLowerCase());
+      dispatch(
+        loginSuccess({
+          isLogin: true,
+          decentralization: response.data.decentralization.toLowerCase(),
+        }),
+      );
+      callback(response.data.decentralization.toLowerCase());
       // if (values.email === 'thuanlevan72@gmail.com' && values.password === '@Anh123anh') {
       //   Cookies.set('access_token', 'response.data.data.token');
       //   Cookies.set('logedIn', true);
@@ -35,7 +45,7 @@ const login = (values, callback) => {
       // }
     } catch (error) {
       console.log(error);
-      dispatch(loginErr(`Error:   ${error.message}`));
+      dispatch(loginErr(`Error:   ${error}`));
     }
   };
 };

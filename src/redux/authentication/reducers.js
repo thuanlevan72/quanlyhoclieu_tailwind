@@ -6,6 +6,7 @@ const { LOGIN_BEGIN, LOGIN_SUCCESS, LOGIN_ERR, LOGOUT_BEGIN, LOGOUT_SUCCESS, LOG
 const initState = {
   login: Cookies.get('logedIn'),
   loading: false,
+  decentralization: Cookies.get('decentralization'),
   error: null,
 };
 
@@ -24,7 +25,8 @@ const AuthReducer = (state = initState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        login: data,
+        login: data.isLogin,
+        decentralization: data.decentralization,
         loading: false,
       };
     case LOGIN_ERR:

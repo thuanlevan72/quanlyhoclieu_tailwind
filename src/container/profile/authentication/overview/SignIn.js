@@ -29,7 +29,7 @@ function SignIn() {
 
   const handleSubmit = useCallback(
     (values) => {
-      dispatch(login(values, () => history('/admin')));
+      dispatch(login(values, (name) => history(`/${name}`)));
     },
     [history, dispatch],
   );
@@ -59,7 +59,7 @@ function SignIn() {
           <div className="px-10 pt-8 pb-6">
             <Form name="login" form={form} onFinish={handleSubmit} layout="vertical">
               <Form.Item
-                name="email"
+                name="username"
                 rules={[{ message: 'Please input your username or Email!', required: true }]}
                 initialValue="hexadash@dm.com"
                 label="Username or Email Address"
