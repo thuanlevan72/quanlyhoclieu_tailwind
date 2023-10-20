@@ -10,11 +10,39 @@ import './static/css/style.css';
 import config from './config/config';
 import ProtectedRoute from './components/utilities/protectedRoute';
 import 'antd/dist/antd.less';
+import Students from './routes/student';
 
 const NotFound = lazy(() => import('./container/pages/404'));
 
 const { theme } = config;
-
+function RouterAuthorization() {
+  const { decentralization } = useSelector((state) => {
+    return {
+      decentralization: state.auth.decentralization,
+    };
+  });
+  console.log(decentralization);
+  return (
+    <>
+      {decentralization === 'admin' && (
+        <Routes>
+          <Route path="/admin/*" element={<ProtectedRoute path="/*" Component={Admin} />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      )}
+      {decentralization === 'student' && (
+        <Routes>
+          <Route path="/student/*" element={<ProtectedRoute path="/*" Component={Students} />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      )}
+      {/* <Routes>
+        <Route path="/admin/*" element={<ProtectedRoute path="/*" Component={Admin} />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes> */}
+    </>
+  );
+}
 function ProviderConfig() {
   const { rtl, isLoggedIn, topMenu, mainContent } = useSelector((state) => {
     return {
@@ -22,9 +50,9 @@ function ProviderConfig() {
       topMenu: state.ChangeLayoutMode.topMenu,
       mainContent: state.ChangeLayoutMode.mode,
       isLoggedIn: state.auth.login,
+      // decentralization: state.auth.decentralization,
     };
   });
-
   // const [path, setPath] = useState(window.location.pathname);
   // useEffect(() => {
   //   // let unmounted = false;
@@ -34,7 +62,6 @@ function ProviderConfig() {
   //   // // eslint-disable-next-line no-return-assign
   //   // return () => (unmounted = true);
   // }, [setPath]);
-
   return (
     <ConfigProvider direction={rtl ? 'rtl' : 'ltr'}>
       <ThemeProvider theme={{ ...theme, rtl, topMenu, mainContent }}>
@@ -44,10 +71,7 @@ function ProviderConfig() {
               <Route path="/*" element={<Auth />} />{' '}
             </Routes>
           ) : (
-            <Routes>
-              <Route path="/admin/*" element={<ProtectedRoute path="/*" Component={Admin} />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <RouterAuthorization />
           )}
           {/* {!isLoggedIn && (path === process.env.PUBLIC_URL || path === `${process.env.PUBLIC_URL}/`) && (
             <Routes>
