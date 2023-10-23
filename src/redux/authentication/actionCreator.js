@@ -1,8 +1,11 @@
 import Cookies from 'js-cookie';
 import actions from './actions';
+// import * as layoutActions from '../themeLayout/actions'; // Sử dụng tên không gian tên "layoutActions" cho thư viện từ '../themeLayout/actions';
+
 import { DataService } from '../../config/dataService/dataService';
 
 const { loginBegin, loginSuccess, loginErr, logoutBegin, logoutSuccess, logoutErr } = actions;
+// const { changeMenuSuccess } = layoutActions;
 
 const login = (values, callback) => {
   return async (dispatch) => {
@@ -23,6 +26,13 @@ const login = (values, callback) => {
           decentralization: response.data.decentralization.toLowerCase(),
         }),
       );
+      // if (response.data.decentralization.toLowerCase() === 'admin') {
+      //   console.clear();
+      // }
+      // console.log(response.data.decentralization.toLowerCase());
+      // if (response.data.decentralization.toLowerCase() === 'student') {
+      //   dispatch(changeMenuSuccess(true));
+      // }
       callback(response.data.decentralization.toLowerCase());
       // if (values.email === 'thuanlevan72@gmail.com' && values.password === '@Anh123anh') {
       //   Cookies.set('access_token', 'response.data.data.token');
@@ -72,6 +82,7 @@ const logOut = (callback) => {
     try {
       Cookies.remove('logedIn');
       Cookies.remove('access_token');
+      Cookies.remove('decentralization');
       dispatch(logoutSuccess(false));
       callback();
     } catch (err) {

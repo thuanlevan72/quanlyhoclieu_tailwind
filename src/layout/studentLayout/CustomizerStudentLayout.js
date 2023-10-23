@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { changeLayoutMode, changeMenuMode, changeDirectionMode } from '../../redux/themeLayout/actionCreator';
 
-function Customizer() {
+function CustomizerStudentLayout() {
   const { t } = useTranslation();
   const { rtl, layoutMode, topMenu } = useSelector((state) => {
     return {
@@ -18,6 +18,7 @@ function Customizer() {
       topMenu: state.ChangeLayoutMode.topMenu,
     };
   });
+  console.log(topMenu);
   const [state, setState] = useState({
     customizerAction: false,
   });
@@ -31,6 +32,7 @@ function Customizer() {
       customizerAction: !customizerAction,
     });
   };
+
   const darkmodeActivated = () => {
     document.body.classList.add('dark');
     document.body.classList.add('dark');
@@ -43,7 +45,6 @@ function Customizer() {
   const changeLayout = (mode) => {
     dispatch(changeLayoutMode(mode));
   };
-
   const changeNavbar = (topMode) => {
     const html = document.querySelector('html');
     if (topMode) {
@@ -51,8 +52,12 @@ function Customizer() {
     } else {
       html.classList.remove('hexadash-topmenu');
     }
+    console.log(topMode);
     dispatch(changeMenuMode(topMode));
   };
+  if (!topMenu) {
+    changeNavbar(true);
+  }
   const changeLayoutDirection = (rtlMode) => {
     if (rtlMode) {
       const html = document.querySelector('html');
@@ -224,4 +229,4 @@ function Customizer() {
   );
 }
 
-export default Customizer;
+export default CustomizerStudentLayout;

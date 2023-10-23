@@ -44,6 +44,7 @@ const AuthReducer = (state = initState, action) => {
       return {
         ...state,
         login: data,
+        decentralization: '',
         loading: false,
       };
     case LOGOUT_ERR:

@@ -11,6 +11,7 @@ import config from './config/config';
 import ProtectedRoute from './components/utilities/protectedRoute';
 import 'antd/dist/antd.less';
 import Students from './routes/student';
+import Tutor from './routes/tutor';
 
 const NotFound = lazy(() => import('./container/pages/404'));
 
@@ -36,6 +37,18 @@ function RouterAuthorization() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       )}
+      {decentralization === 'tutor' && (
+        <Routes>
+          <Route path="/tutor/*" element={<ProtectedRoute path="/*" Component={Tutor} />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      )}
+      {!decentralization && (
+        <Routes>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      )}
+
       {/* <Routes>
         <Route path="/admin/*" element={<ProtectedRoute path="/*" Component={Admin} />} />
         <Route path="*" element={<NotFound />} />

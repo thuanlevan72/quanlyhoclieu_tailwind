@@ -1,12 +1,10 @@
 import React, { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { Spin } from 'antd';
-import Dashboard from './DashboardRoutes';
-import withStudentLayout from '../../layout/studentLayout/withStudentLayout';
 
 const NotFound = lazy(() => import('../../container/pages/404'));
 // const StudentDashboard = lazy(() => import('../../page/student/StudentDashboard'));
-const Student = React.memo(() => {
+const Tutor = React.memo(() => {
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -21,11 +19,11 @@ const Student = React.memo(() => {
     >
       <Routes>
         {/* <Route index path="/*" element={<StudentDashboard />} /> */}
-        <Route index path="/*" element={<Dashboard />} />
+        <Route index path="/*" element={<h1>Tutor</h1>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
   );
 });
 
-export default withStudentLayout(Student);
+export default Tutor;
