@@ -68,8 +68,8 @@ function TopMenu() {
             </Link>
             <ul className="subMenu">
               <li>
-                <NavLink to={`${path}/admin`} onClick={addParentActive}>
-                  Demo 1
+                <NavLink to={`${path}/student-dashboard`} onClick={addParentActive}>
+                  student-dashboard
                 </NavLink>
               </li>
               <li>

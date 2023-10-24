@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Spin } from 'antd';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import Heading from '../../components/heading/heading';
 import { Button } from '../../components/buttons/buttons';
 
-function NotFound() {
+function NotFound({ url }) {
   const [state, setState] = useState({
     isLoading: true,
   });
@@ -32,8 +33,8 @@ function NotFound() {
           <p className="text-body dark:text-white60 mb-6 text-lg xs:text-base font-medium">
             Sorry! the page you are looking for does not exist.
           </p>
-          <NavLink to="/admin">
-            <Button size="default" type="primary" to="/admin" className="h-11">
+          <NavLink to={url || '/admin'}>
+            <Button size="default" type="primary" to={url || '/admin'} className="h-11">
               Return Home
             </Button>
           </NavLink>
@@ -42,5 +43,7 @@ function NotFound() {
     </main>
   );
 }
-
+NotFound.propTypes = {
+  url: PropTypes.string,
+};
 export default NotFound;
