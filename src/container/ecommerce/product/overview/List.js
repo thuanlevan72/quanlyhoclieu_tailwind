@@ -66,7 +66,7 @@ function List() {
                 onShowSizeChange={onShowSizeChange}
                 pageSize={10}
                 defaultCurrent={1}
-                total={100}
+                total={products.length}
               />
             </div>
           </PaginationStyle>

@@ -5,6 +5,10 @@ import Dashboard from './DashboardRoutes';
 import withStudentLayout from '../../layout/studentLayout/withStudentLayout';
 
 const NotFound = lazy(() => import('../../container/pages/404'));
+const StudentAssignment = lazy(() => import('../../page/student/StudentAssignment'));
+const StudentFee = lazy(() => import('../../page/student/StudentFee'));
+const Course = lazy(() => import('../../page/student/Course'));
+const PaymentHistory = lazy(() => import('../../page/student/StudentPaymentHistory'));
 // const StudentDashboard = lazy(() => import('../../page/student/StudentDashboard'));
 const Student = React.memo(() => {
   const { pathname } = useLocation();
@@ -22,6 +26,10 @@ const Student = React.memo(() => {
       <Routes>
         {/* <Route index path="/*" element={<StudentDashboard />} /> */}
         <Route index path="/*" element={<Dashboard />} />
+        <Route path="student-assignment" element={<StudentAssignment />} />
+        <Route path="student-fee" element={<StudentFee />} />
+        <Route path="course" element={<Course />} />
+        <Route path="payment-history" element={<PaymentHistory />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
