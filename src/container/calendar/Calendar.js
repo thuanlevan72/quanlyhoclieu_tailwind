@@ -10,6 +10,7 @@ import UilTrash from '@iconscout/react-unicons/icons/uil-trash-alt';
 import { Col, Modal, notification, Row } from 'antd';
 import moment from 'moment';
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 import Toolbar from 'react-big-calendar/lib/Toolbar';
@@ -30,9 +31,10 @@ const DragAndDropCalendar = withDragAndDrop(Calendar);
 export const eventContext = React.createContext();
 
 function Calendars() {
+  const decentralization = `/${Cookies.get('decentralization')};`;
   const PageRoutes = [
     {
-      path: '/admin',
+      path: decentralization,
       breadcrumbName: 'Dashboard',
     },
     {

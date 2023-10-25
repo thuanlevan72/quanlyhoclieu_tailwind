@@ -1,5 +1,6 @@
 import { React, useState } from 'react';
 import { Upload } from 'antd';
+import Cookies from 'js-cookie';
 import UilCamera from '@iconscout/react-unicons/icons/uil-camera';
 import UilSetting from '@iconscout/react-unicons/icons/uil-setting';
 import UilBell from '@iconscout/react-unicons/icons/uil-bell';
@@ -9,8 +10,7 @@ import { Link, NavLink } from 'react-router-dom';
 import Heading from '../../../../components/heading/heading';
 
 function AuthorBox() {
-  const path = '/admin/pages/settings';
-
+  const decentralization = `/${Cookies.get('decentralization')}/profile`;
   const [activeValue, setActiveValue] = useState('profile');
 
   return (
@@ -36,7 +36,7 @@ function AuthorBox() {
           <ul className="mb-0">
             <li>
               <NavLink
-                to={`${path}/profile`}
+                to={`${decentralization}/profile`}
                 onClick={() => {
                   setActiveValue('profile');
                 }}
@@ -52,7 +52,7 @@ function AuthorBox() {
             </li>
             <li>
               <NavLink
-                to={`${path}/account`}
+                to={`${decentralization}/account`}
                 onClick={() => {
                   setActiveValue('account');
                 }}
@@ -68,7 +68,7 @@ function AuthorBox() {
             </li>
             <li>
               <NavLink
-                to={`${path}/password`}
+                to={`${decentralization}/password`}
                 onClick={() => {
                   setActiveValue('password');
                 }}
@@ -97,7 +97,7 @@ function AuthorBox() {
             </li>
             <li>
               <NavLink
-                to={`${path}/social`}
+                to={`${decentralization}/social`}
                 onClick={() => {
                   setActiveValue('social');
                 }}
@@ -113,7 +113,7 @@ function AuthorBox() {
             </li>
             <li>
               <NavLink
-                to={`${path}/notification`}
+                to={`${decentralization}/notification`}
                 onClick={() => {
                   setActiveValue('notification');
                 }}

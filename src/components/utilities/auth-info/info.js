@@ -59,7 +59,7 @@ const AuthInfo = React.memo(() => {
           </li>
           <li>
             <Link
-              to="#"
+              to={`/${decentralization}/settings`}
               className="inline-flex items-center hover:bg-shadow-transparent text-light dark:text-white60 dark:hover:text-white hover:text-primary dark:hover:bg-white10 dark:rounded-4 hover:pl-6 w-full px-2.5 py-3 text-sm transition-all ease-in-out delay-150"
             >
               <UilSetting className="w-4 h-4 ltr:mr-3 rtl:ml-3" /> Settings
@@ -70,7 +70,7 @@ const AuthInfo = React.memo(() => {
               to="#"
               className="inline-flex items-center hover:bg-shadow-transparent text-light dark:text-white60 dark:hover:text-white hover:text-primary dark:hover:bg-white10 dark:rounded-4 hover:pl-6 w-full px-2.5 py-3 text-sm transition-all ease-in-out delay-150"
             >
-              <UilDollarSign className="w-4 h-4 ltr:mr-3 rtl:ml-3" /> Billing
+              <UilDollarSign className="w-4 h-4 ltr:mr-3 rtl:ml-3" /> Total Money
             </Link>
           </li>
           <li>
@@ -83,7 +83,7 @@ const AuthInfo = React.memo(() => {
           </li>
           <li>
             <Link
-              to="#"
+              to={`/${decentralization}/activity`}
               className="inline-flex items-center hover:bg-shadow-transparent text-light dark:text-white60 dark:hover:text-white hover:text-primary dark:hover:bg-white10 dark:rounded-4 hover:pl-6 w-full px-2.5 py-3 text-sm transition-all ease-in-out delay-150"
             >
               <UilUsersAlt className="w-4 h-4 ltr:mr-3 rtl:ml-3" /> Activity
@@ -91,7 +91,7 @@ const AuthInfo = React.memo(() => {
           </li>
           <li>
             <Link
-              to="#"
+              to={`/${decentralization}/help`}
               className="inline-flex items-center hover:bg-shadow-transparent text-light dark:text-white60 dark:hover:text-white hover:text-primary dark:hover:bg-white10 dark:rounded-4 hover:pl-6 w-full px-2.5 py-3 text-sm transition-all ease-in-out delay-150"
             >
               <UilBell className="w-4 h-4 ltr:mr-3 rtl:ml-3" /> Help

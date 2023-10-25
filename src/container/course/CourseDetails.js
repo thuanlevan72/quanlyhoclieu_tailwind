@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Row, Col, Collapse } from 'antd';
 import UilPlay from '@iconscout/react-unicons/icons/uil-play';
 import UilPlus from '@iconscout/react-unicons/icons/uil-plus';
@@ -9,6 +9,7 @@ import UilClock from '@iconscout/react-unicons/icons/uil-clock';
 import UilAward from '@iconscout/react-unicons/icons/uil-award';
 import UilSync from '@iconscout/react-unicons/icons/uil-sync';
 import ModalVideo from 'react-modal-video';
+import courseData from '../../demoData/course.json';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import { Button } from '../../components/buttons/buttons';
 import '../profile/myProfile/overview/video-modal.css';
@@ -197,8 +198,11 @@ const lectures = [
 ];
 
 function CourseDetails() {
+  const { id } = useParams();
   const [isOpen, setOpen] = useState(false);
-
+  console.log(id);
+  const currentCourse = courseData.find((x) => x.id.toString() === id);
+  console.log(currentCourse);
   return (
     <>
       <ModalVideo channel="youtube" autoplay isOpen={isOpen} videoId="L61p2uyiMSo" onClose={() => setOpen(false)} />
@@ -211,7 +215,7 @@ function CourseDetails() {
         <Row gutter={25}>
           <Col lg={12} xs={24} className="lg:mb-[30px]">
             <div>
-              <h2 className="text-dark dark:text-white87 text-3xl font-semibold">UI/UX Design Masters Course</h2>
+              <h2 className="text-dark dark:text-white87 text-3xl font-semibold">{currentCourse.title}</h2>
               <div>
                 <p className="text-base text-body dark:text-white60 mb-[28px]">
                   Many support queries and technical questions will already be answered in supporting documentation such
@@ -422,13 +426,15 @@ function CourseDetails() {
                   <span className="flex items-center justify-center bg-[#8231d320] w-[70px] h-[70px] rounded-[10px]">
                     <UilBook className="text-primary" />
                   </span>
-                  <span className="inline-block text-body dark:text-white60 mt-1.5">35 Lectures</span>
+                  <span className="inline-block text-body dark:text-white60 mt-1.5">
+                    {currentCourse.lectures} Lectures
+                  </span>
                 </li>
                 <li className="flex items-center flex-col">
                   <span className="flex items-center justify-center bg-[#5840ff20] w-[70px] h-[70px] rounded-[10px]">
                     <UilClock className="text-secondary" />
                   </span>
-                  <span className="finline-block text-body dark:text-white60 mt-1.5">15 Hours</span>
+                  <span className="finline-block text-body dark:text-white60 mt-1.5">{currentCourse.duration} Hrs</span>
                 </li>
                 <li className="flex items-center flex-col">
                   <span className="flex items-center justify-center bg-[#01b81a20] w-[70px] h-[70px] rounded-[10px]">
@@ -444,7 +450,9 @@ function CourseDetails() {
                 </li>
               </ul>
               <div className="mt-[30px] text-center">
-                <span className="block text-dark dark:text-white87 mb-3 text-3xl font-semibold">$250</span>
+                <span className="block text-dark dark:text-white87 mb-3 text-3xl font-semibold">
+                  ${currentCourse.price}
+                </span>
                 <Button size="default" type="primary" className="h-11 px-5 text-sm font-semibold">
                   Start This Course
                 </Button>

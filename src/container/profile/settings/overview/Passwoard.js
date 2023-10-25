@@ -39,6 +39,9 @@ function Password() {
                   <Input.Password />
                 </Form.Item>
                 <p className="mb-0 text-light dark:text-white60 text-[13px]">Minimum 6 characters</p>
+                <Form.Item name="new" label="Confirm Password" className="mb-0 form-label-w-full form-label-text-start">
+                  <Input.Password />
+                </Form.Item>
                 <Form.Item className="mb-7">
                   <div className="flex items-center flex-wrap gap-[15px] mt-11">
                     <Button htmlType="submit" type="primary" className="h-11 px-[20px]">
