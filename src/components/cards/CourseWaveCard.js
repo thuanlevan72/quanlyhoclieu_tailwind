@@ -1,16 +1,14 @@
 import UilBook from '@iconscout/react-unicons/icons/uil-book-alt';
 import UilClock from '@iconscout/react-unicons/icons/uil-clock';
 import { Card, Col } from 'antd';
-import Cookies from 'js-cookie';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function CourseCard({ courseData }) {
-  const { id, thumbnail, title, author, authorImg, price, duration, lectures } = courseData;
-  const decentralization = Cookies.get('decentralization');
+function CourseWaveCard({ courseWaveData }) {
+  const { id, thumbnail, title, author, authorImg, duration, lectures } = courseWaveData;
   return (
-    <Col xxl={6} lg={8} sm={12} xs={24}>
+    <Col xxl={4} lg={8} sm={12} xs={24}>
       <div className="mb-[25px] [&>.ant-card>.ant-card-body]:p-[18px]">
         <Card bordered="false">
           <div className="mb-[15px] rounded-[10px]">
@@ -20,7 +18,7 @@ function CourseCard({ courseData }) {
             <h4 className="text-xl 3xl:text-lg font-semibold mb-3">
               <Link
                 className="text-dark hover:text-secondary dark:text-white87 dark:hover:text-secondary"
-                to={`/${decentralization}/course/courseDetails/${id}`}
+                to={`/admin/app/course/courseDetails/${id}`}
               >
                 {title}
               </Link>
@@ -30,9 +28,6 @@ function CourseCard({ courseData }) {
               <span className="text-[15px] text-light dark:text-white60">{author}</span>
             </div>
             <div className="flex items-center justify-between gap-[10px]">
-              <div>
-                <span className="text-success text-xl 3xl:text-lg font-semibold mb-3">${price}</span>
-              </div>
               <ul className="flex items-center gap-2.5 2xl:gap-[5px] mb-0">
                 <li className="inline-flex items-center gap-[3px] bg-secondary-transparent text-secondary h-8 px-5 3xl:px-2.5 rounded-[20px]">
                   <UilBook className="w-[14px]" />
@@ -51,8 +46,8 @@ function CourseCard({ courseData }) {
   );
 }
 
-CourseCard.propTypes = {
-  courseData: propTypes.object,
+CourseWaveCard.propTypes = {
+  courseWaveData: PropTypes.object,
 };
 
-export default CourseCard;
+export default CourseWaveCard;

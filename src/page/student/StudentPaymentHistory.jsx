@@ -108,24 +108,19 @@ function Orders() {
       key: 'id',
     },
     {
-      title: 'Student ID',
-      dataIndex: 'Student ID',
-      key: 'Student ID',
-    },
-    {
       title: 'Amount',
       dataIndex: 'amount',
       key: 'amount',
     },
     {
-      title: 'PaymentType ID',
-      dataIndex: 'PaymentType ID',
-      key: 'PaymentType ID',
+      title: 'Payment Type',
+      dataIndex: 'PaymentType',
+      key: 'PaymentType',
     },
     {
       title: 'Create At',
-      dataIndex: 'Create At',
-      key: 'Create At',
+      dataIndex: 'CreateAt',
+      key: 'CreateAt',
     },
   ];
 

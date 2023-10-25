@@ -5,9 +5,8 @@
       "title": "UI/UX Design Masters Course",
       "author": "David Warner",
       "authorImg": "chat-auth.png",
-      "price": "150",
-      "lectures": "34",
-      "duration": "16"
+      "lectures": "35",
+      "duration": "15"
     },
     {
         "id": 2,
@@ -15,7 +14,6 @@
         "title": "React Development Course",
         "author": "David Warner",
         "authorImg": "chat-auth.png",
-        "price": "250",
         "lectures": "35",
         "duration": "15"
     },
@@ -25,9 +23,8 @@
         "title": "Digital Marketing Course",
         "author": "David Warner",
         "authorImg": "chat-auth.png",
-        "price": "350",
-        "lectures": "75",
-        "duration": "45"
+        "lectures": "35",
+        "duration": "15"
     },
     {
         "id": 4,
@@ -35,9 +32,8 @@
         "title": "Video Editing Basic Course",
         "author": "David Warner",
         "authorImg": "chat-auth.png",
-        "price": "450",
-        "lectures": "36",
-        "duration": "84"
+        "lectures": "35",
+        "duration": "15"
     },
     {
         "id": 5,
@@ -45,9 +41,8 @@
         "title": "Basic Graphic Design Course",
         "author": "David Warner",
         "authorImg": "chat-auth.png",
-        "price": "550",
-        "lectures": "73",
-        "duration": "17"
+        "lectures": "35",
+        "duration": "15"
     },
     {
         "id": 6,
@@ -55,9 +50,8 @@
         "title": "UI/UX Design Masters Course",
         "author": "David Warner",
         "authorImg": "chat-auth.png",
-        "price": "750",
-        "lectures": "25",
-        "duration": "74"
+        "lectures": "35",
+        "duration": "15"
     },
     {
         "id": 7,
@@ -65,7 +59,6 @@
         "title": "Advance User Experience Design ",
         "author": "David Warner",
         "authorImg": "chat-auth.png",
-        "price": "250",
         "lectures": "35",
         "duration": "15"
     },
@@ -75,9 +68,8 @@
         "title": "Video Editing Advance Course",
         "author": "David Warner",
         "authorImg": "chat-auth.png",
-        "price": "150",
-        "lectures": "75",
-        "duration": "95"
+        "lectures": "35",
+        "duration": "15"
     }
 ]
   

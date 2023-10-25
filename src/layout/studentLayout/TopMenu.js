@@ -24,67 +24,38 @@ function TopMenu() {
               Course
             </Link>
           </li>
-          <li className="">
-            <Link to={`${path}/student-assignment`} className={activeLink('/student-assignment')}>
-              Asignments
-            </Link>
-          </li>
-
-          <li className="">
-            <Link to={`${path}/student-fee`} className={activeLink('/student-fee')}>
-              Fees
-            </Link>
-          </li>
-
-          {/* <li className="has-subMenu">
-            <Link to={`${path}/student-dashboard`} className={activeLink('/student-dashboard')}>
-              Create Feedback
-            </Link>
-          </li>
-          <li className="has-subMenu">
-            <Link to={`${path}/student-dashboard`} className={activeLink('/student-fee')}>
-              Lectures
-            </Link>
-          </li>
-          <li className="has-subMenu">
-            <Link to={`${path}/student-dashboard`} className={activeLink('/student-fee')}>
-              Materials
-            </Link>
-          </li> */}
           <li className="has-subMenu">
             <Link to="#" className="parent">
               Courseware
             </Link>
             <ul className="subMenu">
               <li>
-                <NavLink to={`${path}/admin`} className={activeLink('/payment-history')}>
+                <NavLink to={`${path}/courseWave/lectures`} className={activeLink('/payment-history')}>
                   Lectures
                 </NavLink>
               </li>
               <li>
-                <NavLink to={`${path}/demo-2`} className={activeLink('/payment-history')}>
+                <NavLink to={`${path}/courseWave/materials`} className={activeLink('/payment-history')}>
                   Materials
                 </NavLink>
               </li>
               <li>
-                <NavLink to={`${path}/demo-3`} className={activeLink('/payment-history')}>
+                <NavLink to={`${path}/courseWave/submissions`} className={activeLink('/payment-history')}>
                   Submission
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={`${path}/courseWave/assignments`} className={activeLink('/student-assignment')}>
+                  Asignments
                 </NavLink>
               </li>
             </ul>
           </li>
-          {/* <li className="has-subMenu">
-            <Link to={`${path}/student-dashboard`} className="parent" onClick={addParentActive}>
-              Submission
+          <li className="">
+            <Link to={`${path}/student-fee`} className={activeLink('/student-fee')}>
+              Fees
             </Link>
-            <ul className="subMenu">
-              <li>
-                <NavLink to={`${path}/student-dashboard`} onClick={addParentActive}>
-                  Submission
-                </NavLink>
-              </li>
-            </ul>
-          </li> */}
+          </li>
         </ul>
       </div>
     </TopMenuStyle>

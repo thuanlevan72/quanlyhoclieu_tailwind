@@ -4,12 +4,21 @@ import { Spin } from 'antd';
 import Dashboard from './DashboardRoutes';
 import withStudentLayout from '../../layout/studentLayout/withStudentLayout';
 
+const Profile = lazy(() => import('../../container/profile/settings/overview/Profile'));
+const Account = lazy(() => import('../../container/profile/settings/overview/Account'));
+const Password = lazy(() => import('../../container/profile/settings/overview/Passwoard'));
+const SocialProfiles = lazy(() => import('../../container/profile/settings/overview/SocialProfile'));
+const Notification = lazy(() => import('../../container/profile/settings/overview/Notification'));
 const NotFound = lazy(() => import('../../container/pages/404'));
-const StudentAssignment = lazy(() => import('../../page/student/StudentAssignment'));
 const StudentFee = lazy(() => import('../../page/student/StudentFee'));
 const Course = lazy(() => import('../../page/student/Course'));
+const CourseDetails = lazy(() => import('../../container/course/CourseDetails'));
 const PaymentHistory = lazy(() => import('../../page/student/StudentPaymentHistory'));
-const Profile = lazy(() => import('../../page/student/StudentProfile'));
+const Settings = lazy(() => import('../../page/student/StudentProfile'));
+const ComingSoon = lazy(() => import('../../container/pages/ComingSoon'));
+const CalenDar = lazy(() => import('../../container/calendar/Calendar'));
+const FAQ = lazy(() => import('../../container/pages/Faq'));
+const CourseWave = lazy(() => import('../../page/student/CourseWave'));
 const Student = React.memo(() => {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -24,13 +33,26 @@ const Student = React.memo(() => {
       }
     >
       <Routes>
-        {/* <Route index path="/*" element={<StudentDashboard />} /> */}
         <Route index path="/*" element={<Dashboard />} />
-        <Route path="student-assignment" element={<StudentAssignment />} />
         <Route path="student-fee" element={<StudentFee />} />
         <Route path="course" element={<Course />} />
+        <Route path="course/courseDetails/:id" element={<CourseDetails />} />
+        <Route path="courseWave/lectures" element={<CourseWave />} />
+        <Route path="courseWave/materials" element={<CourseWave />} />
+        <Route path="courseWave/submissions" element={<CourseWave />} />
+        <Route path="courseWave/assignments" element={<CourseWave />} />
+        <Route path="profile" element={<Settings />}>
+          <Route index element={<Profile />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="account" element={<Account />} />
+          <Route path="password" element={<Password />} />
+          <Route path="social" element={<SocialProfiles />} />
+          <Route path="notification" element={<Notification />} />
+        </Route>
+        <Route path="settings" element={<ComingSoon />} />
         <Route path="payment-history" element={<PaymentHistory />} />
-        <Route path="profile" element={<Profile />} />
+        <Route path="activity" element={<CalenDar />} />
+        <Route path="help" element={<FAQ />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

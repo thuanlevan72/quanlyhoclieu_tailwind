@@ -1,13 +1,8 @@
 import React, { lazy, Suspense } from 'react';
 import { Row, Col, Skeleton } from 'antd';
-import { Routes, Route } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { PageHeader } from '../../components/page-headers/page-headers';
 
-const Profile = lazy(() => import('../../container/profile/settings/overview/Profile'));
-const Account = lazy(() => import('../../container/profile/settings/overview/Account'));
-const Password = lazy(() => import('../../container/profile/settings/overview/Passwoard'));
-const SocialProfiles = lazy(() => import('../../container/profile/settings/overview/SocialProfile'));
-const Notification = lazy(() => import('../../container/profile/settings/overview/Notification'));
 const AuthorBox = lazy(() => import('../../container/profile/settings/overview/ProfileAuthorBox'));
 const CoverSection = lazy(() => import('../../container/profile/overview/CoverSection'));
 
@@ -63,14 +58,7 @@ function Settings() {
                   </div>
                 }
               >
-                <Routes>
-                  <Route index element={<Profile />} />
-                  <Route path="profile" element={<Profile />} />
-                  <Route path="account" element={<Account />} />
-                  <Route path="password" element={<Password />} />
-                  <Route path="social" element={<SocialProfiles />} />
-                  <Route path="notification" element={<Notification />} />
-                </Routes>
+                <Outlet />
               </Suspense>
             </>
           </Col>

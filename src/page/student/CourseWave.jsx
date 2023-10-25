@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Pagination } from 'antd';
 import { PageHeader } from '../../components/page-headers/page-headers';
-import courseData from '../../demoData/course.json';
-import CourseCard from '../../components/cards/CourseCard';
-import { PaginationStyle } from '../styled';
+import courseWaveData from '../../demoData/courseWave.json';
+import CourseWaveCard from '../../components/cards/CourseWaveCard';
+import { PaginationStyle } from '../../container/styled';
 
 const PageRoutes = [
   {
@@ -11,21 +11,21 @@ const PageRoutes = [
     breadcrumbName: 'Dashboard',
   },
   {
-    path: 'course',
+    path: 'courseWave',
     breadcrumbName: 'Courses',
   },
 ];
-function Course() {
+function CourseWave() {
   const [state, setState] = useState({
-    courses: courseData,
+    coursesWave: courseWaveData,
     current: 0,
     pageSize: 0,
   });
-  const { courses } = state;
+  const { coursesWave } = state;
   useEffect(() => {
-    if (courseData) {
+    if (courseWaveData) {
       setState({
-        courses: courseData,
+        coursesWave: courseWaveData,
       });
     }
   }, []);
@@ -46,12 +46,12 @@ function Course() {
       />
       <main className="min-h-[715px] lg:min-h-[580px] px-8 xl:px-[15px] pb-[30px] bg-transparent">
         <Row gutter={25} className="mt-sm-10">
-          {courses.map((value, index) => (
-            <CourseCard key={index} courseData={value} />
+          {coursesWave.map((value, index) => (
+            <CourseWaveCard key={index} courseWaveData={value} />
           ))}
           <Col xs={24}>
             <>
-              {courseData.length ? (
+              {courseWaveData.length ? (
                 <PaginationStyle>
                   <div className="ant-pagination-custom-style text-end">
                     <Pagination
@@ -60,7 +60,7 @@ function Course() {
                       onShowSizeChange={onShowSizeChange}
                       pageSize={10}
                       defaultCurrent={1}
-                      total={courseData.length}
+                      total={courseWaveData.length}
                     />
                   </div>
                 </PaginationStyle>
@@ -73,4 +73,4 @@ function Course() {
   );
 }
 
-export default Course;
+export default CourseWave;
