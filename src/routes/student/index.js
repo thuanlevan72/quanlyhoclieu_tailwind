@@ -9,7 +9,7 @@ const StudentAssignment = lazy(() => import('../../page/student/StudentAssignmen
 const StudentFee = lazy(() => import('../../page/student/StudentFee'));
 const Course = lazy(() => import('../../page/student/Course'));
 const PaymentHistory = lazy(() => import('../../page/student/StudentPaymentHistory'));
-// const StudentDashboard = lazy(() => import('../../page/student/StudentDashboard'));
+const Profile = lazy(() => import('../../page/student/StudentProfile'));
 const Student = React.memo(() => {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -30,6 +30,7 @@ const Student = React.memo(() => {
         <Route path="student-fee" element={<StudentFee />} />
         <Route path="course" element={<Course />} />
         <Route path="payment-history" element={<PaymentHistory />} />
+        <Route path="profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

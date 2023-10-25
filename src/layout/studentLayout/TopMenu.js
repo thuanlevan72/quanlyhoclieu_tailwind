@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { TopMenuStyle } from './Style';
 
 function TopMenu() {
@@ -51,10 +51,27 @@ function TopMenu() {
               Materials
             </Link>
           </li> */}
-          <li className="">
-            <Link to={`${path}/payment-history`} className={activeLink('/payment-history')}>
-              Payment History
+          <li className="has-subMenu">
+            <Link to="#" className="parent">
+              Courseware
             </Link>
+            <ul className="subMenu">
+              <li>
+                <NavLink to={`${path}/admin`} className={activeLink('/payment-history')}>
+                  Lectures
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={`${path}/demo-2`} className={activeLink('/payment-history')}>
+                  Materials
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={`${path}/demo-3`} className={activeLink('/payment-history')}>
+                  Submission
+                </NavLink>
+              </li>
+            </ul>
           </li>
           {/* <li className="has-subMenu">
             <Link to={`${path}/student-dashboard`} className="parent" onClick={addParentActive}>
