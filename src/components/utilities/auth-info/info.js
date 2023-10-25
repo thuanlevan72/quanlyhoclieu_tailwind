@@ -4,12 +4,14 @@ import UilDollarSign from '@iconscout/react-unicons/icons/uil-dollar-sign';
 import UilSetting from '@iconscout/react-unicons/icons/uil-setting';
 import UilSignout from '@iconscout/react-unicons/icons/uil-signout';
 import UilUser from '@iconscout/react-unicons/icons/uil-user';
+import UilHistory from '@iconscout/react-unicons/icons/uil-history';
 import UilUsersAlt from '@iconscout/react-unicons/icons/uil-users-alt';
 import { Avatar } from 'antd';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import Search from './Search';
 import Message from './Message';
 import Notification from './Notification';
@@ -20,6 +22,7 @@ import { Dropdown } from '../../dropdown/dropdown';
 import { logOut } from '../../../redux/authentication/actionCreator';
 
 const AuthInfo = React.memo(() => {
+  const decentralization = Cookies.get('decentralization');
   const dispatch = useDispatch();
   const [state, setState] = useState({
     flag: 'en',
@@ -48,7 +51,7 @@ const AuthInfo = React.memo(() => {
         <ul className="mb-0">
           <li>
             <Link
-              to="#"
+              to={`/${decentralization}/profile`}
               className="inline-flex items-center hover:bg-shadow-transparent text-light dark:text-white60 dark:hover:text-white hover:text-primary dark:hover:bg-white10 dark:rounded-4 hover:pl-6 w-full px-2.5 py-3 text-sm transition-all ease-in-out delay-150"
             >
               <UilUser className="w-4 h-4 ltr:mr-3 rtl:ml-3" /> Profile
@@ -68,6 +71,14 @@ const AuthInfo = React.memo(() => {
               className="inline-flex items-center hover:bg-shadow-transparent text-light dark:text-white60 dark:hover:text-white hover:text-primary dark:hover:bg-white10 dark:rounded-4 hover:pl-6 w-full px-2.5 py-3 text-sm transition-all ease-in-out delay-150"
             >
               <UilDollarSign className="w-4 h-4 ltr:mr-3 rtl:ml-3" /> Billing
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={`/${decentralization}/payment-history`}
+              className="inline-flex items-center hover:bg-shadow-transparent text-light dark:text-white60 dark:hover:text-white hover:text-primary dark:hover:bg-white10 dark:rounded-4 hover:pl-6 w-full px-2.5 py-3 text-sm transition-all ease-in-out delay-150"
+            >
+              <UilHistory className="w-4 h-4 ltr:mr-3 rtl:ml-3" /> Payment History
             </Link>
           </li>
           <li>
