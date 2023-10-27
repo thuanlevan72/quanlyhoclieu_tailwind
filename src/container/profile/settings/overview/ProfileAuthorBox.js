@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Upload } from 'antd';
 import Cookies from 'js-cookie';
 import UilCamera from '@iconscout/react-unicons/icons/uil-camera';
@@ -10,6 +11,11 @@ import { Link, NavLink } from 'react-router-dom';
 import Heading from '../../../../components/heading/heading';
 
 function AuthorBox() {
+  const { authInfo } = useSelector((state) => {
+    return {
+      authInfo: state.auth.authInfo,
+    };
+  });
   const decentralization = `/${Cookies.get('decentralization')}/profile`;
   const [activeValue, setActiveValue] = useState('profile');
 
@@ -18,7 +24,7 @@ function AuthorBox() {
       <div className="bg-white dark:bg-white10 rounded-[10px]">
         <div className="-mx-3 px-5 pt-[25px] pb-5 text-center border-b border-regular dark:border-white10">
           <figure className="relative max-w-[120px] mx-auto mb-6">
-            <img className="mx-auto" src={require('../../../../static/img/users/1.png')} alt="" />
+            <img className="mx-auto max-w-[120px]" src={authInfo.avatar} alt="" />
             <Upload className="absolute right-0 -bottom-2 flex items-center justify-center bg-white dark:bg-white10 w-10 h-10 rounded-full">
               <Link to="#" className="inline-flex items-center justify-center bg-primary w-8 h-8 rounded-full">
                 <UilCamera className="w-4 h-4 text-white" />
@@ -27,9 +33,8 @@ function AuthorBox() {
           </figure>
           <figcaption>
             <Heading as="h4" className="mb-0 text-dark dark:text-white87 text-lg font-semibold">
-              Duran Clayton
+              {authInfo.lastName}
             </Heading>
-            <p className="mb-0 text-light dark:text-white60 text-15">UI/UX Designer</p>
           </figcaption>
         </div>
         <nav className="px-[25px] pt-8 pb-5">

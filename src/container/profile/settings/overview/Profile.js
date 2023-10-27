@@ -17,21 +17,57 @@ function Profile() {
       authInfo: states.auth.authInfo,
     };
   });
-  console.log(authInfo);
+  const [address, setAddress] = useState({
+    province: authInfo.provinceID || 0,
+    district: authInfo.districtID || 0,
+    commune: authInfo.communeID || 0,
+  });
   const [state, setState] = useState({
     tags: ['UI/UX', 'Branding', 'Product Design', 'Web Design'],
     values: null,
   });
   const handleSubmit = (values) => {
-    setState({ ...state, values: { ...values, tags: state.tags } });
+    setState({ ...address, values: { ...values, tags: state.tags } });
   };
   const handleDistrictChange = async (values) => {
+    setAddress({
+      province: values,
+      district: 0,
+      commune: 0,
+    });
     const res = await getDistricts(values);
+    if (!res.data) {
+      setAddress({
+        province: 0,
+        district: 0,
+        commune: 0,
+      });
+      return;
+    }
     setDistricts(res.data.districts);
   };
   const handleCommuneChange = async (values) => {
+    setAddress({
+      province: address.province,
+      district: values,
+      commune: 0,
+    });
     const res = await getCommune(values);
+    if (!res.data) {
+      setAddress({
+        province: address.province,
+        district: 0,
+        commune: 0,
+      });
+      return;
+    }
     setCommunes(res.data.wards);
+  };
+  const handleCommuneChangeEnd = async (values) => {
+    setAddress({
+      ...address,
+      commune: values,
+    });
   };
   const handleCancel = (e) => {
     e.preventDefault();
@@ -43,7 +79,6 @@ function Profile() {
       const res = await getCities();
       setCities(res.data);
     }
-
     fetchMyAPI();
     if (authInfo.provinceID) {
       handleDistrictChange(authInfo.provinceID);
@@ -51,8 +86,10 @@ function Profile() {
     if (authInfo.districtID) {
       handleCommuneChange(authInfo.districtID);
     }
+    if (authInfo.communeID) {
+      handleCommuneChangeEnd(authInfo.communeID);
+    }
   }, []);
-
   return (
     <div className="bg-white dark:bg-white10 m-0 p-0 mb-[25px] rounded-10 relative">
       <div className="py-[18px] px-[25px] text-dark dark:text-white87 font-medium text-[17px] border-regular dark:border-white10 border-b">
@@ -72,6 +109,7 @@ function Profile() {
                   name="name"
                   initialValue={authInfo.lastName}
                   label="Name"
+                  rules={[{ required: true, message: '*Required' }]}
                   className="mb-4 form-label-w-full form-label-text-start dark:text-white-60"
                 >
                   <Input />
@@ -80,44 +118,35 @@ function Profile() {
                   name="phone"
                   initialValue={authInfo.contactNumber}
                   label="Phone Number"
+                  rules={[{ required: true, message: '*Required' }]}
                   className="mb-4 form-label-w-full form-label-text-start"
                 >
                   <Input />
                 </Form.Item>
                 <Form.Item
-                  name="province"
-                  initialValue={authInfo.provinceID}
-                  label="Tỉnh thành"
+                  label="Address"
+                  rules={[{ required: true, message: '*Required' }]}
                   className="mb-4 form-label-w-full form-label-text-start"
                 >
-                  <Select style={{ width: '100%' }} onChange={handleDistrictChange}>
+                  Province:
+                  <Select style={{ width: '100%' }} value={address.province} onChange={handleDistrictChange}>
+                    <Option value={0}>Please select</Option>
                     {cities &&
                       cities.map((value) => {
                         return <Option value={value.code}>{value.name}</Option>;
                       })}
                   </Select>
-                </Form.Item>
-                <Form.Item
-                  name="city"
-                  initialValue={authInfo.districtID}
-                  label="City"
-                  className="mb-4 form-label-w-full form-label-text-start"
-                >
-                  <Select style={{ width: '100%' }} onChange={handleCommuneChange}>
+                  District:
+                  <Select style={{ width: '100%' }} value={address.district} onChange={handleCommuneChange}>
+                    <Option value={0}>Please select</Option>
                     {districts &&
                       districts.map((value) => {
                         return <Option value={value.code}>{value.name}</Option>;
                       })}
                   </Select>
-                </Form.Item>
-                <Form.Item
-                  name="commune"
-                  initialValue={authInfo.communeID}
-                  label="Commune"
-                  className="mb-4 form-label-w-full form-label-text-start"
-                >
-                  <Select style={{ width: '100%' }}>
-                    <Option value="">Please Select</Option>
+                  Commune:
+                  <Select value={address.commune} style={{ width: '100%' }} onChange={handleCommuneChangeEnd}>
+                    <Option value={0}>Please select</Option>
                     {communes &&
                       communes.map((value) => {
                         return <Option value={value.code}>{value.name}</Option>;
