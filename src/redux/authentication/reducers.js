@@ -8,6 +8,7 @@ const initState = {
   loading: false,
   decentralization: Cookies.get('decentralization'),
   error: null,
+  authInfo: JSON.parse(localStorage.getItem('authInfo')),
 };
 
 /**
@@ -28,6 +29,7 @@ const AuthReducer = (state = initState, action) => {
         login: data.isLogin,
         decentralization: data.decentralization,
         loading: false,
+        authInfo: data.authInfo,
       };
     case LOGIN_ERR:
       return {

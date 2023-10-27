@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Row, Col, Form, Input } from 'antd';
 import { Button } from '../../../../components/buttons/buttons';
 import Heading from '../../../../components/heading/heading';
@@ -6,10 +7,14 @@ import { GlobalUtilityStyle } from '../../../styled';
 
 function Account() {
   const [form] = Form.useForm();
-
+  const { authInfo } = useSelector((state) => {
+    return {
+      authInfo: state.auth.authInfo,
+    };
+  });
   const [state, setState] = useState({
-    name: 'clayton',
-    values: null,
+    userName: authInfo.userName,
+    email: authInfo.email,
   });
 
   const handleSubmit = (values) => {
@@ -48,7 +53,7 @@ function Account() {
                       <div>
                         <Form.Item
                           name="username"
-                          initialValue={state.name}
+                          initialValue={state.userName}
                           label="Username"
                           className="mb-[26px] [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold"
                         >
@@ -60,7 +65,7 @@ function Account() {
                         </p>
                         <Form.Item
                           name="email"
-                          initialValue="contact@example.com"
+                          initialValue={state.email}
                           rules={[{ type: 'email' }]}
                           label="Email"
                           className="mb-0 [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold"

@@ -20,10 +20,12 @@ const login = (values, callback) => {
       Cookies.set('access_token', response.data.token);
       Cookies.set('logedIn', true);
       Cookies.set('decentralization', response.data.decentralization.toLowerCase());
+      localStorage.setItem('authInfo', JSON.stringify(response.data));
       dispatch(
         loginSuccess({
           isLogin: true,
           decentralization: response.data.decentralization.toLowerCase(),
+          authInfo: response.data,
         }),
       );
       // if (response.data.decentralization.toLowerCase() === 'admin') {
