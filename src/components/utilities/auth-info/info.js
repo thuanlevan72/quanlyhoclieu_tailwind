@@ -27,7 +27,6 @@ const AuthInfo = React.memo(() => {
       authInfo: state.auth.authInfo,
     };
   });
-  console.log('money: ', authInfo.totalMoney);
   const decentralization = Cookies.get('decentralization');
   const dispatch = useDispatch();
   const [state, setState] = useState({
@@ -46,12 +45,12 @@ const AuthInfo = React.memo(() => {
     <div>
       <div className="min-w-[280px] sm:min-w-full pt-4">
         <figure className="flex items-center text-sm rounded-[8px] bg-section dark:bg-white10 py-[20px] px-[25px] mb-[12px]">
-          <img className="ltr:mr-4 rtl:ml-4" src={require('../../../static/img/avatar/chat-auth.png')} alt="" />
+          <img className="ltr:mr-4 rtl:ml-4 max-w-[100px] rounded-xl" src={authInfo.avatar} alt="" />
           <figcaption>
             <Heading className="text-dark dark:text-white87 mb-0.5 text-sm" as="h5">
-              Abdullah Bin Talha
+              {authInfo.lastName}
             </Heading>
-            <p className="mb-0 text-xs text-body dark:text-white60">UI Expert</p>
+            <p className="mb-0 text-xs text-body dark:text-white60">Cựu trẻ em</p>
           </figcaption>
         </figure>
         <ul className="mb-0">
@@ -179,9 +178,9 @@ const AuthInfo = React.memo(() => {
       <div className="flex ltr:ml-3 rtl:mr-3 ltr:mr-4 rtl:ml-4 ssm:mr-0 ssm:rtl:ml-0">
         <Popover placement="bottomRight" content={userContent} action="click">
           <Link to="#" className="flex items-center text-light whitespace-nowrap">
-            <Avatar src="https://cdn0.iconfinder.com/data/icons/user-pictures/100/matureman1-512.png" />
+            <Avatar src={authInfo.avatar} />
             <span className="ltr:mr-1.5 rtl:ml-1.5 ltr:ml-2.5 rtl:mr-2.5 text-body dark:text-white60 text-sm font-medium md:hidden">
-              Md. Rafiq
+              {authInfo.lastName}
             </span>
             <UilAngleDown className="w-4 h-4 ltr:md:ml-[5px] rtl:md:mr-[5px]" />
           </Link>
