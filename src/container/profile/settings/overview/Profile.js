@@ -1,31 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Row, Col, Form, Input, Select } from 'antd';
 import { Button } from '../../../../components/buttons/buttons';
 import Heading from '../../../../components/heading/heading';
-import { Tag } from '../../../../components/tags/tags';
 import { GlobalUtilityStyle } from '../../../styled';
+import { getCities, getCommune, getDistricts } from '../../../../config/dataService/ProvinceOpenAPI';
 
 const { Option } = Select;
 function Profile() {
   const [form] = Form.useForm();
-
+  const [cities, setCities] = useState([]);
+  const [districts, setDistricts] = useState([]);
+  const [communes, setCommunes] = useState([]);
+  const { authInfo } = useSelector((states) => {
+    return {
+      authInfo: states.auth.authInfo,
+    };
+  });
+  console.log(authInfo);
   const [state, setState] = useState({
     tags: ['UI/UX', 'Branding', 'Product Design', 'Web Design'],
     values: null,
   });
-
   const handleSubmit = (values) => {
     setState({ ...state, values: { ...values, tags: state.tags } });
   };
-
+  const handleDistrictChange = async (values) => {
+    const res = await getDistricts(values);
+    setDistricts(res.data.districts);
+  };
+  const handleCommuneChange = async (values) => {
+    const res = await getCommune(values);
+    setCommunes(res.data.wards);
+  };
   const handleCancel = (e) => {
     e.preventDefault();
     form.resetFields();
   };
+  useEffect(() => {
+    // Gọi API lấy danh sách tỉnh thành
+    async function fetchMyAPI() {
+      const res = await getCities();
+      setCities(res.data);
+    }
 
-  const checked = (checke) => {
-    setState({ tags: checke });
-  };
+    fetchMyAPI();
+    if (authInfo.provinceID) {
+      handleDistrictChange(authInfo.provinceID);
+    }
+    if (authInfo.districtID) {
+      handleCommuneChange(authInfo.districtID);
+    }
+  }, []);
 
   return (
     <div className="bg-white dark:bg-white10 m-0 p-0 mb-[25px] rounded-10 relative">
@@ -44,7 +70,7 @@ function Profile() {
               <Form className="pt-2.5 pb-[30px]" name="editProfile" onFinish={handleSubmit}>
                 <Form.Item
                   name="name"
-                  initialValue="Duran Clayton"
+                  initialValue={authInfo.lastName}
                   label="Name"
                   className="mb-4 form-label-w-full form-label-text-start dark:text-white-60"
                 >
@@ -52,67 +78,53 @@ function Profile() {
                 </Form.Item>
                 <Form.Item
                   name="phone"
-                  initialValue="0096644553"
+                  initialValue={authInfo.contactNumber}
                   label="Phone Number"
                   className="mb-4 form-label-w-full form-label-text-start"
                 >
                   <Input />
                 </Form.Item>
                 <Form.Item
-                  name="country"
-                  initialValue=""
-                  label="Country"
+                  name="province"
+                  initialValue={authInfo.provinceID}
+                  label="Tỉnh thành"
                   className="mb-4 form-label-w-full form-label-text-start"
                 >
-                  <Select style={{ width: '100%' }}>
-                    <Option value="">Please Select</Option>
-                    <Option value="bangladesh">Bangladesh</Option>
-                    <Option value="india">India</Option>
-                    <Option value="pakistan">Pakistan</Option>
+                  <Select style={{ width: '100%' }} onChange={handleDistrictChange}>
+                    {cities &&
+                      cities.map((value) => {
+                        return <Option value={value.code}>{value.name}</Option>;
+                      })}
                   </Select>
                 </Form.Item>
                 <Form.Item
                   name="city"
-                  initialValue=""
+                  initialValue={authInfo.districtID}
                   label="City"
+                  className="mb-4 form-label-w-full form-label-text-start"
+                >
+                  <Select style={{ width: '100%' }} onChange={handleCommuneChange}>
+                    {districts &&
+                      districts.map((value) => {
+                        return <Option value={value.code}>{value.name}</Option>;
+                      })}
+                  </Select>
+                </Form.Item>
+                <Form.Item
+                  name="commune"
+                  initialValue={authInfo.communeID}
+                  label="Commune"
                   className="mb-4 form-label-w-full form-label-text-start"
                 >
                   <Select style={{ width: '100%' }}>
                     <Option value="">Please Select</Option>
-                    <Option value="dhaka">Dhaka</Option>
-                    <Option value="mymensingh">Mymensingh</Option>
-                    <Option value="khulna">Khulna</Option>
+                    {communes &&
+                      communes.map((value) => {
+                        return <Option value={value.code}>{value.name}</Option>;
+                      })}
                   </Select>
                 </Form.Item>
-                <Form.Item
-                  name="company"
-                  initialValue="Example"
-                  label="Company Name"
-                  className="mb-4 form-label-w-full form-label-text-start"
-                >
-                  <Input />
-                </Form.Item>
-                <Form.Item
-                  name="website"
-                  initialValue="www.example.com"
-                  label="Website"
-                  className="mb-4 form-label-w-full form-label-text-start"
-                >
-                  <Input />
-                </Form.Item>
-                <Form.Item
-                  name="userBio"
-                  initialValue="Nam malesuada dolor tellus pretium amet was hendrerit facilisi id vitae enim sed ornare there suspendisse sed orci neque ac sed aliquet risus faucibus in pretium molestee."
-                  label="User Bio"
-                  className="mb-4 form-label-w-full form-label-text-start"
-                >
-                  <Input.TextArea rows={3} />
-                </Form.Item>
-                <Form.Item name="skills" label="Skills" className="mb-4 form-label-w-full form-label-text-start">
-                  <div className="p-3 border border-gray-200 dark:border-white10 rounded-md [&>div>div>span>.ant-tag]:inline-flex [&>div>div>span>.ant-tag]:items-center">
-                    <Tag className="bg-primary" animate onChange={checked} data={state.tags} />
-                  </div>
-                </Form.Item>
+
                 <div className="mt-11">
                   <Button size="default" htmlType="submit" type="primary" className="h-11 px-[20px] font-semibold">
                     Update Profile

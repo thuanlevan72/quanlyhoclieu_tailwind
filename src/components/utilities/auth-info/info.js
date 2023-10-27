@@ -9,7 +9,7 @@ import UilUsersAlt from '@iconscout/react-unicons/icons/uil-users-alt';
 import { Avatar } from 'antd';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Search from './Search';
@@ -22,6 +22,12 @@ import { Dropdown } from '../../dropdown/dropdown';
 import { logOut } from '../../../redux/authentication/actionCreator';
 
 const AuthInfo = React.memo(() => {
+  const { authInfo } = useSelector((state) => {
+    return {
+      authInfo: state.auth.authInfo,
+    };
+  });
+  console.log('money: ', authInfo.totalMoney);
   const decentralization = Cookies.get('decentralization');
   const dispatch = useDispatch();
   const [state, setState] = useState({
@@ -70,7 +76,7 @@ const AuthInfo = React.memo(() => {
               to="#"
               className="inline-flex items-center hover:bg-shadow-transparent text-light dark:text-white60 dark:hover:text-white hover:text-primary dark:hover:bg-white10 dark:rounded-4 hover:pl-6 w-full px-2.5 py-3 text-sm transition-all ease-in-out delay-150"
             >
-              <UilDollarSign className="w-4 h-4 ltr:mr-3 rtl:ml-3" /> Total Money
+              <UilDollarSign className="w-4 h-4 ltr:mr-3 rtl:ml-3" /> Total Money: {authInfo.totalMoney} VND
             </Link>
           </li>
           <li>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Checkbox from 'antd/lib/checkbox/Checkbox';
 import { Row, Col, Table, Form, Input, Spin } from 'antd';
 import UilPlus from '@iconscout/react-unicons/icons/uil-plus';
 import UilMinus from '@iconscout/react-unicons/icons/uil-minus';
@@ -65,6 +66,7 @@ function CartTable() {
               />
               <figcaption>
                 <div className="cart-single__info">
+                  <Checkbox classname="float:left" />
                   <Heading as="h6" className="text-base font-medium text-dark dark:text-white87">
                     {name}
                   </Heading>
