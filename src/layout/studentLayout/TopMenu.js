@@ -30,23 +30,23 @@ function TopMenu() {
             </Link>
             <ul className="subMenu">
               <li>
-                <NavLink to={`${path}/courseWave/lectures`} className={activeLink('/payment-history')}>
-                  Lectures
+                <NavLink to={`${path}/courseWave/lectures`} className={activeLink('/courseWave/lectures')}>
+                  Lecture
                 </NavLink>
               </li>
               <li>
-                <NavLink to={`${path}/courseWave/materials`} className={activeLink('/payment-history')}>
-                  Materials
+                <NavLink to={`${path}/courseWave/materials`} className={activeLink('/courseWave/materials')}>
+                  Material
                 </NavLink>
               </li>
               <li>
-                <NavLink to={`${path}/courseWave/submissions`} className={activeLink('/payment-history')}>
+                <NavLink to={`${path}/courseWave/submissions`} className={activeLink('/courseWave/submissions')}>
                   Submission
                 </NavLink>
               </li>
               <li>
                 <NavLink to={`${path}/courseWave/assignments`} className={activeLink('/student-assignment')}>
-                  Asignments
+                  Asignment
                 </NavLink>
               </li>
             </ul>

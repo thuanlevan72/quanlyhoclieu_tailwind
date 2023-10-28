@@ -18,7 +18,7 @@ const { Panel } = Collapse;
 const PageRoutes = [
   {
     path: 'index',
-    breadcrumbName: 'Dashboard',
+    breadcrumbName: 'Home',
   },
   {
     path: 'course',
@@ -200,9 +200,7 @@ const lectures = [
 function CourseDetails() {
   const { id } = useParams();
   const [isOpen, setOpen] = useState(false);
-  console.log(id);
   const currentCourse = courseData.find((x) => x.id.toString() === id);
-  console.log(currentCourse);
   return (
     <>
       <ModalVideo channel="youtube" autoplay isOpen={isOpen} videoId="L61p2uyiMSo" onClose={() => setOpen(false)} />

@@ -39,7 +39,11 @@ function Password() {
                   <Input.Password />
                 </Form.Item>
                 <p className="mb-0 text-light dark:text-white60 text-[13px]">Minimum 6 characters</p>
-                <Form.Item name="new" label="Confirm Password" className="mb-0 form-label-w-full form-label-text-start">
+                <Form.Item
+                  name="confirm"
+                  label="Confirm Password"
+                  className="mb-0 form-label-w-full form-label-text-start"
+                >
                   <Input.Password />
                 </Form.Item>
                 <Form.Item className="mb-7">

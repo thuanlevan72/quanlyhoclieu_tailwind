@@ -1,12 +1,14 @@
 import UilBook from '@iconscout/react-unicons/icons/uil-book-alt';
 import UilClock from '@iconscout/react-unicons/icons/uil-clock';
 import { Card, Col } from 'antd';
+import Cookies from 'js-cookie';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 function CourseWaveCard({ courseWaveData }) {
-  const { id, thumbnail, title, author, authorImg, duration, lectures } = courseWaveData;
+  const { id, thumbnail, title, author, authorImg, duration, lectures, waveType } = courseWaveData;
+  const decentralization = Cookies.get('decentralization');
   return (
     <Col xxl={4} lg={8} sm={12} xs={24}>
       <div className="mb-[25px] [&>.ant-card>.ant-card-body]:p-[18px]">
@@ -18,7 +20,7 @@ function CourseWaveCard({ courseWaveData }) {
             <h4 className="text-xl 3xl:text-lg font-semibold mb-3">
               <Link
                 className="text-dark hover:text-secondary dark:text-white87 dark:hover:text-secondary"
-                to={`/admin/app/course/courseDetails/${id}`}
+                to={`/${decentralization}/courseWave/${waveType}/${waveType}Card/${id}`}
               >
                 {title}
               </Link>

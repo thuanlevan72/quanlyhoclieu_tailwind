@@ -7,8 +7,8 @@ import { PaginationStyle } from '../../container/styled';
 
 const PageRoutes = [
   {
-    path: 'index',
-    breadcrumbName: 'Dashboard',
+    path: 'student',
+    breadcrumbName: 'Home',
   },
   {
     path: 'course',

@@ -1,10 +1,17 @@
 import { Breadcrumb } from 'antd';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { ReactSVG } from 'react-svg';
 import { HeaderWrapper, PageHeaderStyle } from './style';
 
 function PageHeader(props) {
+  const { authInfo } = useSelector((state) => {
+    return {
+      authInfo: state.auth.authInfo,
+    };
+  });
+  const path = `/${authInfo.decentralization.toLowerCase()}`;
   const { title, subTitle, routes, buttons, ghost, bgColor, className } = props;
   const breadcrumb = routes ? (
     <Breadcrumb
@@ -12,7 +19,7 @@ function PageHeader(props) {
       separator={<span className="inline-flex bg-light-extra relative -top-0.5 w-1 h-1 rounded-full" />}
     >
       {routes.map((route, index) =>
-        index + 1 === routes.length ? (
+        index !== 0 ? (
           <Breadcrumb.Item key={index} className="text-breadcrumbs dark:text-white30 text-15">
             {route.breadcrumbName}
           </Breadcrumb.Item>
@@ -23,7 +30,7 @@ function PageHeader(props) {
               src={require(`../../static/img/icon/home.svg`).default}
             />{' '}
             <Link
-              to={route.path}
+              to={path}
               className="text-light hover:text-primary dark:text-[#a4a5aa] dark:hover:text-white87 text-sm"
             >
               {route.breadcrumbName}

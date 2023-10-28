@@ -13,6 +13,8 @@ const NotFound = lazy(() => import('../../container/pages/404'));
 const StudentFee = lazy(() => import('../../page/student/StudentFee'));
 const Course = lazy(() => import('../../page/student/Course'));
 const CourseDetails = lazy(() => import('../../container/course/CourseDetails'));
+const LectureDetails = lazy(() => import('../../container/courseWave/LectureDetails'));
+const Lecture = lazy(() => import('../../page/student/Lecture'));
 const PaymentHistory = lazy(() => import('../../page/student/StudentPaymentHistory'));
 const Settings = lazy(() => import('../../page/student/StudentProfile'));
 const ComingSoon = lazy(() => import('../../container/pages/ComingSoon'));
@@ -37,10 +39,19 @@ const Student = React.memo(() => {
         <Route path="student-fee" element={<StudentFee />} />
         <Route path="course" element={<Course />} />
         <Route path="course/courseDetails/:id" element={<CourseDetails />} />
-        <Route path="courseWave/lectures" element={<CourseWave />} />
-        <Route path="courseWave/materials" element={<CourseWave />} />
-        <Route path="courseWave/submissions" element={<CourseWave />} />
-        <Route path="courseWave/assignments" element={<CourseWave />} />
+        <Route path="courseWave/lectures" element={<CourseWave type="Lecture" />} />
+        <Route path="courseWave/lectures/lecturesCard/:id" element={<Lecture />} />
+        <Route path="courseWave/lectures/lecturesCard/1/lectureNumber/:id" element={<LectureDetails />} />
+        <Route path="courseWave/lectures/lecturesCard/2/lectureNumber/:id" element={<LectureDetails />} />
+        <Route path="courseWave/lectures/lecturesCard/3/lectureNumber/:id" element={<LectureDetails />} />
+        <Route path="courseWave/lectures/lecturesCard/4/lectureNumber/:id" element={<LectureDetails />} />
+        <Route path="courseWave/lectures/lecturesCard/5/lectureNumber/:id" element={<LectureDetails />} />
+        <Route path="courseWave/lectures/lecturesCard/6/lectureNumber/:id" element={<LectureDetails />} />
+        <Route path="courseWave/lectures/lecturesCard/7/lectureNumber/:id" element={<LectureDetails />} />
+        <Route path="courseWave/lectures/lecturesCard/8/lectureNumber/:id" element={<LectureDetails />} />
+        <Route path="courseWave/materials" element={<CourseWave type="Material" />} />
+        <Route path="courseWave/submissions" element={<CourseWave type="Submission" />} />
+        <Route path="courseWave/assignments" element={<CourseWave type="Assignment" />} />
         <Route path="profile" element={<Settings />}>
           <Route index element={<Profile />} />
           <Route path="profile" element={<Profile />} />
