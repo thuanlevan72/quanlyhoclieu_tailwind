@@ -59,11 +59,7 @@ function Ordersummary({ subtotal, checkout }) {
               </li>
               <li className="flex items-center justify-between mb-[18px]">
                 <span className="font-medium text-body dark:text-white60">Discount :</span>
-                <span className="font-medium text-dark dark:text-white87">{`$${-20}`}</span>
-              </li>
-              <li className="flex items-center justify-between mb-[18px]">
-                <span className="font-medium text-body dark:text-white60">Shipping Charge :</span>
-                <span className="font-medium text-dark dark:text-white87">{`$${30}`}</span>
+                <span className="font-medium text-dark dark:text-white87">{`$${0}`}</span>
               </li>
             </ul>
             <Form form={form} name="promo" onFinish={submitPromo}>
@@ -73,10 +69,10 @@ function Ordersummary({ subtotal, checkout }) {
                     <img src={require('../../../static/img/Subtraction1.png')} alt="" /> Select Coupon
                   </Option>
                   <Option value="one">
-                    <img src={require('../../../static/img/Subtraction1.png')} alt="" /> Coupon one
+                    <img src={require('../../../static/img/Subtraction1.png')} alt="" /> None
                   </Option>
                   <Option value="tow">
-                    <img src={require('../../../static/img/Subtraction1.png')} alt="" /> Coupon tow
+                    <img src={require('../../../static/img/Subtraction1.png')} alt="" /> None
                   </Option>
                 </Select>
               </Form.Item>
@@ -106,7 +102,7 @@ function Ordersummary({ subtotal, checkout }) {
             </Form>
             <Heading className="inline-flex items-center justify-between w-full" as="h4">
               <span className="text-base font-semibold text-dark dark:text-white87">Total : </span>
-              <span className="text-lg font-semibold text-primary">{`$${subtotal + 30 - 20}`}</span>
+              <span className="text-lg font-semibold text-primary">{`$${subtotal}`}</span>
             </Heading>
             {!checkout && (
               <Button
