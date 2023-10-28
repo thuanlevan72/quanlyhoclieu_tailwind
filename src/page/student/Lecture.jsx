@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Pagination } from 'antd';
+import { useParams } from 'react-router-dom';
 import { PageHeader } from '../../components/page-headers/page-headers';
-import courseWaveData from '../../demoData/courseWave.json';
-import CourseWaveCard from '../../components/cards/CourseWaveCard';
+import coureWaveData from '../../demoData/courseWave.json';
+import lectureData from '../../demoData/lecture.json';
+import LectureCard from '../../components/cards/LectureCard';
 import { PaginationStyle } from '../../container/styled';
 
-function CourseWave(data) {
-  const { type } = data;
+function Lecture() {
+  const { id } = useParams();
+  const currentCourseWave = coureWaveData.find((x) => x.id.toString() === id);
+  const newLectureData = lectureData.map((value) => {
+    const cloneValue = { ...value };
+    cloneValue.navid = id.toString();
+    return cloneValue;
+  });
   const PageRoutes = [
     {
       path: 'index',
@@ -17,24 +25,32 @@ function CourseWave(data) {
       breadcrumbName: 'CourseWave',
     },
     {
-      path: type,
-      breadcrumbName: type,
+      path: 'lecture',
+      breadcrumbName: 'Lecture',
+    },
+    {
+      path: 'lectuteList',
+      breadcrumbName: 'Lecture List',
+    },
+    {
+      path: currentCourseWave.title,
+      breadcrumbName: currentCourseWave.title,
     },
   ];
   const [state, setState] = useState({
-    coursesWave: courseWaveData,
+    lecture: newLectureData,
     current: 0,
     pageSize: 0,
   });
-  const { coursesWave } = state;
+  const { lecture } = state;
   useEffect(() => {
-    if (courseWaveData) {
+    if (lectureData) {
       setState({
-        coursesWave: courseWaveData,
+        lecture: newLectureData,
       });
     }
   }, []);
-
+  console.log(lecture);
   const onShowSizeChange = (current, pageSize) => {
     setState({ ...state, current, pageSize });
   };
@@ -46,17 +62,17 @@ function CourseWave(data) {
     <>
       <PageHeader
         className="flex items-center justify-between px-8 xl:px-[15px] pt-2 pb-6 sm:pb-[30px] bg-transparent sm:flex-col"
-        title={type}
+        title={currentCourseWave.title}
         routes={PageRoutes}
       />
       <main className="min-h-[715px] lg:min-h-[580px] px-8 xl:px-[15px] pb-[30px] bg-transparent">
         <Row gutter={25} className="mt-sm-10">
-          {coursesWave.map((value, index) => (
-            <CourseWaveCard key={index} courseWaveData={value} />
+          {lecture.map((value, index) => (
+            <LectureCard key={index} lectureData={value} />
           ))}
           <Col xs={24}>
             <>
-              {courseWaveData.length ? (
+              {lectureData.length ? (
                 <PaginationStyle>
                   <div className="ant-pagination-custom-style text-end">
                     <Pagination
@@ -65,7 +81,7 @@ function CourseWave(data) {
                       onShowSizeChange={onShowSizeChange}
                       pageSize={10}
                       defaultCurrent={1}
-                      total={courseWaveData.length}
+                      total={lectureData.length}
                     />
                   </div>
                 </PaginationStyle>
@@ -78,4 +94,4 @@ function CourseWave(data) {
   );
 }
 
-export default CourseWave;
+export default Lecture;
