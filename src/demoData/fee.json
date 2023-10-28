@@ -1,0 +1,59 @@
+[
+    {
+        "id": 1,
+        "img": "1.png",
+        "name": "UI/UX Design Masters Course",
+        "price": 150,
+        "isChecked": false
+    },
+    {
+        "id": 2,
+        "img": "1.png",
+        "name": "UI/UX Design Masters Course",
+        "price": 250,
+        "isChecked": false
+    },
+    {
+        "id": 3,
+        "img": "1.png",
+        "name": "UI/UX Design Masters Course",
+        "price": 350,
+        "isChecked": false
+    },
+    {
+        "id": 4,
+        "img": "1.png",
+        "name": "UI/UX Design Masters Course",
+        "price": 350,
+        "isChecked": false
+    },
+    {
+        "id": 5,
+        "img": "1.png",
+        "name": "UI/UX Design Masters Course",
+        "price": 350,
+        "isChecked": false
+    },
+    {
+        "id": 6,
+        "img": "1.png",
+        "name": "UI/UX Design Masters Course",
+        "price": 350,
+        "isChecked": false
+    },
+    {
+        "id": 7,
+        "img": "1.png",
+        "name": "UI/UX Design Masters Course",
+        "price": 350,
+        "isChecked": false
+    },
+    {
+        "id": 8,
+        "img": "1.png",
+        "name": "UI/UX Design Masters Course",
+        "price": 350,
+        "isChecked": false
+    }
+]
+  
