@@ -5,9 +5,6 @@ import BlogCard from '../../components/cards/BlogCard';
 import { PageHeaderBanner } from '../../components/banners/Banners';
 import cardData from '../../demoData/sampleCards.json';
 
-const UserOverview = lazy(() => import('./overview/demoFive/UserOverview'));
-const Calender = lazy(() => import('./overview/demoFive/CalendarHead'));
-const MemberProgress = lazy(() => import('./overview/demoFive/MemberProgress'));
 const UpcomingEvents = lazy(() => import('./overview/demoFive/UpcomingEvents'));
 const KnowledgeBase = lazy(() => import('./overview/demoFive/KnowledgeBase'));
 const Timelines = lazy(() => import('./overview/demoFive/Timeline'));
@@ -27,42 +24,10 @@ function DemoFive() {
             }
           >
             <PageHeaderBanner
-              title="Welcome To Demo Dashboard"
-              subtitle="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form"
+              title="Welcome To LD Academy"
+              subtitle="
+              Knowledge is all you need, come to us."
             />
-          </Suspense>
-        </Col>
-        <Col xxl={16} xs={24} className="mb-[25px]">
-          <Suspense
-            fallback={
-              <Cards headless>
-                <Skeleton active />
-              </Cards>
-            }
-          >
-            <UserOverview />
-          </Suspense>
-        </Col>
-        <Col xxl={8} xl={10} xs={24} className="mb-[25px]">
-          <Suspense
-            fallback={
-              <Cards headless>
-                <Skeleton active />
-              </Cards>
-            }
-          >
-            <Calender />
-          </Suspense>
-        </Col>
-        <Col xxl={12} xl={14} xs={24} className="mb-[25px]">
-          <Suspense
-            fallback={
-              <Cards headless>
-                <Skeleton active />
-              </Cards>
-            }
-          >
-            <MemberProgress />
           </Suspense>
         </Col>
         <Col xl={12} lg={24} xs={24} className="mb-[25px]">
@@ -76,7 +41,7 @@ function DemoFive() {
             <UpcomingEvents />
           </Suspense>
         </Col>
-        <Col xxl={8} xl={12} lg={12} xs={24} className="mb-[25px]">
+        <Col xxl={12} xl={12} lg={12} xs={24} className="mb-[25px]">
           <Suspense
             fallback={
               <Cards headless>
@@ -87,7 +52,7 @@ function DemoFive() {
             <KnowledgeBase />
           </Suspense>
         </Col>
-        <Col xxl={8} xl={12} lg={12} xs={24} className="mb-[25px]">
+        <Col xxl={12} xl={12} lg={12} xs={24} className="mb-[25px]">
           <Suspense
             fallback={
               <Cards headless>
@@ -98,7 +63,7 @@ function DemoFive() {
             <Timelines />
           </Suspense>
         </Col>
-        <Col xxl={8} xl={12} xs={24} className="mb-[25px]">
+        <Col xxl={12} xl={12} xs={24} className="mb-[25px]">
           <Suspense
             fallback={
               <Cards headless>

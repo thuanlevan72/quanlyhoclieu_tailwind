@@ -7,11 +7,11 @@ import UilTimes from '@iconscout/react-unicons/icons/uil-times';
 import FontAwesome from 'react-fontawesome';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { changeLayoutMode, changeMenuMode, changeDirectionMode } from '../../redux/themeLayout/actionCreator';
+import { changeLayoutMode, changeMenuMode } from '../../redux/themeLayout/actionCreator';
 
 function CustomizerStudentLayout() {
   const { t } = useTranslation();
-  const { rtl, layoutMode, topMenu } = useSelector((state) => {
+  const { layoutMode, topMenu } = useSelector((state) => {
     return {
       rtl: state.ChangeLayoutMode.rtlData,
       layoutMode: state.ChangeLayoutMode.mode,
@@ -58,16 +58,16 @@ function CustomizerStudentLayout() {
   if (!topMenu) {
     changeNavbar(true);
   }
-  const changeLayoutDirection = (rtlMode) => {
-    if (rtlMode) {
-      const html = document.querySelector('html');
-      html.setAttribute('dir', 'rtl');
-    } else {
-      const html = document.querySelector('html');
-      html.setAttribute('dir', 'ltr');
-    }
-    dispatch(changeDirectionMode(rtlMode));
-  };
+  // const changeLayoutDirection = (rtlMode) => {
+  //   if (rtlMode) {
+  //     const html = document.querySelector('html');
+  //     html.setAttribute('dir', 'rtl');
+  //   } else {
+  //     const html = document.querySelector('html');
+  //     html.setAttribute('dir', 'ltr');
+  //   }
+  //   dispatch(changeDirectionMode(rtlMode));
+  // };
 
   return (
     <>
@@ -108,7 +108,7 @@ function CustomizerStudentLayout() {
               </Link>
             </div>
             <div className="px-6 pb-6">
-              <div className="mb-12">
+              {/* <div className="mb-12">
                 <h4 className="mb-8 text-base font-semibold text-dark dark:text-white87">
                   {t('layouts')} {t('type')}
                 </h4>
@@ -144,7 +144,7 @@ function CustomizerStudentLayout() {
                     </Link>
                   </li>
                 </ul>
-              </div>
+              </div> */}
               <div className="mb-12">
                 <h4 className="mb-8 text-base font-semibold text-dark dark:text-white87">
                   {t('sidebar')} {t('type')}
@@ -184,7 +184,7 @@ function CustomizerStudentLayout() {
                   </li>
                 </ul>
               </div>
-              <div className="mb-12">
+              {/* <div className="mb-12">
                 <h4 className="mb-8 text-base font-semibold text-dark dark:text-white87">
                   {t('navbar')} {t('type')}
                 </h4>
@@ -220,7 +220,7 @@ function CustomizerStudentLayout() {
                     </Link>
                   </li>
                 </ul>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
