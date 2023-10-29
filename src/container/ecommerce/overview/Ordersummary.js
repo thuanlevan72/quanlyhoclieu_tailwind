@@ -110,7 +110,7 @@ function Ordersummary({ subtotal, checkout }) {
                 type="secondary"
                 size="large"
               >
-                <Link to="/admin/ecommerce/checkout" className="flex items-center justify-center text-white">
+                <Link to="/student/student-fee/checkout" className="flex items-center justify-center text-white">
                   Proceed To Checkout
                   {!rtl ? (
                     <UilAngleRight className="w-4 h-4 ltr:ml-1.5 rtl:mr-1.5" />

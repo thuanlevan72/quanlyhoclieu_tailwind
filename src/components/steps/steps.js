@@ -70,7 +70,14 @@ function Steps({
     </StepsStyle>
   ) : (
     <>
-      <StepsStyle current={currents} direction={direction} status={status} progressDot={progressDot} size={size}>
+      <StepsStyle
+        current={currents}
+        direction={direction}
+        status={status}
+        progressDot={progressDot}
+        size={size}
+        className="m-[8px]"
+      >
         {steps !== undefined &&
           steps.map((item) => (
             <Step

@@ -7,6 +7,7 @@ const StepsStyle = Styled(Steps)`
             &.ant-steps-finish-icon{
                 svg{
                     color: ${({ theme }) => theme['primary-color']};
+                    margin: [30px];
                 }
             }
         }

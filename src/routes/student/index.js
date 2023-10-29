@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { Spin } from 'antd';
 import Dashboard from './DashboardRoutes';
 import withStudentLayout from '../../layout/studentLayout/withStudentLayout';
+import CheckOut from '../../container/ecommerce/overview/CheckoutWizard';
 
 const Profile = lazy(() => import('../../container/profile/settings/overview/Profile'));
 const Account = lazy(() => import('../../container/profile/settings/overview/Account'));
@@ -16,6 +17,7 @@ const CourseDetails = lazy(() => import('../../container/course/CourseDetails'))
 const LectureDetails = lazy(() => import('../../container/courseWave/LectureDetails'));
 const Lecture = lazy(() => import('../../page/student/Lecture'));
 const PaymentHistory = lazy(() => import('../../page/student/StudentPaymentHistory'));
+const Totalmoney = lazy(() => import('../../page/student/TotalMoney'));
 const Settings = lazy(() => import('../../page/student/StudentProfile'));
 const ComingSoon = lazy(() => import('../../container/pages/ComingSoon'));
 const CalenDar = lazy(() => import('../../container/calendar/Calendar'));
@@ -37,6 +39,7 @@ const Student = React.memo(() => {
       <Routes>
         <Route index path="/*" element={<Dashboard />} />
         <Route path="student-fee" element={<StudentFee />} />
+        <Route path="student-fee/checkout" element={<CheckOut />} />
         <Route path="course" element={<Course />} />
         <Route path="course/courseDetails/:id" element={<CourseDetails />} />
         <Route path="courseWave/lectures" element={<CourseWave type="Lecture" />} />
@@ -62,6 +65,7 @@ const Student = React.memo(() => {
         </Route>
         <Route path="settings" element={<ComingSoon />} />
         <Route path="payment-history" element={<PaymentHistory />} />
+        <Route path="total-money" element={<Totalmoney />} />
         <Route path="activity" element={<CalenDar />} />
         <Route path="help" element={<FAQ />} />
         <Route path="*" element={<NotFound />} />

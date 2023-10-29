@@ -55,6 +55,8 @@ function FeeTable() {
     if (data.isChecked) subtotal += data.price;
     return data;
   });
+  localStorage.setItem('subtotal', subtotal);
+  localStorage.setItem('feelist', JSON.stringify(fee));
   if (fee !== null) {
     fee.map((data) => {
       const { id, img, name, price, isChecked } = data;
