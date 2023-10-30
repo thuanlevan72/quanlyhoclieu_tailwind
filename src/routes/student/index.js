@@ -44,14 +44,7 @@ const Student = React.memo(() => {
         <Route path="course/courseDetails/:id" element={<CourseDetails />} />
         <Route path="courseWave/lectures" element={<CourseWave type="Lecture" />} />
         <Route path="courseWave/lectures/lecturesCard/:id" element={<Lecture />} />
-        <Route path="courseWave/lectures/lecturesCard/1/lectureNumber/:id" element={<LectureDetails />} />
-        <Route path="courseWave/lectures/lecturesCard/2/lectureNumber/:id" element={<LectureDetails />} />
-        <Route path="courseWave/lectures/lecturesCard/3/lectureNumber/:id" element={<LectureDetails />} />
-        <Route path="courseWave/lectures/lecturesCard/4/lectureNumber/:id" element={<LectureDetails />} />
-        <Route path="courseWave/lectures/lecturesCard/5/lectureNumber/:id" element={<LectureDetails />} />
-        <Route path="courseWave/lectures/lecturesCard/6/lectureNumber/:id" element={<LectureDetails />} />
-        <Route path="courseWave/lectures/lecturesCard/7/lectureNumber/:id" element={<LectureDetails />} />
-        <Route path="courseWave/lectures/lecturesCard/8/lectureNumber/:id" element={<LectureDetails />} />
+        <Route path="courseWave/lectures/lecturesCard/:preid/lectureNumber/:id" element={<LectureDetails />} />
         <Route path="courseWave/materials" element={<CourseWave type="Material" />} />
         <Route path="courseWave/submissions" element={<CourseWave type="Submission" />} />
         <Route path="courseWave/assignments" element={<CourseWave type="Assignment" />} />
