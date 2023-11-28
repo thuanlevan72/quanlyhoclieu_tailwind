@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { TopMenuStyle } from './Style';
 
 function TopMenu() {
@@ -9,10 +9,8 @@ function TopMenu() {
 
   // Sử dụng substring để lấy phần con đường dẫn
   const subPath = currentPath.substring(currentPath.indexOf('/', 1));
-  console.log(subPath);
 
   const activeLink = (value) => {
-    console.log(value);
     return value === subPath ? 'parent active' : 'parent';
   };
   return (
@@ -24,32 +22,10 @@ function TopMenu() {
               Course
             </Link>
           </li>
-          <li className="has-subMenu">
-            <Link to="#" className="parent">
-              Courseware
+          <li className="">
+            <Link to={`${path}/yourCourses`} className={activeLink('/yourCourses')}>
+              Your Courses
             </Link>
-            <ul className="subMenu">
-              <li>
-                <NavLink to={`${path}/courseWave/lectures`} className={activeLink('/courseWave/lectures')}>
-                  Lecture
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={`${path}/courseWave/materials`} className={activeLink('/courseWave/materials')}>
-                  Material
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={`${path}/courseWave/submissions`} className={activeLink('/courseWave/submissions')}>
-                  Submission
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={`${path}/courseWave/assignments`} className={activeLink('/student-assignment')}>
-                  Asignment
-                </NavLink>
-              </li>
-            </ul>
           </li>
           <li className="">
             <Link to={`${path}/student-fee`} className={activeLink('/student-fee')}>
