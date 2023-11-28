@@ -60,7 +60,6 @@ function FeeTable() {
   if (fee !== null) {
     fee.map((data) => {
       const { id, img, name, price, isChecked } = data;
-      console.log(data);
       return productTableData.push({
         course: (
           <div className="cart-single">

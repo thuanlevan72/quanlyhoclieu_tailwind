@@ -18,7 +18,6 @@ function CustomizerStudentLayout() {
       topMenu: state.ChangeLayoutMode.topMenu,
     };
   });
-  console.log(topMenu);
   const [state, setState] = useState({
     customizerAction: false,
   });
@@ -52,7 +51,6 @@ function CustomizerStudentLayout() {
     } else {
       html.classList.remove('hexadash-topmenu');
     }
-    console.log(topMode);
     dispatch(changeMenuMode(topMode));
   };
   if (!topMenu) {

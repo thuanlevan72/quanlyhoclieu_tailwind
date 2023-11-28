@@ -5,7 +5,7 @@ import courseWaveData from '../../demoData/courseWave.json';
 import CourseWaveCard from '../../components/cards/CourseWaveCard';
 import { PaginationStyle } from '../../container/styled';
 
-function CourseWave() {
+function YourCourses() {
   const PageRoutes = [
     {
       path: 'index',
@@ -49,7 +49,8 @@ function CourseWave() {
           {coursesWave.map((value, index) => (
             <CourseWaveCard key={index} courseWaveData={value} />
           ))}
-          <Col xs={24}>
+
+          <Col xs={24} className="mt-[40px]">
             <>
               {courseWaveData.length ? (
                 <PaginationStyle>
@@ -73,4 +74,4 @@ function CourseWave() {
   );
 }
 
-export default CourseWave;
+export default YourCourses;
