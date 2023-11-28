@@ -4,6 +4,7 @@ import { Row, Col, Collapse, Skeleton } from 'antd';
 
 import CollapsePanel from 'antd/lib/collapse/CollapsePanel';
 import UilPlus from '@iconscout/react-unicons/icons/uil-plus';
+import UilMassage from '@iconscout/react-unicons/icons/uil-comment-message';
 import UilPlay from '@iconscout/react-unicons/icons/uil-play';
 import UilMinus from '@iconscout/react-unicons/icons/uil-minus';
 import courseData from '../../demoData/course.json';
@@ -38,6 +39,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: true,
+          isWatching: false,
         },
         {
           id: '2',
@@ -46,6 +48,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
         {
           id: '3',
@@ -54,6 +57,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
       ],
     },
@@ -68,6 +72,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
         {
           id: '2',
@@ -76,6 +81,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
         {
           id: '3',
@@ -84,6 +90,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
       ],
     },
@@ -98,6 +105,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
         {
           id: '2',
@@ -106,6 +114,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
         {
           id: '3',
@@ -114,6 +123,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
       ],
     },
@@ -128,6 +138,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
         {
           id: '2',
@@ -136,6 +147,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
         {
           id: '3',
@@ -144,6 +156,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
       ],
     },
@@ -158,6 +171,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
         {
           id: '2',
@@ -166,6 +180,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
         {
           id: '3',
@@ -174,6 +189,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
       ],
     },
@@ -188,6 +204,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
         {
           id: '2',
@@ -196,6 +213,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
         {
           id: '3',
@@ -204,6 +222,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
       ],
     },
@@ -218,6 +237,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
         {
           id: '2',
@@ -226,6 +246,7 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
         {
           id: '3',
@@ -234,18 +255,26 @@ function CourseDetails() {
           duration: '5',
           isWatched: false,
           isAvailable: false,
+          isWatching: false,
         },
       ],
     },
   ]);
   const { id } = useParams();
-  const [link, setLink] = useState('https://www.youtube.com/embed/dBd1j6x2HOo');
-
-  const activeChoose = (value, li, si) => {
+  const [link, setLink] = useState('https://www.youtube.com/embed/PBwzoZ8aFxI?si=JzLOvPTKI6wU5JVG');
+  const currentCourse = courseData.find((x) => x.id.toString() === id);
+  const [currentTitle, setCurrentTitle] = useState(currentCourse.title);
+  const activeChoose = (value, title, li, si) => {
+    lectures.forEach((data) => {
+      data.classes.forEach((cdata) => {
+        cdata.isWatching = false;
+      });
+    });
     const currentL = lectures[li - 1];
+    setLink(value);
+    setCurrentTitle(title);
     if (li - 0 < lectures.length) {
       if (si - 0 < currentL.classes.length) {
-        setLink(value);
         setLectures((prevLectures) => {
           const newLectures = [...prevLectures];
           newLectures[li - 1] = {
@@ -253,6 +282,7 @@ function CourseDetails() {
             classes: newLectures[li - 1].classes.map((cls, index) => {
               if (index === si - 1) {
                 cls.isWatched = true;
+                cls.isWatching = true;
               }
               if (index === si - 0) {
                 cls.isAvailable = true;
@@ -264,7 +294,6 @@ function CourseDetails() {
         });
       }
       if (si - 0 === currentL.classes.length) {
-        setLink(value);
         setLectures((prevLectures) => {
           const newLectures = [...prevLectures];
           newLectures[li - 1] = {
@@ -272,6 +301,7 @@ function CourseDetails() {
             classes: newLectures[li - 1].classes.map((cls, index) => {
               if (index === si - 1) {
                 cls.isWatched = true;
+                cls.isWatching = true;
               }
               return cls;
             }),
@@ -290,7 +320,6 @@ function CourseDetails() {
       }
     } else {
       if (si - 0 < lectures[lectures.length - 1].classes.length) {
-        setLink(value);
         setLectures((prevLectures) => {
           const newLectures = [...prevLectures];
           newLectures[li - 1] = {
@@ -298,6 +327,7 @@ function CourseDetails() {
             classes: newLectures[li - 1].classes.map((cls, index) => {
               if (index === si - 1) {
                 cls.isWatched = true;
+                cls.isWatching = true;
               }
               if (index === si - 0) {
                 cls.isAvailable = true;
@@ -308,7 +338,6 @@ function CourseDetails() {
           return newLectures;
         });
       }
-      setLink(value);
       setLectures((prevLectures) => {
         const newLectures = [...prevLectures];
         newLectures[li - 1] = {
@@ -316,6 +345,7 @@ function CourseDetails() {
           classes: newLectures[li - 1].classes.map((cls, index) => {
             if (index === si - 1) {
               cls.isWatched = true;
+              cls.isWatching = true;
             }
             return cls;
           }),
@@ -324,7 +354,6 @@ function CourseDetails() {
       });
     }
   };
-  const currentCourse = courseData.find((x) => x.id.toString() === id);
   return (
     <Suspense
       fallback={
@@ -335,7 +364,7 @@ function CourseDetails() {
     >
       <PageHeader
         className="flex items-center justify-between px-8 xl:px-[15px] pt-2 pb-6 sm:pb-[30px] bg-transparent sm:flex-col"
-        title="Course"
+        title={currentCourse.title}
         routes={PageRoutes}
       />
       <main className="min-h-[715px] lg:min-h-[580px] px-8 xl:px-[15px] pb-[30px] bg-transparent">
@@ -352,12 +381,34 @@ function CourseDetails() {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
+                <div className=" mt-[30px] ">
+                  <div className="text-[40px] text-body">{currentTitle}</div>
+                  <div>Any questions?</div>
+                </div>
+                <div className="text-[20px] mt-[60px]">
+                  <div>
+                    Fanpage: <a href="">fanpage.fanpage.com</a>
+                  </div>
+                  <div>
+                    Facebook: <a href="">facebook.facebook.com</a>
+                  </div>
+                  <div>
+                    Youtube: <a href="">youtube.youtube.com</a>
+                  </div>
+                </div>
               </div>
             </div>
           </Col>
           <Col lg={6} xs={24} className="lg:mb-[30px]">
-            <div>
-              <h2 className="text-3xl font-semibold text-dark dark:text-white87">{currentCourse.title}</h2>
+            <div className="relative">
+              <div
+                className="fixed shadow-2xl w-[140px] h-[50px] bg-[#eccc68] flex items-center justify-center hover:bg-[#ffa502]
+              text-white text-[20px] rounded-[12px] right-[40px] bottom-[80px] z-50 cursor-pointer"
+              >
+                Message
+                <UilMassage className="ml-[5px]" />
+              </div>
+              <h2 className="text-3xl font-semibold text-[#ffa502] dark:text-white87">{currentCourse.title}</h2>
               <div>
                 <p className="text-base text-body dark:text-white60 mb-[28px]">
                   Many support queries and technical questions will already be answered in supporting documentation such
@@ -370,7 +421,7 @@ function CourseDetails() {
               </h2>
               <div>
                 <Collapse
-                  className="bg-transparent [&>.ant-collapse-item]:bg-white [&>.ant-collapse-item:last-child]:bg-[#eccc68] dark:[&>.ant-collapse-item]:bg-white06 dark:[&>.ant-collapse-item:last-child]:bg-white10 [&>.ant-collapse-item]:mb-[5px] [&>.ant-collapse-item]:rounded-[5px] [&>.ant-collapse-item]:border [&>.ant-collapse-item]:border-regular dark:[&>.ant-collapse-item]:border-whiteDark [&>.ant-collapse-item]:shadow-[0_15px_40px_rgba_(173,181,217)] [&>.ant-collapse-item>.ant-collapse-header]:text-[15px] [&>.ant-collapse-item>.ant-collapse-header]:font-medium [&>.ant-collapse-item>.ant-collapse-header]:text-dark dark:[&>.ant-collapse-item>.ant-collapse-header]:text-white87 [&>.ant-collapse-item>.ant-collapse-header]:py-[15px] [&>.ant-collapse-item>.ant-collapse-header]:px-[25px] [&>.ant-collapse-item>.ant-collapse-header]:border-b [&>.ant-collapse-item>.ant-collapse-header]:border-regular dark:[&>.ant-collapse-item>.ant-collapse-header]:border-white06 [&>.ant-collapse-item>.ant-collapse-content>.ant-collapse-content-box]:px-[25px] [&>.ant-collapse-item>.ant-collapse-content>.ant-collapse-content-box]:py-[20px] [&>.ant-collapse-item>.ant-collapse-content>.ant-collapse-content-box]:pb-[12px]"
+                  className="bg-transparent [&>.ant-collapse-item]:bg-white dark:[&>.ant-collapse-item]:bg-white06 dark:[&>.ant-collapse-item:last-child]:bg-white10 [&>.ant-collapse-item]:mb-[5px] [&>.ant-collapse-item]:rounded-[5px] [&>.ant-collapse-item]:border [&>.ant-collapse-item]:border-regular dark:[&>.ant-collapse-item]:border-whiteDark [&>.ant-collapse-item]:shadow-[0_15px_40px_rgba_(173,181,217)] [&>.ant-collapse-item>.ant-collapse-header]:text-[15px] [&>.ant-collapse-item>.ant-collapse-header]:font-medium [&>.ant-collapse-item>.ant-collapse-header]:text-dark dark:[&>.ant-collapse-item>.ant-collapse-header]:text-white87 [&>.ant-collapse-item>.ant-collapse-header]:py-[15px] [&>.ant-collapse-item>.ant-collapse-header]:px-[25px] [&>.ant-collapse-item>.ant-collapse-header]:border-b [&>.ant-collapse-item>.ant-collapse-header]:border-regular dark:[&>.ant-collapse-item>.ant-collapse-header]:border-white06 [&>.ant-collapse-item>.ant-collapse-content>.ant-collapse-content-box]:px-[25px] [&>.ant-collapse-item>.ant-collapse-content>.ant-collapse-content-box]:py-[20px] [&>.ant-collapse-item>.ant-collapse-content>.ant-collapse-content-box]:pb-[12px]"
                   bordered={false}
                   defaultActiveKey={['1']}
                   expandIcon={({ isActive }) =>
@@ -399,17 +450,25 @@ function CourseDetails() {
                               className="flex items-center gap-2"
                               onClick={
                                 singleClass.isAvailable
-                                  ? () => activeChoose(singleClass.videoLink, lecture.id, singleClass.id)
+                                  ? () =>
+                                      activeChoose(
+                                        singleClass.videoLink,
+                                        singleClass.classTitle,
+                                        lecture.id,
+                                        singleClass.id,
+                                      )
                                   : () => {}
                               }
                               to="#"
                             >
                               <UilPlay className="w-4 h-4 text-[#eccc68]" />
                               <span
-                                className={`title${lecture.id}${singleClass.id} dark:text-white60 text-[15px] 
+                                className={`title${lecture.id}${singleClass.id} dark:text-white60 text-[15px] title
                                 
                                  ${
-                                   singleClass.isWatched
+                                   singleClass.isWatching
+                                     ? 'text-[#ffa502]'
+                                     : singleClass.isWatched
                                      ? 'text-black'
                                      : singleClass.isAvailable
                                      ? 'text-[#eccc68]'

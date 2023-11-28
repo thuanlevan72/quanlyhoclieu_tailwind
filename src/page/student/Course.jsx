@@ -49,7 +49,7 @@ function Course() {
           {courses.map((value, index) => (
             <CourseCard key={index} courseData={value} />
           ))}
-          <Col xs={24}>
+          <Col xs={24} className="mt-[30px]">
             <>
               {courseData.length ? (
                 <PaginationStyle>

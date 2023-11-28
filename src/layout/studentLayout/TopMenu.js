@@ -18,17 +18,17 @@ function TopMenu() {
       <div className="hexadash-top-menu ltr:pl-[20px] rtl:pr-[20px] xl:ltr:pl-[10px] xl:rtl:pr-[10px]">
         <ul>
           <li className="">
-            <Link to={`${path}/course`} className={activeLink('/course')}>
+            <Link to={`${path}/course`} className={`${activeLink('/course')} hover:text-purple-700`}>
               Course
             </Link>
           </li>
           <li className="">
-            <Link to={`${path}/yourCourses`} className={activeLink('/yourCourses')}>
+            <Link to={`${path}/yourCourses`} className={`${activeLink('/yourCourses')} hover:text-purple-700`}>
               Your Courses
             </Link>
           </li>
           <li className="">
-            <Link to={`${path}/student-fee`} className={activeLink('/student-fee')}>
+            <Link to={`${path}/student-fee`} className={`${activeLink('/student-fee')} hover:text-purple-700`}>
               Fees
             </Link>
           </li>

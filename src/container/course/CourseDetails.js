@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Row, Col, Collapse } from 'antd';
 import UilPlus from '@iconscout/react-unicons/icons/uil-plus';
 import UilMinus from '@iconscout/react-unicons/icons/uil-minus';
@@ -234,7 +234,7 @@ function CourseDetails() {
                   ${currentCourse.price}
                 </span>
                 <Button size="default" type="primary" className="px-5 text-sm font-semibold h-11">
-                  Start This Course
+                  <Link to="/student/student-fee">Start This Course</Link>
                 </Button>
               </div>
             </div>
