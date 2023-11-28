@@ -5,20 +5,15 @@ import courseWaveData from '../../demoData/courseWave.json';
 import CourseWaveCard from '../../components/cards/CourseWaveCard';
 import { PaginationStyle } from '../../container/styled';
 
-function CourseWave(data) {
-  const { type } = data;
+function CourseWave() {
   const PageRoutes = [
     {
       path: 'index',
       breadcrumbName: 'Home',
     },
     {
-      path: 'courseWave',
-      breadcrumbName: 'CourseWave',
-    },
-    {
-      path: type,
-      breadcrumbName: type,
+      path: 'yourCourse',
+      breadcrumbName: 'Your Courses',
     },
   ];
   const [state, setState] = useState({
@@ -46,7 +41,7 @@ function CourseWave(data) {
     <>
       <PageHeader
         className="flex items-center justify-between px-8 xl:px-[15px] pt-2 pb-6 sm:pb-[30px] bg-transparent sm:flex-col"
-        title={type}
+        title=""
         routes={PageRoutes}
       />
       <main className="min-h-[715px] lg:min-h-[580px] px-8 xl:px-[15px] pb-[30px] bg-transparent">

@@ -7,23 +7,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function CourseWaveCard({ courseWaveData }) {
-  const { id, thumbnail, title, duration, lectures, waveType } = courseWaveData;
+  const { id, thumbnail, title, duration, lectures } = courseWaveData;
   const decentralization = Cookies.get('decentralization');
   return (
-    <Col xxl={4} lg={8} sm={12} xs={24}>
-      <div className="mb-[25px] [&>.ant-card>.ant-card-body]:p-[18px]">
+    <Col xxl={6} lg={8} sm={12} xs={24}>
+      <Link
+        className="mb-[25px] [&>.ant-card>.ant-card-body]:p-[18px]"
+        to={`/${decentralization}/yourCourses/courseDetail/${id}`}
+      >
         <Card bordered="false">
           <div className="mb-[15px] rounded-[10px]">
             <img className="3xl:w-full" src={require(`../../static/img/courses/${thumbnail}`)} alt="hexadash" />
           </div>
           <div>
-            <h4 className="text-xl 3xl:text-lg font-semibold mb-3">
-              <Link
-                className="text-dark hover:text-secondary dark:text-white87 dark:hover:text-secondary"
-                to={`/${decentralization}/courseWave/${waveType}/${waveType}Card/${id}`}
-              >
-                {title}
-              </Link>
+            <h4 className="mb-3 text-xl font-semibold 3xl:text-lg">
+              <div className="text-dark hover:text-secondary dark:text-white87 dark:hover:text-secondary">{title}</div>
             </h4>
             <div className="flex items-center justify-between gap-[10px]">
               <ul className="flex items-center gap-2.5 2xl:gap-[5px] mb-0">
@@ -35,14 +33,14 @@ function CourseWaveCard({ courseWaveData }) {
                   <UilClock className="w-[14px]" />
                   <span className="text-[13px] 3xl:text-xs font-medium leading-none">{duration} Hrs</span>
                 </li>
-                <li>
-                  <Progress type="dashboard" percent={70} width={35} />
-                </li>
               </ul>
+              <div>
+                <Progress type="dashboard" percent={0} width={50} />
+              </div>
             </div>
           </div>
         </Card>
-      </div>
+      </Link>
     </Col>
   );
 }
