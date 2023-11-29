@@ -229,12 +229,19 @@ function CourseDetails() {
                   <span className="finline-block text-body dark:text-white60 mt-1.5">Lifetime access</span>
                 </li>
               </ul>
-              <div className="mt-[30px] text-center">
-                <span className="block mb-3 text-3xl font-semibold text-dark dark:text-white87">
+              <div className="mt-[30px] text-center flex flex-wrap justify-center">
+                <span className="block mb-3 text-3xl font-semibold text-dark dark:text-white87 w-[100%]">
                   ${currentCourse.price}
                 </span>
-                <Button size="default" type="primary" className="px-5 text-sm font-semibold h-11">
-                  <Link to="/student/student-fee">Start This Course</Link>
+                <Button size="default" type="primary" className="px-5 text-sm font-semibold h-11 mx-[5px]">
+                  <Link to="/student/student-fee">Add To Fees</Link>
+                </Button>
+                <Button
+                  size="default"
+                  type="primary"
+                  className="px-5 text-sm font-semibold h-11 mx-[5px] bg-white text-body hover:bg-purple-500 hover:text-white cursor-pointer"
+                >
+                  Buy Now
                 </Button>
               </div>
             </div>
