@@ -7,10 +7,12 @@ import UilPlus from '@iconscout/react-unicons/icons/uil-plus';
 import UilMassage from '@iconscout/react-unicons/icons/uil-comment-message';
 import UilPlay from '@iconscout/react-unicons/icons/uil-play';
 import UilMinus from '@iconscout/react-unicons/icons/uil-minus';
+import { UilQuestionCircle } from '@iconscout/react-unicons';
 import courseData from '../../demoData/course.json';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import '../profile/myProfile/overview/video-modal.css';
 import { Cards } from '../../components/cards/frame/cards-frame';
+import { Modal } from '../../components/modals/antd-modals';
 
 const PageRoutes = [
   {
@@ -60,6 +62,18 @@ function CourseDetails() {
           isWatching: false,
         },
       ],
+      exams: [
+        {
+          id: '1',
+          examTitle: 'Test01',
+          duration: '60',
+        },
+        {
+          id: '2',
+          examTitle: 'Test02',
+          duration: '60',
+        },
+      ],
     },
     {
       id: '2',
@@ -91,6 +105,18 @@ function CourseDetails() {
           isWatched: false,
           isAvailable: false,
           isWatching: false,
+        },
+      ],
+      exams: [
+        {
+          id: '1',
+          examTitle: 'Test01',
+          duration: '60',
+        },
+        {
+          id: '2',
+          examTitle: 'Test02',
+          duration: '60',
         },
       ],
     },
@@ -126,6 +152,18 @@ function CourseDetails() {
           isWatching: false,
         },
       ],
+      exams: [
+        {
+          id: '1',
+          examTitle: 'Test01',
+          duration: '60',
+        },
+        {
+          id: '2',
+          examTitle: 'Test02',
+          duration: '60',
+        },
+      ],
     },
     {
       id: '4',
@@ -157,6 +195,18 @@ function CourseDetails() {
           isWatched: false,
           isAvailable: false,
           isWatching: false,
+        },
+      ],
+      exams: [
+        {
+          id: '1',
+          examTitle: 'Test01',
+          duration: '60',
+        },
+        {
+          id: '2',
+          examTitle: 'Test02',
+          duration: '60',
         },
       ],
     },
@@ -192,6 +242,18 @@ function CourseDetails() {
           isWatching: false,
         },
       ],
+      exams: [
+        {
+          id: '1',
+          examTitle: 'Test01',
+          duration: '60',
+        },
+        {
+          id: '2',
+          examTitle: 'Test02',
+          duration: '60',
+        },
+      ],
     },
     {
       id: '6',
@@ -223,6 +285,18 @@ function CourseDetails() {
           isWatched: false,
           isAvailable: false,
           isWatching: false,
+        },
+      ],
+      exams: [
+        {
+          id: '1',
+          examTitle: 'Test01',
+          duration: '60',
+        },
+        {
+          id: '2',
+          examTitle: 'Test02',
+          duration: '60',
         },
       ],
     },
@@ -258,12 +332,25 @@ function CourseDetails() {
           isWatching: false,
         },
       ],
+      exams: [
+        {
+          id: '1',
+          examTitle: 'Test01',
+          duration: '60',
+        },
+        {
+          id: '2',
+          examTitle: 'Test02',
+          duration: '60',
+        },
+      ],
     },
   ]);
   const { id } = useParams();
   const [link, setLink] = useState('https://www.youtube.com/embed/PBwzoZ8aFxI?si=JzLOvPTKI6wU5JVG');
   const currentCourse = courseData.find((x) => x.id.toString() === id);
   const [currentTitle, setCurrentTitle] = useState(currentCourse.title);
+  const [visible, setVisible] = useState(false);
   const activeChoose = (value, title, li, si) => {
     lectures.forEach((data) => {
       data.classes.forEach((cdata) => {
@@ -368,6 +455,7 @@ function CourseDetails() {
         routes={PageRoutes}
       />
       <main className="min-h-[715px] lg:min-h-[580px] px-8 xl:px-[15px] pb-[30px] bg-transparent">
+        <Modal visible={visible} width={700} onCancel={() => setVisible(false)} onOk={() => setVisible(false)} />
         <Row gutter={25}>
           <Col lg={18} xs={24}>
             <div className="bg-white dark:bg-whiteDark p-[35px] rounded-[10px]">
@@ -478,7 +566,18 @@ function CourseDetails() {
                                 {singleClass.classTitle}
                               </span>
                               <div className="flex items-center ml-auto gap-x-[80px] xl:gap-x-[30px] sm:gap-x-[10px]">
-                                <span className="text-sm text-body dark:text-white60">5:00</span>
+                                <span className="text-sm text-body dark:text-white60">{singleClass.duration}:00</span>
+                              </div>
+                            </Link>
+                          </li>
+                        ))}
+                        {lecture.exams.map((singleExam, index1) => (
+                          <li className="w-full" key={index1}>
+                            <Link className="flex items-center gap-2 text-[#1e90ff]" onClick={() => setVisible(true)}>
+                              <UilQuestionCircle />
+                              <span>{singleExam.examTitle}</span>
+                              <div className="flex items-center ml-auto gap-x-[80px] xl:gap-x-[30px] sm:gap-x-[10px]">
+                                <span className="text-sm text-body dark:text-white60">{singleExam.duration}:00</span>
                               </div>
                             </Link>
                           </li>
