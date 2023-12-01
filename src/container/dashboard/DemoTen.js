@@ -1,8 +1,7 @@
 import React, { Suspense, lazy } from 'react';
-import { Row, Col, Skeleton } from 'antd';
+import { Row, Col, Skeleton, Slider } from 'antd';
 import { Cards } from '../../components/cards/frame/cards-frame';
 import BlogCard from '../../components/cards/BlogCard';
-import { PageHeaderBanner } from '../../components/banners/Banners';
 import cardData from '../../demoData/sampleCards.json';
 
 const UpcomingEvents = lazy(() => import('./overview/demoFive/UpcomingEvents'));
@@ -23,11 +22,12 @@ function DemoFive() {
               </Cards>
             }
           >
-            <PageHeaderBanner
+            {/* <PageHeaderBanner
               title="Welcome To LD Academy"
               subtitle="
               Knowledge is all you need, come to us."
-            />
+            /> */}
+            <Slider />
           </Suspense>
         </Col>
         <Col xl={12} lg={24} xs={24} className="mb-[25px]">

@@ -13,6 +13,7 @@ import { PageHeader } from '../../components/page-headers/page-headers';
 import '../profile/myProfile/overview/video-modal.css';
 import { Cards } from '../../components/cards/frame/cards-frame';
 import { Modal } from '../../components/modals/antd-modals';
+import Test from '../../components/tasklist/Test';
 
 const PageRoutes = [
   {
@@ -455,7 +456,9 @@ function CourseDetails() {
         routes={PageRoutes}
       />
       <main className="min-h-[715px] lg:min-h-[580px] px-8 xl:px-[15px] pb-[30px] bg-transparent">
-        <Modal visible={visible} width={700} onCancel={() => setVisible(false)} onOk={() => setVisible(false)} />
+        <Modal visible={visible} width={700} onCancel={() => setVisible(false)} onOk={() => setVisible(false)}>
+          <Test />
+        </Modal>
         <Row gutter={25}>
           <Col lg={18} xs={24}>
             <div className="bg-white dark:bg-whiteDark p-[35px] rounded-[10px]">
