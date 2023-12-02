@@ -91,6 +91,7 @@ function Product() {
         <Row gutter={30}>
           <Col xxl={5} xl={6} md={12} xs={20}>
             <button
+              aria-label="Expand Arrows"
               className="mb-[15px] w-[45px] h-[45px] hidden xl:inline-flex items-center justify-center p-0 text-primary bg-white dark:bg-white10 dark:text-white87 border-1 border-white dark:border-white10 rounded-6"
               type="button"
               onClick={handleButtonClick}

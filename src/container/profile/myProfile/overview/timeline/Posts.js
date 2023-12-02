@@ -229,6 +229,7 @@ function Posts({ postId, from, time, img, like, comment, content, author }) {
                     return (
                       key <= 1 && (
                         <a
+                          aria-label="Expand Arrows"
                           href="#"
                           onClick={() => {
                             lightBoxHandler(true, key);
@@ -255,6 +256,7 @@ function Posts({ postId, from, time, img, like, comment, content, author }) {
                       return (
                         key > 1 && (
                           <a
+                            aria-label="Expand Arrows"
                             key={key + 1}
                             href="#"
                             onClick={() => {

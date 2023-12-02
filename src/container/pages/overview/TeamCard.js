@@ -35,6 +35,7 @@ function TeamCard({ user, actions }) {
             <div className="flex flex-wrap items-center justify-center mt-[16px] gap-[10px]">
               {socialMediaLinks.map((link) => (
                 <a
+                  aria-label="Expand Arrows"
                   key={link.id}
                   className={`w-[38px] h-[38px] rounded-full inline-flex items-center justify-center bg-white dark:bg-white10 shadow-[0_10px_20px_rgba(116,116,116,0.08)] btn-icon text-${link.icon}`}
                   href={`https://${link.name.toLowerCase()}.com`}
