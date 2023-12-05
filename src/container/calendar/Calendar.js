@@ -305,11 +305,21 @@ export class CustomToolbar extends Toolbar {
             today
           </button>
           <div className="calender-head__navigation">
-            <button className="btn-navigate" type="button" onClick={() => this.navigate('PREV')}>
+            <button
+              aria-label="Expand Arrows"
+              className="btn-navigate"
+              type="button"
+              onClick={() => this.navigate('PREV')}
+            >
               <UilAngleLeft />
             </button>
             <span className="date-label">{this.props.label}</span>
-            <button className="btn-navigate" type="button" onClick={() => this.navigate('NEXT')}>
+            <button
+              aria-label="Expand Arrows"
+              className="btn-navigate"
+              type="button"
+              onClick={() => this.navigate('NEXT')}
+            >
               <UilAngleRight />
             </button>
           </div>

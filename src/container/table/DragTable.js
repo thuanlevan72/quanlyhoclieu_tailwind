@@ -78,7 +78,7 @@ function DragAndDropTable() {
 
     return (
       <tr className="ant-table-row" ref={setNodeRef} style={style} {...attributes} {...listeners}>
-        <td className="ant-table-cell drag-visible">
+        <td className="ant-table-cell drag-visible" aria-label="Expand Arrows">
           <UilExpandArrows className="w-4 h-4 text-light dark:text-white60" />
         </td>
         <td className="ant-table-cell">{item.user}</td>

@@ -292,6 +292,7 @@ const SaleByLocation = React.memo(() => {
               </ComposableMap>
               <div className="absolute flex flex-col items-center right-5 bottom-5">
                 <button
+                  aria-label="Expand Arrows"
                   type="button"
                   onClick={handleZoomIn}
                   className="flex justify-center bg-white rounded-md rounded-b-none dark:bg-white10 border-regular border-1 dark:border-white30 w-7 h-7 dark:text-white87"
@@ -309,6 +310,7 @@ const SaleByLocation = React.memo(() => {
                   </svg>
                 </button>
                 <button
+                  aria-label="Expand Arrows"
                   type="button"
                   onClick={handleZoomOut}
                   className="flex justify-center bg-white rounded-md rounded-t-none dark:bg-white10 border-regular border-1 dark:border-white30 border-t-none w-7 h-7 dark:text-white87"

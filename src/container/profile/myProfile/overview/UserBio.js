@@ -58,6 +58,7 @@ function UserBio() {
           <div className="flex flex-wrap items-center mt-[16px] gap-[10px]">
             {socialMediaLinks.map((link) => (
               <a
+                aria-label="Expand Arrows"
                 key={link.id}
                 className={`w-[44px] h-[44px] rounded-full inline-flex items-center justify-center bg-white dark:bg-white10 shadow-[0_5px_15px_rgba(116,116,116,0.13)] btn-icon text-${link.icon}`}
                 href={`https://${link.name.toLowerCase()}.com`}

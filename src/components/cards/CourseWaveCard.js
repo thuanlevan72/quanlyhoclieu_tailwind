@@ -15,13 +15,16 @@ function CourseWaveCard({ courseWaveData }) {
         className="mb-[25px] [&>.ant-card>.ant-card-body]:p-[18px]"
         to={`/${decentralization}/yourCourses/courseDetail/${id}`}
       >
-        <Card bordered="false">
+        <Card
+          bordered="false"
+          className="transition-transform duration-300 transform hover:bg-[#eccc68] my-[10px] hover:scale-105 hover:shadow-sm"
+        >
           <div className="mb-[15px] rounded-[10px]">
             <img className="3xl:w-full" src={require(`../../static/img/courses/${thumbnail}`)} alt="hexadash" />
           </div>
           <div>
             <h4 className="mb-3 text-xl font-semibold 3xl:text-lg">
-              <div className="text-dark hover:text-secondary dark:text-white87 dark:hover:text-secondary">{title}</div>
+              <div className="text-dark hover:text-[#ff6348] dark:text-white87 dark:hover:text-[#ff6348]">{title}</div>
             </h4>
             <div className="flex items-center justify-between gap-[10px]">
               <ul className="flex items-center gap-2.5 2xl:gap-[5px] mb-0">

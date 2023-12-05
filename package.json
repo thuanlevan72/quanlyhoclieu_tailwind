@@ -6,7 +6,7 @@
     "@dnd-kit/core": "^6.0.8",
     "@dnd-kit/sortable": "^7.0.2",
     "@dnd-kit/utilities": "^3.2.1",
-    "@iconscout/react-unicons": "^1.1.6",
+    "@iconscout/react-unicons": "^2.0.2",
     "@pezhmanparsaee/react-custom-scrollbars": "4.3.1",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^14.0.0",
@@ -118,7 +118,7 @@
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "esm": "^3.2.25",
-    "node-sass": "^8.0.0",
+    "node-sass": "^9.0.0",
     "postcss": "^8.4.20",
     "prettier": "^2.7.1",
     "react-simple-maps": "^3.0.0",
@@ -131,12 +131,9 @@
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "craco.config.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sovware/hexadash-react.git"
-  },
+  "repository": "git+https://github.com/sovware/hexadash-react.git",
   "keywords": [],
-  "author": "",
+  "author": "Rongdo04 <hienxk1@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/sovware/hexadash-react/issues"

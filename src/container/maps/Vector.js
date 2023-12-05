@@ -91,6 +91,7 @@ function VectorMaps() {
                   </ComposableMap>
                   <div className="flex items-center flex-col absolute ltr:right-5 rtl:left-5 bottom-5">
                     <button
+                      aria-label="Expand Arrows"
                       type="button"
                       onClick={handleZoomIn}
                       className="flex justify-center bg-white dark:text-white87 dark:bg-white10 w-7 h-7 border border-regular dark:border-white10 rounded-md rounded-b-none"
@@ -108,6 +109,7 @@ function VectorMaps() {
                       </svg>
                     </button>
                     <button
+                      aria-label="Expand Arrows"
                       type="button"
                       onClick={handleZoomOut}
                       className="flex justify-center dark:text-white87 bg-white dark:bg-white10 w-7 h-7 border border-regular dark:border-white10 rounded-md rounded-t-none"
