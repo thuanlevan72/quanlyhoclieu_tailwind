@@ -1,4 +1,3 @@
-
 import React, { Suspense } from 'react';
 import { Row, Col, Skeleton } from 'antd';
 import Feedback from './overview/demoFive/Feedback';
@@ -34,7 +33,6 @@ function DemoFive() {
               Knowledge is all you need, come to us."
             /> */}
             <CarouselComponent />
-
           </Suspense>
         </Col>
         <Col xl={12} lg={24} xs={24} className="mb-[25px]">
