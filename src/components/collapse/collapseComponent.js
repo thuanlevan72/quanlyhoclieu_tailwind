@@ -58,8 +58,8 @@ function collapseComponent() {
   return (
     <Collapse className="mt-12" accordion>
       {data.map((item) => (
-        <Panel header={item.title} key={item.id}>
-          <p className="text-purple-500">{item.content}</p>
+        <Panel header={item.title} key={item.id} className="hover:bg-[#eccc68]">
+          <p className="text-[#ffa502]">{item.content}</p>
         </Panel>
       ))}
     </Collapse>

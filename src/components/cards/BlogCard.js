@@ -7,8 +7,11 @@ import { Link } from 'react-router-dom';
 function BlogCard({ item, theme }) {
   const { content, title, img } = item;
   return (
-    <div>
-      <figure className="group p-6 mb-0 bg-white dark:bg-white10 rounded-10 shadow-regular dark:shadow-none transform transition-transform duration-300 hover:scale-105">
+    <Link className="cursor-pointer">
+      <figure
+        className="p-6 mb-0 transition-transform duration-300 transform bg-white group 
+      dark:bg-white10 rounded-10 shadow-regular dark:shadow-none hover:scale-105 hover:bg-[#eccc68]"
+      >
         <div className="relative after:absolute after:h-0 after:w-full ltr:after:left-0 rtl:after:right-0 after:top-0 after:bg-[#0a0a0a15] after:rounded-10 after:transition-all after:duration-300 group-hover:after:h-full">
           <img className="w-full rounded-10" src={require(`../../static/img/blogs/${img}`)} alt="hexadash Blog" />
         </div>
@@ -36,7 +39,7 @@ function BlogCard({ item, theme }) {
             ''
           )}
           <h2 className="mt-4 mb-3 text-xl font-semibold">
-            <Link to="#" className="text-dark hover:text-primary dark:text-white87 dark:hover:text-primary">
+            <Link to="#" className="text-dark hover:text-[#ff6348] dark:text-white87 dark:hover:text-[#ff6348]">
               {title}
             </Link>
           </h2>
@@ -63,7 +66,7 @@ function BlogCard({ item, theme }) {
           </div>
         </figcaption>
       </figure>
-    </div>
+    </Link>
   );
 }
 

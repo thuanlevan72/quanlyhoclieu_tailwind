@@ -16,9 +16,9 @@ import CarouselComponent from '../../components/carousel/carouselComponent';
 const { BlogCardData } = cardData;
 function DemoFive() {
   return (
-    <div className="min-h-[715px] lg:min-h-[580px] flex-1 h-auto px-8 xl:px-[15px] pb-[30px] bg-transparent mt-[40px]">
-      <Row gutter={25}>
-        <Col xs={24} className="mb-[25px]">
+    <div className="min-h-[715px] lg:min-h-[580px] flex-1 h-auto px-8 xl:px-[15px] pb-[30px] bg-transparent mt-[40px] flex justify-center">
+      <Row gutter={25} className="w-[95%]">
+        <Col xs={24} className="mb-[60px]">
           <Suspense
             fallback={
               <Cards headless>
@@ -89,7 +89,7 @@ function DemoFive() {
               </Cards>
             }
           >
-            <h1 className="text-center text-4xl text-primary font-bold">Bài viết nổi bật</h1>
+            <h1 className="text-4xl font-bold text-center text-[#ffa502] mt-[80px]">Bài viết nổi bật</h1>
           </Suspense>
         </Col>
         {BlogCardData.slice(0, 8).map((blog, index) => {

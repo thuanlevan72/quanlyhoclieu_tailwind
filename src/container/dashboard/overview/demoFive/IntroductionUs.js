@@ -4,7 +4,7 @@ function IntroductionUs() {
   return (
     <div>
       <h1 className="text-[25px]">
-        Why <span className="text-primary">Choose Us!</span>
+        Why <span className="text-[#ffa502]">Choose Us!</span>
       </h1>
       <img
         width="800px"

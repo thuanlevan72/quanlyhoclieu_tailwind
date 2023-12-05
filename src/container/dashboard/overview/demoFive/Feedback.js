@@ -47,12 +47,12 @@ function Feedback() {
   ];
 
   return (
-    <div className="">
-      <h2 className="text-center text-4xl text-primary font-bold">Student feedback about us</h2>
-      <Carousel slidesToShow={2} autoplay autoplaySpeed={2000}>
+    <div className="mt-[80px]">
+      <h2 className="text-4xl font-bold text-center text-[#ffa502] mb-[30px]">Student feedback about us</h2>
+      <Carousel slidesToShow={2} autoplay autoplaySpeed={4000}>
         {peopleData.map((person) => (
-          <div key={person.id}>
-            <Card className="h-[400px] person-card flex flex-col justify-center items-center text-center">
+          <div key={person.id} className="h-[400px] flex justify-center">
+            <Card className="h-[100%] w-[95%] flex flex-col items-center justify-center text-center person-card">
               <Avatar size={64} src={person.avatar} />
               <h3>{person.name}</h3>
               <p>{person.position}</p>

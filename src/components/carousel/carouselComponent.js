@@ -1,13 +1,13 @@
 import React, { useRef } from 'react';
 import { Carousel, Button } from 'antd';
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { UilAngleRightB, UilAngleLeftB } from '@iconscout/react-unicons';
 
 const contentStyle = {
-  height: '500px',
+  height: '400px',
+  width: '1500px',
   textAlign: 'center',
   borderRadius: '10px',
   lineHeight: '300px',
-  backgroundSize: 'cover', // Đảm bảo kích thước ảnh phù hợp với kích thước của phần nền
 };
 
 const carouselStyle = {
@@ -43,31 +43,30 @@ function CarouselComponent() {
   };
 
   return (
-    <Carousel style={carouselStyle} autoplay autoplaySpeed={2000} easing="ease" ref={carouselRef}>
+    <Carousel style={carouselStyle} autoplay autoplaySpeed={5000} easing="ease" ref={carouselRef}>
       {slides.map((slide) => (
-        <div key={slide.id} style={{ contentStyle, backgroundImage: `url(${slide.image})` }}>
+        <div key={slide.id} style={{ contentStyle }} className="relative">
           {/* Nội dung của slide */}
-
-          <div className="relative">
-            <Button
-              onClick={handlePrev}
-              className="bottom-[50%] left-0 absolute active text-white text-[13px] font-semibold bg-transparent hover:border-primary px-[8px]  inline-flex items-center"
-            >
-              <LeftOutlined className="inline-flex svg-w-h-10" />
-            </Button>
-            <Button
-              onClick={handleNext}
-              className="bottom-[50%] right-0 absolute text-[13px] font-semibold px-[8px] inline-flex items-center bg-transparent text-white"
-            >
-              <RightOutlined className="inline-flex svg-w-h-10 dark:[&>svg]:!text-dark" />
-            </Button>
-            <img
-              className="mx-auto"
-              src={slide.image}
-              alt={`Slide ${slide.id}`}
-              style={{ width: '100%', height: '50%', borderRadius: '10px', ...contentStyle }}
-            />
-          </div>
+          <Button
+            onClick={handlePrev}
+            className="bottom-[50%] left-[5%] absolute active text-white font-semibold bg-transparent 
+             px-[8px] inline-flex items-center border-none bg-white w-[40px] h-[40px] rounded-[50%]"
+          >
+            <UilAngleLeftB className="inline-flex text-gray-400 hover:text-black" />
+          </Button>
+          <Button
+            onClick={handleNext}
+            className="bottom-[50%] right-[5%] absolute font-semibold px-[8px] 
+              inline-flex items-center bg-transparent text-white border-none bg-white w-[40px] h-[40px] rounded-[50%]"
+          >
+            <UilAngleRightB className="inline-flex text-gray-400 hover:text-black" />
+          </Button>
+          <img
+            className="mx-auto"
+            src={slide.image}
+            alt={`Slide ${slide.id}`}
+            style={{ width: '100%', height: '50%', borderRadius: '10px', ...contentStyle }}
+          />
         </div>
       ))}
     </Carousel>
