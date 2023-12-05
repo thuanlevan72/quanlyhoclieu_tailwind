@@ -31,7 +31,7 @@ function PageHeader(props) {
             />{' '}
             <Link
               to={path}
-              className="text-light hover:text-primary dark:text-[#a4a5aa] dark:hover:text-white87 text-sm"
+              className="text-light hover:text-[#ffa502] dark:text-[#a4a5aa] dark:hover:text-white87 text-sm"
             >
               {route.breadcrumbName}
             </Link>

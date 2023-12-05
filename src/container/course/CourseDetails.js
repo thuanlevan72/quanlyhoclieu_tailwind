@@ -233,13 +233,18 @@ function CourseDetails() {
                 <span className="block mb-3 text-3xl font-semibold text-dark dark:text-white87 w-[100%]">
                   ${currentCourse.price}
                 </span>
-                <Button size="default" type="primary" className="px-5 text-sm font-semibold h-11 mx-[5px]">
+                <Button
+                  size="default"
+                  type="primary"
+                  className="px-5 text-sm font-semibold h-11 mx-[5px] bg-[#ffa502] border-[#ffa502] hover:scale-105"
+                >
                   <Link to="/student/student-fee">Add To Fees</Link>
                 </Button>
                 <Button
                   size="default"
                   type="primary"
-                  className="px-5 text-sm font-semibold h-11 mx-[5px] bg-white text-body hover:bg-purple-500 hover:text-white cursor-pointer"
+                  className="px-5 text-sm font-semibold h-11 mx-[5px] border-[#ffa502] hover:scale-105
+                  bg-white text-body hover:bg-[#eccc68] hover:text-white cursor-pointer"
                 >
                   Buy Now
                 </Button>
