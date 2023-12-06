@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getItem } from '../../utility/localStorageControl';
 
 const API_ENDPOINT = `${process.env.REACT_APP_API_ENDPOINT}/api`;
-
+// const QRCodeUrl = process.env.REACT_APP_QRCODE;
 const authHeader = () => ({
   Authorization: `Bearer ${getItem('access_token')}`,
 });
