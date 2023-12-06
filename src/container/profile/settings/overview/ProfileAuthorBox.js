@@ -132,6 +132,22 @@ function AuthorBox() {
                 Notification
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                to={`${decentralization}/payment`}
+                onClick={() => {
+                  setActiveValue('payment');
+                }}
+                className={`flex items-center mb-3 px-5 py-3 rounded-[6px] ${
+                  activeValue === 'payment'
+                    ? 'bg-primary-transparent text-primary font-medium'
+                    : 'bg-transparent text-light dark:text-white60 font-normal'
+                }`}
+              >
+                <UilBell className="w-4 h-4 ltr:mr-3 rtl:ml-3 mb-0.5" />
+                Payment
+              </NavLink>
+            </li>
           </ul>
         </nav>
       </div>

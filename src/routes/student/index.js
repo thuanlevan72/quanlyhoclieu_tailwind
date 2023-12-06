@@ -4,6 +4,7 @@ import { Spin } from 'antd';
 import Dashboard from './DashboardRoutes';
 import withStudentLayout from '../../layout/studentLayout/withStudentLayout';
 import CheckOut from '../../container/ecommerce/overview/CheckoutWizard';
+import Payment from '../../container/profile/settings/overview/Payment';
 
 const Profile = lazy(() => import('../../container/profile/settings/overview/Profile'));
 const Account = lazy(() => import('../../container/profile/settings/overview/Account'));
@@ -50,6 +51,7 @@ const Student = React.memo(() => {
           <Route path="password" element={<Password />} />
           <Route path="social" element={<SocialProfiles />} />
           <Route path="notification" element={<Notification />} />
+          <Route path="payment" element={<Payment />} />
         </Route>
         <Route path="settings" element={<ComingSoon />} />
         <Route path="payment-history" element={<PaymentHistory />} />
