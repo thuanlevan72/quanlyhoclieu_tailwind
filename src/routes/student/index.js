@@ -22,6 +22,7 @@ const ComingSoon = lazy(() => import('../../container/pages/ComingSoon'));
 const CalenDar = lazy(() => import('../../container/calendar/Calendar'));
 const FAQ = lazy(() => import('../../container/pages/Faq'));
 const YourCourses = lazy(() => import('../../page/student/YourCourses'));
+const BlogPage = lazy(() => import('../../container/pages/blog/BlogPage'));
 const Student = React.memo(() => {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -40,6 +41,7 @@ const Student = React.memo(() => {
         <Route path="student-fee" element={<StudentFee />} />
         <Route path="student-fee/checkout" element={<CheckOut />} />
         <Route path="course" element={<Course />} />
+        <Route path="blog" element={<BlogPage />} />
         <Route path="course/courseDetails/:id" element={<CourseDetails />} />
         <Route path="yourCourses" element={<YourCourses />} />
         <Route path="yourCourses/courseDetail/:id" element={<BoughtCourseDetail />} />

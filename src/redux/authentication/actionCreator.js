@@ -3,6 +3,7 @@ import actions from './actions';
 // import * as layoutActions from '../themeLayout/actions'; // Sử dụng tên không gian tên "layoutActions" cho thư viện từ '../themeLayout/actions';
 
 import { DataService } from '../../config/dataService/dataService';
+import { StudentApi } from '../../config/api/student/StudentApi';
 
 const { loginBegin, loginSuccess, loginErr, logoutBegin, logoutSuccess, logoutErr } = actions;
 // const { changeMenuSuccess } = layoutActions;
@@ -12,8 +13,7 @@ const login = (values, callback) => {
     try {
       dispatch(loginBegin());
       // console.log(values);
-      const response = await DataService.post('/Account/signIn', values);
-      console.log(response);
+      const response = await DataService.post('/Account/signIn', { email: values.username, password: values.password });
       if (response.data.token == null) {
         throw new Error('đăng nhập thất bại');
       }
@@ -62,18 +62,24 @@ const login = (values, callback) => {
   };
 };
 
-const register = (values) => {
+const register = (values, callback) => {
   return async (dispatch) => {
     dispatch(loginBegin());
     try {
-      const response = await DataService.post('/register', values);
-      if (response.data.errors) {
-        dispatch(loginErr('Registration failed!'));
+      const response = await DataService.post('/Account/signUp', {
+        email: values.email,
+        fullName: values.name,
+        password: values.password,
+        confirmPassword: values.confirmPassword,
+      });
+      console.log(response);
+      if (response.data.succeed) {
+        callback();
       } else {
         dispatch(loginSuccess(false));
       }
     } catch (err) {
-      dispatch(loginErr(err));
+      dispatch(loginErr(`Error:`));
     }
   };
 };
@@ -93,4 +99,9 @@ const logOut = (callback) => {
   };
 };
 
-export { login, logOut, register };
+const forgotPassword = async (values) => {
+  const response = await StudentApi.forgotPassword(values);
+  console.log(response);
+};
+
+export { login, logOut, register, forgotPassword };

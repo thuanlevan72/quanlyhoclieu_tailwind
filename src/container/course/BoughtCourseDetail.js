@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState, Suspense, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Row, Col, Collapse, Skeleton } from 'antd';
 
@@ -14,6 +14,7 @@ import '../profile/myProfile/overview/video-modal.css';
 import { Cards } from '../../components/cards/frame/cards-frame';
 import { Modal } from '../../components/modals/antd-modals';
 import Test from '../../components/tasklist/Test';
+import { StudentApi } from '../../config/api/student/StudentApi';
 
 const PageRoutes = [
   {
@@ -347,6 +348,27 @@ function CourseDetails() {
       ],
     },
   ]);
+  const [datas, setDatas] = useState([]);
+  const [pagination, setPagination] = useState({
+    pageNumber: 1,
+    pageSize: 8,
+  });
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setPagination({
+          pageNumber: 1,
+          pageSize: 4,
+        });
+        const res = await StudentApi.getLecture(pagination);
+        setDatas(res.data);
+      } catch (error) {
+        alert('hehe');
+      }
+    }
+    fetchData();
+  }, []);
+  console.log(datas);
   const { id } = useParams();
   const [link, setLink] = useState('https://www.youtube.com/embed/PBwzoZ8aFxI?si=JzLOvPTKI6wU5JVG');
   const currentCourse = courseData.find((x) => x.id.toString() === id);

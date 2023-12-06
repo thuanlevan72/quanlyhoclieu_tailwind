@@ -32,6 +32,11 @@ function TopMenu() {
               Fees
             </Link>
           </li>
+          <li className="">
+            <Link to={`${path}/blog`} className={`${activeLink('/blog')} hover:text-[#ffa502]`}>
+              Blog
+            </Link>
+          </li>
         </ul>
       </div>
     </TopMenuStyle>

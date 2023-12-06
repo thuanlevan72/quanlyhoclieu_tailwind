@@ -4,6 +4,7 @@ import { PageHeader } from '../../components/page-headers/page-headers';
 import courseData from '../../demoData/course.json';
 import CourseCard from '../../components/cards/CourseCard';
 import { PaginationStyle } from '../../container/styled';
+import { StudentApi } from '../../config/api/student/StudentApi';
 
 const PageRoutes = [
   {
@@ -16,27 +17,34 @@ const PageRoutes = [
   },
 ];
 function Course() {
-  const [state, setState] = useState({
-    courses: courseData,
-    current: 0,
-    pageSize: 0,
+  const [pagination, setPagination] = useState({
+    pageNumber: 1,
+    pageSize: 8,
   });
-  const { courses } = state;
+  const [courses, setCourses] = useState([]);
   useEffect(() => {
-    if (courseData) {
-      setState({
-        courses: courseData,
-      });
+    async function fetchData() {
+      try {
+        setPagination({
+          pageNumber: 1,
+          pageSize: 8,
+        });
+        const res = await StudentApi.getCourse(pagination);
+        setCourses(res.data.data);
+      } catch (error) {
+        alert('hehe');
+      }
     }
-  }, []);
+    fetchData();
+  }, [courses]);
 
-  const onShowSizeChange = (current, pageSize) => {
-    setState({ ...state, current, pageSize });
-  };
+  // const onShowSizeChange = (current, pageSize) => {
+  //   setState({ ...state, current, pageSize });
+  // };
 
-  const onHandleChange = (current, pageSize) => {
-    setState({ ...state, current, pageSize });
-  };
+  // const onHandleChange = (current, pageSize) => {
+  //   setState({ ...state, current, pageSize });
+  // };
   return (
     <>
       <PageHeader
@@ -55,9 +63,9 @@ function Course() {
                 <PaginationStyle>
                   <div className="ant-pagination-custom-style text-end">
                     <Pagination
-                      onChange={onHandleChange}
+                      // onChange={onHandleChange}
                       showSizeChanger
-                      onShowSizeChange={onShowSizeChange}
+                      // onShowSizeChange={onShowSizeChange}
                       pageSize={10}
                       defaultCurrent={1}
                       total={courseData.length}

@@ -8,7 +8,7 @@ function IntroductionUs() {
       </h1>
       <img
         width="800px"
-        src="https://i1-ngoisao.vnecdn.net/2022/11/15/sp2-1749-1668484122.jpg?w=1020&h=0&q=100&dpr=1&fit=crop&s=uGLEjqhXnhArZzN6pGSgPA"
+        src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y29tcGFueXxlbnwwfHwwfHx8MA%3D%3D"
         alt=""
       />
       <p className="mt-10 text-[15px]">

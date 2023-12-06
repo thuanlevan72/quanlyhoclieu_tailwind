@@ -1,12 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+// import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Input, Button, Row, Col } from 'antd';
 import { AuthFormWrap } from './style';
+// import { forgotPassword } from '../../../../redux/authentication/actionCreator';
 
 function ForgotPassword() {
+  // const dispatch = useDispatch();
+  const [timer, setTimer] = useState(60);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+  useEffect(() => {
+    let interval;
+    if (isTimerRunning && timer > 0) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+    } else {
+      setIsTimerRunning(false);
+      setTimer(60);
+      clearInterval(interval);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [isTimerRunning, timer]);
+
   const [state, setState] = useState({
     values: null,
   });
+
+  const handleButtonClick = (values) => {
+    console.log(values);
+    setTimer(60);
+    setIsTimerRunning((prevIsTimerRunning) => !prevIsTimerRunning);
+  };
+
   const handleSubmit = (values) => {
     setState({ ...state, values });
   };
@@ -23,12 +52,48 @@ function ForgotPassword() {
               <p className="mb-4 dark:text-white60">
                 Enter the email address you used when you joined and we’ll send you instructions to reset your password.
               </p>
+              <div className="flex items-center">
+                <Form.Item
+                  label="Email Address"
+                  name="email"
+                  rules={[{ required: true, message: 'Please input your email!', type: 'email' }]}
+                  className="w-[80%]"
+                >
+                  <Input placeholder="name@example.com" />
+                </Form.Item>
+                <Button
+                  className={`mt-[10px] mx-[10px] border-[#ffa502] hover:bg-[#eccc68]
+                   hover:text-white text-body ${
+                     isTimerRunning ? 'cursor-not-allowed hover:bg-white hover:text-body' : ''
+                   }`}
+                  onClick={timer === 60 ? () => handleButtonClick() : () => {}}
+                >
+                  {isTimerRunning && timer > 0 ? `${timer}s` : 'Send'}
+                </Button>
+              </div>
               <Form.Item
-                label="Email Address"
-                name="email"
-                rules={[{ required: true, message: 'Please input your email!', type: 'email' }]}
+                label="Verify Code"
+                name="verifyCode"
+                rules={[{ required: true, message: 'Please input your code!', type: 'string' }]}
+                className="w-[80%]"
               >
-                <Input placeholder="name@example.com" />
+                <Input placeholder="Verify Code" />
+              </Form.Item>
+              <Form.Item
+                label="Password"
+                name="password"
+                rules={[{ required: true, message: 'Please input your password!', type: 'string' }]}
+                className="w-[80%]"
+              >
+                <Input.Password placeholder="Password" />
+              </Form.Item>
+              <Form.Item
+                label="Confirm Password"
+                name="confirmPassword"
+                rules={[{ required: true, message: 'Please confirm your password!', type: 'string' }]}
+                className="w-[80%]"
+              >
+                <Input.Password placeholder="Confirm Password" />
               </Form.Item>
               <Form.Item>
                 <Button
@@ -37,7 +102,7 @@ function ForgotPassword() {
                   type="primary"
                   size="large"
                 >
-                  Send Reset Instructions
+                  Reset Password
                 </Button>
               </Form.Item>
             </div>
