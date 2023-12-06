@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useCallback } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { ReactSVG } from 'react-svg';
 import { Row, Col, Form, Input, Button } from 'antd';
 import UilFacebook from '@iconscout/react-unicons/icons/uil-facebook-f';
@@ -12,15 +12,19 @@ import { Checkbox } from '../../../../components/checkbox/checkbox';
 import { register } from '../../../../redux/authentication/actionCreator';
 
 function SignUp() {
+  const history = useNavigate();
   const dispatch = useDispatch();
 
   const [state, setState] = useState({
     values: null,
     checked: null,
   });
-  const handleSubmit = (values) => {
-    dispatch(register(values));
-  };
+  const handleSubmit = useCallback(
+    (values) => {
+      dispatch(register(values, () => history(`/login`)));
+    },
+    [history, dispatch],
+  );
 
   const onChange = (checked) => {
     setState({ ...state, checked });
@@ -58,6 +62,14 @@ function SignUp() {
                 rules={[{ required: true, message: 'Please input your password!' }]}
               >
                 <Input.Password placeholder="Password" />
+              </Form.Item>
+              <Form.Item
+                label="Confirm Password"
+                name="confirmPassword"
+                className="[&>div>div>label]:text-sm [&>div>div>label]:text-dark dark:[&>div>div>label]:text-white60 [&>div>div>label]:font-medium"
+                rules={[{ required: true, message: 'Please confirm password!' }]}
+              >
+                <Input.Password placeholder="Confirm Password" />
               </Form.Item>
               <div className="flex items-center justify-between">
                 <Checkbox onChange={onChange} checked={state.checked}>

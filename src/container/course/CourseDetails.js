@@ -26,6 +26,7 @@ const PageRoutes = [
 ];
 function CourseDetails() {
   const { id } = useParams();
+  console.log(id);
   const [isOpen, setOpen] = useState(false);
   const currentCourse = courseData.find((x) => x.id.toString() === id);
   return (

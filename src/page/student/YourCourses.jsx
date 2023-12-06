@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Pagination } from 'antd';
 import { PageHeader } from '../../components/page-headers/page-headers';
-import courseWaveData from '../../demoData/courseWave.json';
 import CourseWaveCard from '../../components/cards/CourseWaveCard';
 import { PaginationStyle } from '../../container/styled';
+import { StudentApi } from '../../config/api/student/StudentApi';
 
 function YourCourses() {
   const PageRoutes = [
@@ -16,27 +16,33 @@ function YourCourses() {
       breadcrumbName: 'Your Courses',
     },
   ];
-  const [state, setState] = useState({
-    coursesWave: courseWaveData,
-    current: 0,
-    pageSize: 0,
+  const [pagination, setPagination] = useState({
+    pageNumber: 1,
+    pageSize: 8,
   });
-  const { coursesWave } = state;
+  const [coursesWave, setCoursesWave] = useState([]);
   useEffect(() => {
-    if (courseWaveData) {
-      setState({
-        coursesWave: courseWaveData,
-      });
+    async function fetchData() {
+      try {
+        setPagination({
+          pageNumber: 1,
+          pageSize: 8,
+        });
+        const res = await StudentApi.getBoughtCourse(pagination);
+        setCoursesWave(res.data.data);
+      } catch (error) {
+        setCoursesWave([]);
+      }
     }
+    fetchData();
   }, []);
+  // const onShowSizeChange = (current, pageSize) => {
+  //   setState({ ...state, current, pageSize });
+  // };
 
-  const onShowSizeChange = (current, pageSize) => {
-    setState({ ...state, current, pageSize });
-  };
-
-  const onHandleChange = (current, pageSize) => {
-    setState({ ...state, current, pageSize });
-  };
+  // const onHandleChange = (current, pageSize) => {
+  //   setState({ ...state, current, pageSize });
+  // };
   return (
     <>
       <PageHeader
@@ -46,22 +52,24 @@ function YourCourses() {
       />
       <main className="min-h-[715px] lg:min-h-[580px] px-8 xl:px-[15px] pb-[30px] bg-transparent">
         <Row gutter={25} className="mt-sm-10">
-          {coursesWave.map((value, index) => (
-            <CourseWaveCard key={index} courseWaveData={value} />
-          ))}
+          {coursesWave.length ? (
+            coursesWave.map((value, index) => <CourseWaveCard key={index} courseWaveData={value} />)
+          ) : (
+            <div className="text-center w-[100%] text-[30px]">Empty</div>
+          )}
 
           <Col xs={24} className="mt-[40px]">
             <>
-              {courseWaveData.length ? (
+              {coursesWave.length ? (
                 <PaginationStyle>
                   <div className="ant-pagination-custom-style text-end">
                     <Pagination
-                      onChange={onHandleChange}
+                      // onChange={onHandleChange}
                       showSizeChanger
-                      onShowSizeChange={onShowSizeChange}
+                      // onShowSizeChange={onShowSizeChange}
                       pageSize={10}
                       defaultCurrent={1}
-                      total={courseWaveData.length}
+                      total={coursesWave.length}
                     />
                   </div>
                 </PaginationStyle>

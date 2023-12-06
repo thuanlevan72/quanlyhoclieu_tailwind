@@ -22,7 +22,6 @@ function RouterAuthorization() {
       decentralization: state.auth.decentralization,
     };
   });
-  console.log(decentralization);
   return (
     <>
       {decentralization === 'admin' && (

@@ -3,7 +3,7 @@ import { Carousel, Button } from 'antd';
 import { UilAngleRightB, UilAngleLeftB } from '@iconscout/react-unicons';
 
 const contentStyle = {
-  height: '400px',
+  height: '512px',
   width: '1500px',
   textAlign: 'center',
   borderRadius: '10px',
@@ -22,15 +22,19 @@ function CarouselComponent() {
     {
       id: 1,
       image:
-        'https://media.geeksforgeeks.org/wp-content/uploads/20230929165105/JavaScript-Courses-&-Certifications.png',
+        'https://ccweb.imgix.net/https%3A%2F%2Fwww.classcentral.com%2Fimages%2Fmeta%2Fmeta-default.png?auto=format&ixlib=php-4.1.0&s=a980b3b7b5c83a15eac6da49bbbbc182',
     },
     {
       id: 2,
-      image: 'https://itsharks.co/images/demo/course/c-hash.jpg',
+      image: 'https://www.classcentral.com/report/wp-content/uploads/2022/06/JavaScript-BCG-Banner-icons.png',
     },
     {
       id: 3,
-      image: 'https://149611589.v2.pressablecdn.com/wp-content/uploads/2016/09/reactjs.png',
+      image: 'https://www.classcentral.com/report/wp-content/uploads/2022/07/C-BCG-Banner.png',
+    },
+    {
+      id: 4,
+      image: 'https://www.classcentral.com/report/wp-content/uploads/2022/10/React-JS-BCG-Banner.png',
     },
   ];
 
