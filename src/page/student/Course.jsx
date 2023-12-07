@@ -36,7 +36,7 @@ function Course() {
       }
     }
     fetchData();
-  }, [courses]);
+  }, []);
 
   // const onShowSizeChange = (current, pageSize) => {
   //   setState({ ...state, current, pageSize });

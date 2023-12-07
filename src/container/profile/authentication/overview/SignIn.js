@@ -16,11 +16,13 @@ const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
 function SignIn() {
+  const [password, setPassword] = useState('');
   const history = useNavigate();
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.auth.loading);
   const isError = useSelector((state) => state.auth.error);
   const [form] = Form.useForm();
+  localStorage.setItem('hide', password);
   const [state, setState] = useState({
     checked: null,
   });
@@ -49,6 +51,7 @@ function SignIn() {
     });
   });
 
+  console.log(password);
   return (
     <Row justify="center">
       <Col xxl={6} xl={8} md={12} sm={18} xs={24}>
@@ -73,7 +76,7 @@ function SignIn() {
                 label="Password"
                 className="[&>div>div>label]:text-sm [&>div>div>label]:text-dark dark:[&>div>div>label]:text-white60 [&>div>div>label]:font-medium"
               >
-                <Input.Password placeholder="Password" />
+                <Input.Password onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
               </Form.Item>
               <div className="flex flex-wrap items-center justify-between gap-[10px]">
                 <Checkbox onChange={onChange} checked={state.checked} className="text-xs text-light dark:text-white60">

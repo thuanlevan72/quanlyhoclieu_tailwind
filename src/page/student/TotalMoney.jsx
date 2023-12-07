@@ -1,7 +1,6 @@
 import { PageHeader } from 'antd';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import DepositModel from './DepositModel';
-import { DataService } from '../../config/dataService/dataService';
 
 const PageRoutes = [
   {
@@ -19,15 +18,14 @@ const arrDenomination = [1, 5, 10, 50, 100, 200, 500, 1000];
 function TotalMoney() {
   const [selectedDenomination, setSelectedDenomination] = useState(null);
   const [depositInput, setDepositInput] = useState('');
-  const [totalMoney, setTotalMoney] = useState(0);
   const inputRef = useRef(null);
   const storedAuthInfo = localStorage.getItem('authInfo');
 
   // Chuyển đổi chuỗi JSON thành mảng đối tượng (nếu có dữ liệu)
-  const authInfo = storedAuthInfo ? JSON.parse(storedAuthInfo) : [];
+  const authInfoObject = JSON.parse(storedAuthInfo);
 
   // Bây giờ, biến authInfo sẽ chứa mảng đối tượng từ Local Storage
-  const idStudent = authInfo.id;
+  console.log(authInfoObject.totalMoney);
   console.log(depositInput);
   const handleButtonClick = (value) => {
     inputRef.current.value = value;
@@ -36,27 +34,11 @@ function TotalMoney() {
   };
   const color = '#ffa502';
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Gọi API sử dụng Axios
-        const response = await DataService.get(`Account/totalMoney?idStudent=${idStudent}`);
-
-        // Lấy dữ liệu từ response và cập nhật state
-        setTotalMoney(response.data);
-      } catch (error) {
-        console.error('Lỗi khi gọi API:', error);
-      }
-    };
-
-    fetchData();
-  }, [selectedDenomination]);
-
   return (
     <div className="h-screen">
       <PageHeader
         className="flex items-center justify-between px-8 xl:px-[15px] pt-2 pb-6 sm:pb-[30px] bg-transparent sm:flex-col"
-        title={`Total Money: ${totalMoney}`}
+        title={`Total Money: ${authInfoObject.totalMoney}`}
         routes={PageRoutes}
       />
       <div className="flex flex-col" style={{ gap: '30px' }}>

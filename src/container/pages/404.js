@@ -33,8 +33,8 @@ function NotFound({ url }) {
           <p className="text-body dark:text-white60 mb-6 text-lg xs:text-base font-medium">
             Sorry! the page you are looking for does not exist.
           </p>
-          <NavLink to={url || '/admin'}>
-            <Button size="default" type="primary" to={url || '/admin'} className="h-11">
+          <NavLink to={url || '/login'}>
+            <Button size="default" type="primary" to={url || '/login'} className="h-11">
               Return Home
             </Button>
           </NavLink>
