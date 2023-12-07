@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Row, Col } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,7 +22,14 @@ function SignIn() {
   const isLoading = useSelector((state) => state.auth.loading);
   const isError = useSelector((state) => state.auth.error);
   const [form] = Form.useForm();
-  localStorage.setItem('hide', password);
+
+  const handleInput = (e) => {
+    setPassword(e.target.value);
+  };
+
+  useEffect(() => {
+    localStorage.setItem('hide', password);
+  }, [password]);
   const [state, setState] = useState({
     checked: null,
   });
@@ -50,8 +57,6 @@ function SignIn() {
       lock.hide();
     });
   });
-
-  console.log(password);
   return (
     <Row justify="center">
       <Col xxl={6} xl={8} md={12} sm={18} xs={24}>
@@ -76,7 +81,7 @@ function SignIn() {
                 label="Password"
                 className="[&>div>div>label]:text-sm [&>div>div>label]:text-dark dark:[&>div>div>label]:text-white60 [&>div>div>label]:font-medium"
               >
-                <Input.Password onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+                <Input.Password onChange={handleInput} placeholder="Password" />
               </Form.Item>
               <div className="flex flex-wrap items-center justify-between gap-[10px]">
                 <Checkbox onChange={onChange} checked={state.checked} className="text-xs text-light dark:text-white60">

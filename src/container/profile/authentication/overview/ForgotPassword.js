@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Form, Input, Button, Row, Col } from 'antd';
 import { AuthFormWrap } from './style';
 // import { forgotPassword } from '../../../../redux/authentication/actionCreator';
+import { AuthService } from '../../../../config/api/student/AuthService';
 
 function ForgotPassword() {
   // const dispatch = useDispatch();
@@ -36,7 +37,9 @@ function ForgotPassword() {
     setIsTimerRunning((prevIsTimerRunning) => !prevIsTimerRunning);
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
+    const response = await AuthService.forgotPassword({ email: values.email });
+    console.log(response.data);
     setState({ ...state, values });
   };
 
@@ -57,11 +60,11 @@ function ForgotPassword() {
                   label="Email Address"
                   name="email"
                   rules={[{ required: true, message: 'Please input your email!', type: 'email' }]}
-                  className="w-[80%]"
+                  className="w-[100%]"
                 >
                   <Input required placeholder="name@example.com" />
                 </Form.Item>
-                <Button
+                {/* <Button
                   className={`mt-[10px] mx-[10px] border-[#ffa502] hover:bg-[#eccc68]
                    hover:text-white text-body ${
                      isTimerRunning ? 'cursor-not-allowed hover:bg-white hover:text-body' : ''
@@ -69,17 +72,17 @@ function ForgotPassword() {
                   onClick={timer === 60 ? () => handleButtonClick() : () => {}}
                 >
                   {isTimerRunning && timer > 0 ? `${timer}s` : 'Send'}
-                </Button>
+                </Button> */}
               </div>
-              <Form.Item
+              {/* <Form.Item
                 label="Verify Code"
                 name="verifyCode"
                 rules={[{ required: true, message: 'Please input your code!', type: 'string' }]}
                 className="w-[80%]"
               >
                 <Input placeholder="Verify Code" />
-              </Form.Item>
-              <Form.Item
+              </Form.Item> */}
+              {/* <Form.Item
                 label="Password"
                 name="password"
                 rules={[{ required: true, message: 'Please input your password!', type: 'string' }]}
@@ -94,15 +97,18 @@ function ForgotPassword() {
                 className="w-[80%]"
               >
                 <Input.Password placeholder="Confirm Password" />
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item>
                 <Button
-                  className="block w-full h-12 p-0 text-sm font-medium"
+                  className={`bg-white text-black hover:text-white border-[#ffa502] hover:bg-[#eccc68] block w-full h-12 p-0 text-sm font-medium  ${
+                    isTimerRunning ? 'cursor-not-allowed hover:bg-white hover:text-body' : ''
+                  }`}
+                  onClick={timer === 60 ? () => handleButtonClick() : () => {}}
                   htmlType="submit"
                   type="primary"
                   size="large"
                 >
-                  Reset Password
+                  {isTimerRunning && timer > 0 ? `${timer}s` : 'Send'}
                 </Button>
               </Form.Item>
             </div>
