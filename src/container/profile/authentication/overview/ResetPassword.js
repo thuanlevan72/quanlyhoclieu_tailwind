@@ -20,7 +20,6 @@ function ResetPassword() {
         window.location.href = '/login'; // Thay '/login' bằng đường dẫn của trang đăng nhập
       }
     }
-
     setState({ ...state, values });
   };
 

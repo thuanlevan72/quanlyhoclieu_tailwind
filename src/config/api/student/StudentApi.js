@@ -8,11 +8,22 @@ export const StudentApi = {
       newPassword,
       confirmPassword,
     };
-    return DataService.put(url, data);
+    return DataService.post(url, data);
   },
   getLecture: ({ pageSize, pageNumber }) => {
     const url = `/Lecture/forStudent?pageSize=${pageSize}&pageNumber=${pageNumber}`;
     return DataService.get(url);
+  },
+  updateProfile: (fullName, contactNumber, provinceID, districtID, communeID) => {
+    const url = `/Student/updateInfomation`;
+    const data = {
+      fullName,
+      contactNumber,
+      provinceID,
+      districtID,
+      communeID,
+    };
+    return DataService.post(url, data);
   },
   getCourse: ({ pageSize, pageNumber }) => {
     const url = `/Course?pageSize=${pageSize}&pageNumber=${pageNumber}`;
