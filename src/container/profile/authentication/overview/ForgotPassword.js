@@ -59,7 +59,7 @@ function ForgotPassword() {
                   rules={[{ required: true, message: 'Please input your email!', type: 'email' }]}
                   className="w-[80%]"
                 >
-                  <Input placeholder="name@example.com" />
+                  <Input required placeholder="name@example.com" />
                 </Form.Item>
                 <Button
                   className={`mt-[10px] mx-[10px] border-[#ffa502] hover:bg-[#eccc68]

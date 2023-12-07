@@ -1,17 +1,35 @@
 import React, { useState } from 'react';
-import { Row, Col, Form, Input, Button } from 'antd';
+import { Row, Col, Form, Input, Button, message } from 'antd';
 import { GlobalUtilityStyle } from '../../../styled';
 import Heading from '../../../../components/heading/heading';
+import { StudentApi } from '../../../../config/api/student/StudentApi';
 
 function Password() {
   const [form] = Form.useForm();
-  const [state, setState] = useState({
-    values: null,
-  });
-
-  const handleSubmit = (values) => {
-    setState({ ...state, values });
+  const [password, setPassword] = useState('');
+  const handleSubmit = async (values) => {
+    try {
+      if (!values.old || !values.new || !values.confirm) {
+        message.error("Can't be blank");
+      } else if (values.new !== values.confirm) {
+        message.error('Password and confirm password do not match');
+      } else if (password !== localStorage.getItem('hide')) {
+        message.error('Password incorrect!');
+      } else {
+        const response = await StudentApi.changePassword({
+          password: values.old,
+          newPassword: values.new,
+          confirmPassword: values.confirm,
+        });
+        console.log(response.data);
+        message.success('Password changed successfully!');
+      }
+    } catch (error) {
+      console.error('Lỗi khi gửi yêu cầu:', error);
+      message.error('Failed to change password. Please check your input and try again.');
+    }
   };
+
   const handleCancel = (e) => {
     e.preventDefault();
     form.resetFields();
@@ -32,8 +50,13 @@ function Password() {
           <Row justify="center">
             <Col xxl={12} sm={16} xs={24}>
               <Form form={form} name="changePassword" onFinish={handleSubmit}>
-                <Form.Item name="old" label="Old Password" className="mb-4 form-label-w-full form-label-text-start">
-                  <Input />
+                <Form.Item
+                  required
+                  name="old"
+                  label="Old Password"
+                  className="mb-4 form-label-w-full form-label-text-start"
+                >
+                  <Input.Password onChange={(e) => setPassword(e.target.value)} />
                 </Form.Item>
                 <Form.Item name="new" label="New Password" className="mb-0 form-label-w-full form-label-text-start">
                   <Input.Password />

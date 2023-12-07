@@ -13,6 +13,7 @@ import 'antd/dist/antd.less';
 import Students from './routes/student';
 import Tutor from './routes/tutor';
 
+const Login = lazy(() => import('./container/profile/authentication/overview/SignIn'));
 const NotFound = lazy(() => import('./container/pages/404'));
 
 const { theme } = config;
@@ -27,19 +28,19 @@ function RouterAuthorization() {
       {decentralization === 'admin' && (
         <Routes>
           <Route path="/admin/*" element={<ProtectedRoute path="/*" Component={Admin} />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       )}
       {decentralization === 'student' && (
         <Routes>
           <Route path="/student/*" element={<ProtectedRoute path="/*" Component={Students} />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       )}
       {decentralization === 'tutor' && (
         <Routes>
           <Route path="/tutor/*" element={<ProtectedRoute path="/*" Component={Tutor} />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       )}
       {!decentralization && (

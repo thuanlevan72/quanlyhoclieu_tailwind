@@ -1,6 +1,15 @@
 import { DataService } from '../../dataService/dataService';
 
 export const StudentApi = {
+  changePassword: ({ password, newPassword, confirmPassword }) => {
+    const url = `/Account/changePassword`;
+    const data = {
+      password,
+      newPassword,
+      confirmPassword,
+    };
+    return DataService.put(url, data);
+  },
   getLecture: ({ pageSize, pageNumber }) => {
     const url = `/Lecture/forStudent?pageSize=${pageSize}&pageNumber=${pageNumber}`;
     return DataService.get(url);
