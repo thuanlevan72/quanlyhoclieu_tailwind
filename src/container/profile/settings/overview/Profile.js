@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Row, Col, Form, Input, Select } from 'antd';
+import { Row, Col, Form, Input, Select, message } from 'antd';
 import { Button } from '../../../../components/buttons/buttons';
 import Heading from '../../../../components/heading/heading';
 import { GlobalUtilityStyle } from '../../../styled';
 import { getCities, getCommune, getDistricts } from '../../../../config/dataService/ProvinceOpenAPI';
+import { StudentApi } from '../../../../config/api/student/StudentApi';
 
 const { Option } = Select;
 function Profile() {
@@ -26,7 +27,19 @@ function Profile() {
     tags: ['UI/UX', 'Branding', 'Product Design', 'Web Design'],
     values: null,
   });
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
+    try {
+      const response = await StudentApi.updateProfile(
+        values.name,
+        values.phone,
+        address.province,
+        address.district,
+        address.commune,
+      );
+      message.success(response.data);
+    } catch (e) {
+      message.error('Update failure');
+    }
     setState({ ...address, values: { ...values, tags: state.tags } });
   };
   const handleDistrictChange = async (values) => {
@@ -90,6 +103,7 @@ function Profile() {
       handleCommuneChangeEnd(authInfo.communeID);
     }
   }, []);
+
   return (
     <div className="bg-white dark:bg-white10 m-0 p-0 mb-[25px] rounded-10 relative">
       <div className="py-[18px] px-[25px] text-dark dark:text-white87 font-medium text-[17px] border-regular dark:border-white10 border-b">
@@ -107,7 +121,7 @@ function Profile() {
               <Form className="pt-2.5 pb-[30px]" name="editProfile" onFinish={handleSubmit}>
                 <Form.Item
                   name="name"
-                  initialValue={authInfo.lastName}
+                  initialValue={authInfo.fullName}
                   label="Name"
                   rules={[{ required: true, message: '*Required' }]}
                   className="mb-4 form-label-w-full form-label-text-start dark:text-white-60"

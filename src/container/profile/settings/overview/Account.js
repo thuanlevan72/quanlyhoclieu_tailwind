@@ -65,7 +65,7 @@ function Account() {
                         </p>
                         <Form.Item
                           name="email"
-                          initialValue={state.email}
+                          initialValue={state.userName}
                           rules={[{ type: 'email' }]}
                           label="Email"
                           className="mb-0 [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold"
