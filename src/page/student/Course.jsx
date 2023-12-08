@@ -30,13 +30,15 @@ function Course() {
           pageSize: 8,
         });
         const res = await StudentApi.getCourse(pagination);
+        const totalRes = await StudentApi.getAll(pagination);
         setCourses(res.data.data);
+        localStorage.setItem('courses', JSON.stringify(totalRes.data.data));
       } catch (error) {
         alert('hehe');
       }
     }
     fetchData();
-  }, [courses]);
+  }, []);
 
   // const onShowSizeChange = (current, pageSize) => {
   //   setState({ ...state, current, pageSize });

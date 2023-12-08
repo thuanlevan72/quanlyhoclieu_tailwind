@@ -1,10 +1,11 @@
 import { Col, Row, Skeleton, Table } from 'antd';
 import { useState, useEffect, Suspense } from 'react';
 import Checkbox from 'antd/lib/checkbox/Checkbox';
+import UilTrash from '@iconscout/react-unicons/icons/uil-trash';
 import Ordersummary from './Ordersummary';
 import Heading from '../../../components/heading/heading';
 import { GlobalUtilityStyle } from '../../styled';
-import feeData from '../../../demoData/fee.json';
+import { StudentApi } from '../../../config/api/student/StudentApi';
 
 function FeeTable() {
   const productTableData = [];
@@ -24,66 +25,121 @@ function FeeTable() {
       dataIndex: 'date',
       key: 'date',
     },
+    {
+      title: '',
+      dataIndex: 'remove',
+      key: 'remove',
+    },
   ];
-  const [state, setState] = useState({
-    fee: feeData,
+  const [pagination, setPagination] = useState({
+    pageNumber: 1,
+    pageSize: 8,
   });
-  const { fee } = state;
+  const [fee, setFee] = useState([]);
+  const [enrolls, setEnrolls] = useState([]);
+  const authInfo = localStorage.getItem('authInfo');
+  const authInfoObject = JSON.parse(authInfo);
   useEffect(() => {
-    if (feeData) {
-      setState({
-        fee: feeData,
-      });
+    async function fetchData() {
+      try {
+        const values = {
+          id: authInfoObject.id,
+          pageNumber: 1,
+          pageSize: 100,
+        };
+        const res1 = await StudentApi.getEnrollment(values);
+        setEnrolls(res1.data.data);
+      } catch (error) {
+        return 'error';
+      }
     }
+    fetchData();
   }, []);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setPagination({
+          pageNumber: 1,
+          pageSize: 8,
+        });
+        const res = await StudentApi.getFee(pagination);
+        setFee(res.data.result.data);
+      } catch (error) {
+        alert('Sai rồi kìadf');
+      }
+    }
+    fetchData();
+  }, [enrolls]);
   const onHandleChecked = (key) => {
-    setState((prevState) => ({
-      fee: prevState.fee.map((item) => {
-        if (item.id === key) {
-          if (!item.isChecked) {
-            item.isChecked = true;
-          } else {
-            item.isChecked = false;
-          }
+    setFee((prevFee) => {
+      return prevFee.map((item) => {
+        if (item.feeID === key) {
+          return { ...item, isChecked: !item.isChecked };
         }
         return item;
-      }),
-    }));
+      });
+    });
+  };
+  const onHandleRemove = async (key) => {
+    const index = enrolls.findIndex((x) => x.courseID === key);
+    const res2 = await StudentApi.removeEnrollment(enrolls[index].enrollmentID);
+    const data = fee.filter((x) => x.courseID !== key);
+    setFee([...data]);
+    return res2;
   };
   let subtotal = 0;
   fee.map((data) => {
-    if (data.isChecked) subtotal += data.price;
+    if (data.isChecked) subtotal += data.cost;
     return data;
   });
   localStorage.setItem('subtotal', subtotal);
   localStorage.setItem('feelist', JSON.stringify(fee));
+  const courses = localStorage.getItem('courses');
+  const coursesObject = JSON.parse(courses);
   if (fee !== null) {
     fee.map((data) => {
-      const { id, img, name, price, isChecked } = data;
-      return productTableData.push({
-        course: (
-          <div className="cart-single">
-            <figure className="flex items-center mb-0">
-              <Checkbox className="pr-2" checked={isChecked} onChange={() => onHandleChecked(id)} />
-              <img
-                className="max-w-[80px] min-h-[80px] ltr:mr-[25px] rtl:ml-[25px] rounded-[10px]"
-                style={{ width: 80 }}
-                src={require(`../../../static/img/courses/${img}`)}
-                alt=""
-              />
-              <figcaption>
-                <div className="cart-single__info">
-                  <Heading as="h6" className="text-base font-medium text-dark dark:text-white87">
-                    {name}
-                  </Heading>
-                </div>
-              </figcaption>
-            </figure>
-          </div>
-        ),
-        price: <span className="text-body dark:text-white60 text-[15px]">${price}</span>,
-        date: <span className="text-body dark:text-white60 text-[15px]">28/10/2023</span>,
-      });
+      const { feeID, cost, isChecked, status, courseID } = data;
+      let index = -1;
+      if (status === 'Not Yet') {
+        coursesObject.map((value, i) => {
+          if (value.courseID === courseID) {
+            index = i;
+            return i;
+          }
+          return -1;
+        });
+        return productTableData.push({
+          course: (
+            <div className="cart-single">
+              <figure className="flex items-center mb-0">
+                <Checkbox className="pr-2" checked={isChecked} onChange={() => onHandleChecked(feeID)} />
+                <img
+                  className="max-w-[80px] min-h-[80px] ltr:mr-[25px] rtl:ml-[25px] rounded-[10px]"
+                  style={{ width: 80 }}
+                  src={require(`../../../static/img/courses/1.png`)}
+                  alt=""
+                />
+                <figcaption>
+                  <div className="cart-single__info">
+                    <Heading as="h6" className="text-base font-medium text-dark dark:text-white87">
+                      {coursesObject[index].courseName}
+                    </Heading>
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+          ),
+          price: <span className="text-body dark:text-white60 text-[15px]">{cost}VND</span>,
+          date: <span className="text-body dark:text-white60 text-[15px]">28/10/2023</span>,
+          remove: (
+            <UilTrash
+              className="text-body w-[30px] h-[30px] cursor-pointer flex justify-center items-center border-none hover:text-[#ff4757]"
+              onClick={() => onHandleRemove(courseID)}
+            />
+          ),
+        });
+      }
+      return null;
     });
   }
   return (

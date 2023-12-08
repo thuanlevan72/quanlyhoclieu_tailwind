@@ -12,6 +12,7 @@ import courseData from '../../demoData/course.json';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import { Button } from '../../components/buttons/buttons';
 import '../profile/myProfile/overview/video-modal.css';
+import { StudentApi } from '../../config/api/student/StudentApi';
 
 const { Panel } = Collapse;
 const PageRoutes = [
@@ -25,8 +26,26 @@ const PageRoutes = [
   },
 ];
 function CourseDetails() {
+  const authInfo = localStorage.getItem('authInfo');
+  const authInfoObject = JSON.parse(authInfo);
   const { id } = useParams();
-  console.log(id);
+  const values = {
+    studentID: authInfoObject.id,
+    courseID: parseInt(id),
+    date: '2023-12-06T16:14:01.047Z',
+  };
+  const addEnroll = async () => {
+    try {
+      const res = await StudentApi.addEnrollment(values);
+      return res;
+    } catch (error) {
+      return 'error';
+    }
+  };
+  const onHandleClick = async () => {
+    alert('Added');
+    await addEnroll();
+  };
   const [isOpen, setOpen] = useState(false);
   const currentCourse = courseData.find((x) => x.id.toString() === id);
   return (
@@ -238,9 +257,11 @@ function CourseDetails() {
                   size="default"
                   type="primary"
                   className="px-5 text-sm font-semibold h-11 mx-[5px] bg-[#ffa502] border-[#ffa502] hover:scale-105"
+                  onClick={onHandleClick}
                 >
                   <Link to="/student/student-fee">Add To Fees</Link>
                 </Button>
+
                 <Button
                   size="default"
                   type="primary"

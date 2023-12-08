@@ -9,6 +9,10 @@ export const StudentApi = {
     const url = `/Course?pageSize=${pageSize}&pageNumber=${pageNumber}`;
     return DataService.get(url);
   },
+  getAll: ({ pageSize, pageNumber }) => {
+    const url = `/Course/getAllForStudent?pageSize=${pageSize}&pageNumber=${pageNumber}`;
+    return DataService.get(url);
+  },
   getBoughtCourse: ({ pageSize, pageNumber }) => {
     const url = `/Course/forStudent?pageSize=${pageSize}&pageNumber=${pageNumber}`;
     return DataService.get(url);
@@ -19,6 +23,34 @@ export const StudentApi = {
   },
   getFee: ({ pageSize, pageNumber }) => {
     const url = `/Fee/forStudent?pageSize=${pageSize}&pageNumber=${pageNumber}`;
+    return DataService.get(url);
+  },
+  payFee: (id) => {
+    const url = `/Fee/payFee/${id}`;
+    return DataService.post(url);
+  },
+  removeEnrollment: (id) => {
+    const url = `/Enrollment/d/${id}`;
+    return DataService.post(url);
+  },
+  getTotalMoney: () => {
+    const url = `/Student/getTotalMoney`;
+    return DataService.get(url);
+  },
+  addEnrollment: (values) => {
+    const url = `/Enrollment`;
+    return DataService.post(url, {
+      StudentID: values.studentID,
+      CourseID: values.courseID,
+      EnrollmentDate: values.date,
+    });
+  },
+  getEnrollment: ({ pageNumber, pageSize, id }) => {
+    const url = `/Enrollment/student/${id}?pageSize=${pageSize}&pageNumber=${pageNumber}`;
+    return DataService.get(url);
+  },
+  getCourseDetail: ({ pageNumber, pageSize }) => {
+    const url = `/Course/getDetail?pageSize=${pageSize}&pageNumber=${pageNumber}`;
     return DataService.get(url);
   },
 };
