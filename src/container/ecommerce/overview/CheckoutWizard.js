@@ -7,6 +7,7 @@ import Heading from '../../../components/heading/heading';
 import { Cards } from '../../../components/cards/frame/cards-frame';
 import { GlobalUtilityStyle } from '../../styled';
 import { cartGetData } from '../../../redux/cart/actionCreator';
+import { StudentApi } from '../../../config/api/student/StudentApi';
 
 function CheckOut() {
   function handlePayWithBankingClick() {
@@ -19,7 +20,6 @@ function CheckOut() {
   const feelist = JSON.parse(feelistJSON);
   const checkedlist = feelist.filter((x) => x.isChecked === true);
   const dataSource = [];
-  console.log(dataSource);
   const dispatch = useDispatch();
 
   const [state, setState] = useState({
@@ -80,10 +80,37 @@ function CheckOut() {
       current: current - 1,
     });
   };
-
-  const done = () => {
-    const confirm = window.confirm('Are sure to submit order?');
+  const [totalMoney, setTotalMoney] = useState(authInfo.totalMoney);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await StudentApi.getTotalMoney();
+        setTotalMoney(res.data);
+      } catch (error) {
+        return 'error';
+      }
+    }
+    fetchData();
+  }, [totalMoney]);
+  const processPayment = async () => {
+    try {
+      await Promise.all(
+        feelist.map(async (value) => {
+          if (value.isChecked === true) {
+            const res = await StudentApi.payFee(value.feeID);
+            return res;
+          }
+          return null;
+        }),
+      );
+    } catch (error) {
+      console.error('Error processing payment:', error);
+    }
+  };
+  const done = async () => {
+    const confirm = window.confirm('Are you sure to submit the order?');
     if (confirm) {
+      await processPayment();
       setState({
         ...state,
         status: 'finish',
@@ -92,26 +119,35 @@ function CheckOut() {
       });
     }
   };
-
+  const courses = localStorage.getItem('courses');
+  const coursesObject = JSON.parse(courses);
   if (checkedlist.length !== 0) {
     checkedlist.map((data) => {
-      const { id, name, price } = data;
+      const { courseID, feeID, cost } = data;
+      let index = -1;
+      coursesObject.map((value, i) => {
+        if (value.courseID === courseID) {
+          index = i;
+          return i;
+        }
+        return -1;
+      });
       return dataSource.push({
-        key: id,
+        key: feeID,
         name: (
           <div className="w-[300px]">
             <div className="flex items-center gap-x-[25px]">
               <figcaption>
                 <div>
                   <Heading as="h6" className="mb-2 text-base font-medium text-dark dark:text-white87">
-                    {name}
+                    {coursesObject[index].courseName}
                   </Heading>
                 </div>
               </figcaption>
             </div>
           </div>
         ),
-        price: <span className="text-body dark:text-white60 text-[15px]">${price}</span>,
+        price: <span className="text-body dark:text-white60 text-[15px]">{cost}VND</span>,
       });
     });
   }
@@ -199,7 +235,7 @@ function CheckOut() {
                       Total Money
                     </Heading>
                   </div>
-                  <div className="mb-2 text-[15px] font-medium">{authInfo.totalMoney} VND</div>
+                  <div className="mb-2 text-[15px] font-medium">{totalMoney} VND</div>
                 </div>
                 <div className="bg-regularBG dark:bg-white10 mb-[25px] p-[25px] rounded-[15px]">
                   <div className="border-b table-responsive table-bg-transparent table-head-none hover-tr-none table-td-border-none border-regular dark:border-white10">

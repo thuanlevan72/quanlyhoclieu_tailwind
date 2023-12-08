@@ -91,6 +91,9 @@ const logOut = (callback) => {
       Cookies.remove('logedIn');
       Cookies.remove('access_token');
       Cookies.remove('decentralization');
+      localStorage.removeItem('authInfo');
+      localStorage.removeItem('feelist');
+      localStorage.removeItem('subtotal');
       dispatch(logoutSuccess(false));
       callback();
     } catch (err) {

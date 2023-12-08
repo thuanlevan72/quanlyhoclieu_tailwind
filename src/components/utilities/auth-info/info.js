@@ -7,7 +7,7 @@ import UilUser from '@iconscout/react-unicons/icons/uil-user';
 import UilHistory from '@iconscout/react-unicons/icons/uil-history';
 import UilUsersAlt from '@iconscout/react-unicons/icons/uil-users-alt';
 import { Avatar } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -20,6 +20,7 @@ import { Popover } from '../../popup/popup';
 import Heading from '../../heading/heading';
 import { Dropdown } from '../../dropdown/dropdown';
 import { logOut } from '../../../redux/authentication/actionCreator';
+import { StudentApi } from '../../../config/api/student/StudentApi';
 
 const AuthInfo = React.memo(() => {
   const { authInfo } = useSelector((state) => {
@@ -40,6 +41,18 @@ const AuthInfo = React.memo(() => {
     e.preventDefault();
     dispatch(logOut(() => navigate('/')));
   };
+  const [totalMoney, setTotalMoney] = useState(authInfo.totalMoney);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await StudentApi.getTotalMoney();
+        setTotalMoney(res.data);
+      } catch (error) {
+        return 'error';
+      }
+    }
+    fetchData();
+  }, [totalMoney]);
 
   const userContent = (
     <div>
@@ -75,7 +88,7 @@ const AuthInfo = React.memo(() => {
               to={`/${decentralization}/total-money`}
               className="inline-flex items-center hover:bg-shadow-transparent text-light dark:text-white60 dark:hover:text-white hover:text-primary dark:hover:bg-white10 dark:rounded-4 hover:pl-6 w-full px-2.5 py-3 text-sm transition-all ease-in-out delay-150"
             >
-              <UilDollarSign className="w-4 h-4 ltr:mr-3 rtl:ml-3" /> Total Money: {authInfo.totalMoney} VND
+              <UilDollarSign className="w-4 h-4 ltr:mr-3 rtl:ml-3" /> Total Money: {totalMoney} VND
             </Link>
           </li>
           <li>

@@ -31,344 +31,27 @@ const PageRoutes = [
   },
 ];
 function CourseDetails() {
-  const [lectures, setLectures] = useState([
-    {
-      id: '1',
-      title: 'Getting Started',
-      classes: [
-        {
-          id: '1',
-          classTitle: 'Course Introduction',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: true,
-          isWatching: false,
-        },
-        {
-          id: '2',
-          classTitle: 'Demand of UI/UX Design',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-        {
-          id: '3',
-          classTitle: 'Tools',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-      ],
-      exams: [
-        {
-          id: '1',
-          examTitle: 'Test01',
-          duration: '60',
-        },
-        {
-          id: '2',
-          examTitle: 'Test02',
-          duration: '60',
-        },
-      ],
-    },
-    {
-      id: '2',
-      title: 'User Interface Vs User Experience',
-      classes: [
-        {
-          id: '1',
-          classTitle: 'Course Introduction',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-        {
-          id: '2',
-          classTitle: 'Demand of UI/UX Design',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-        {
-          id: '3',
-          classTitle: 'Tools',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-      ],
-      exams: [
-        {
-          id: '1',
-          examTitle: 'Test01',
-          duration: '60',
-        },
-        {
-          id: '2',
-          examTitle: 'Test02',
-          duration: '60',
-        },
-      ],
-    },
-    {
-      id: '3',
-      title: 'Design Fundamental',
-      classes: [
-        {
-          id: '1',
-          classTitle: 'Course Introduction',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-        {
-          id: '2',
-          classTitle: 'Demand of UI/UX Design',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-        {
-          id: '3',
-          classTitle: 'Tools',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-      ],
-      exams: [
-        {
-          id: '1',
-          examTitle: 'Test01',
-          duration: '60',
-        },
-        {
-          id: '2',
-          examTitle: 'Test02',
-          duration: '60',
-        },
-      ],
-    },
-    {
-      id: '4',
-      title: 'Colour Theory',
-      classes: [
-        {
-          id: '1',
-          classTitle: 'Course Introduction',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-        {
-          id: '2',
-          classTitle: 'Demand of UI/UX Design',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-        {
-          id: '3',
-          classTitle: 'Tools',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-      ],
-      exams: [
-        {
-          id: '1',
-          examTitle: 'Test01',
-          duration: '60',
-        },
-        {
-          id: '2',
-          examTitle: 'Test02',
-          duration: '60',
-        },
-      ],
-    },
-    {
-      id: '5',
-      title: 'Typography',
-      classes: [
-        {
-          id: '1',
-          classTitle: 'Course Introduction',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-        {
-          id: '2',
-          classTitle: 'Demand of UI/UX Design',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-        {
-          id: '3',
-          classTitle: 'Tools',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-      ],
-      exams: [
-        {
-          id: '1',
-          examTitle: 'Test01',
-          duration: '60',
-        },
-        {
-          id: '2',
-          examTitle: 'Test02',
-          duration: '60',
-        },
-      ],
-    },
-    {
-      id: '6',
-      title: 'Live Project 01',
-      classes: [
-        {
-          id: '1',
-          classTitle: 'Course Introduction',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-        {
-          id: '2',
-          classTitle: 'Demand of UI/UX Design',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-        {
-          id: '3',
-          classTitle: 'Tools',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-      ],
-      exams: [
-        {
-          id: '1',
-          examTitle: 'Test01',
-          duration: '60',
-        },
-        {
-          id: '2',
-          examTitle: 'Test02',
-          duration: '60',
-        },
-      ],
-    },
-    {
-      id: '7',
-      title: 'Live Project 02',
-      classes: [
-        {
-          id: '1',
-          classTitle: 'Course Introduction',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-        {
-          id: '2',
-          classTitle: 'Demand of UI/UX Design',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-        {
-          id: '3',
-          classTitle: 'Tools',
-          videoLink: 'https://www.youtube.com/embed/RmY5OdmC7Ps?si=bTp--7hOIczsrRw8',
-          duration: '5',
-          isWatched: false,
-          isAvailable: false,
-          isWatching: false,
-        },
-      ],
-      exams: [
-        {
-          id: '1',
-          examTitle: 'Test01',
-          duration: '60',
-        },
-        {
-          id: '2',
-          examTitle: 'Test02',
-          duration: '60',
-        },
-      ],
-    },
-  ]);
-  const [datas, setDatas] = useState([]);
+  const [lectures, setLectures] = useState([]);
   const [pagination, setPagination] = useState({
     pageNumber: 1,
-    pageSize: 8,
+    pageSize: 100,
   });
   useEffect(() => {
     async function fetchData() {
       try {
         setPagination({
           pageNumber: 1,
-          pageSize: 4,
+          pageSize: 8,
         });
-        const res = await StudentApi.getLecture(pagination);
-        setDatas(res.data);
+        const res = await StudentApi.getCourseDetail(pagination);
+        res.data.data[0].classes[0].isAvailable = true;
+        setLectures(res.data.data);
       } catch (error) {
-        alert('hehe');
+        alert('Sai gòi');
       }
     }
     fetchData();
   }, []);
-  console.log(datas);
   const { id } = useParams();
   const [link, setLink] = useState('https://www.youtube.com/embed/PBwzoZ8aFxI?si=JzLOvPTKI6wU5JVG');
   const currentCourse = courseData.find((x) => x.id.toString() === id);
@@ -545,10 +228,10 @@ function CourseDetails() {
                     )
                   }
                 >
-                  {lectures.map((lecture) => (
+                  {lectures.map((lecture, index) => (
                     <CollapsePanel
-                      header={`${lecture.title}`}
-                      key={lecture.id}
+                      header={`${lecture.coursePartName}`}
+                      key={lecture.coursePartID}
                       extra={
                         <div className="flex items-center gap-x-[70px] xl:gap-x-[30px] sm:gap-x-[10px] ml-2.5">
                           <span className="text-sm font-normal text-body dark:text-white60">03 Lectures</span>
@@ -557,7 +240,7 @@ function CourseDetails() {
                       }
                     >
                       <ul className="flex flex-col items-center gap-y-6">
-                        {lecture.classes.map((singleClass, index) => (
+                        {lecture.classes.map((singleClass, index1) => (
                           <li className="w-full" key={index}>
                             <Link
                               className="flex items-center gap-2"
@@ -565,10 +248,10 @@ function CourseDetails() {
                                 singleClass.isAvailable
                                   ? () =>
                                       activeChoose(
-                                        singleClass.videoLink,
-                                        singleClass.classTitle,
-                                        lecture.id,
-                                        singleClass.id,
+                                        singleClass.lectureLink,
+                                        singleClass.lectureTitle,
+                                        index + 1,
+                                        index1 + 1,
                                       )
                                   : () => {}
                               }
@@ -576,7 +259,9 @@ function CourseDetails() {
                             >
                               <UilPlay className="w-4 h-4 text-[#eccc68]" />
                               <span
-                                className={`title${lecture.id}${singleClass.id} dark:text-white60 text-[15px] title
+                                className={`title${lecture.coursePartID}${
+                                  singleClass.lectureID
+                                } dark:text-white60 text-[15px] title
                                 
                                  ${
                                    singleClass.isWatching
@@ -588,7 +273,7 @@ function CourseDetails() {
                                      : 'text-gray-400 cursor-not-allowed'
                                  } `}
                               >
-                                {singleClass.classTitle}
+                                {singleClass.lectureTitle}
                               </span>
                               <div className="flex items-center ml-auto gap-x-[80px] xl:gap-x-[30px] sm:gap-x-[10px]">
                                 <span className="text-sm text-body dark:text-white60">{singleClass.duration}:00</span>
@@ -600,9 +285,9 @@ function CourseDetails() {
                           <li className="w-full" key={index1}>
                             <Link className="flex items-center gap-2 text-[#1e90ff]" onClick={() => setVisible(true)}>
                               <UilQuestionCircle />
-                              <span>{singleExam.examTitle}</span>
+                              <span>{singleExam.examName}</span>
                               <div className="flex items-center ml-auto gap-x-[80px] xl:gap-x-[30px] sm:gap-x-[10px]">
-                                <span className="text-sm text-body dark:text-white60">{singleExam.duration}:00</span>
+                                <span className="text-sm text-body dark:text-white60">{singleExam.workTime}:00</span>
                               </div>
                             </Link>
                           </li>
