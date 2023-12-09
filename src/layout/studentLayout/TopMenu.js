@@ -7,7 +7,6 @@ function TopMenu() {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  // Sử dụng substring để lấy phần con đường dẫn
   const subPath = currentPath.substring(currentPath.indexOf('/', 1));
 
   const activeLink = (value) => {
@@ -30,11 +29,6 @@ function TopMenu() {
           <li className="">
             <Link to={`${path}/student-fee`} className={`${activeLink('/student-fee')} hover:text-[#ffa502]`}>
               Fees
-            </Link>
-          </li>
-          <li className="">
-            <Link to={`${path}/blog`} className={`${activeLink('/blog')} hover:text-[#ffa502]`}>
-              Blog
             </Link>
           </li>
         </ul>

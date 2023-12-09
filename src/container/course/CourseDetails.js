@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Row, Col, Collapse } from 'antd';
 import UilPlus from '@iconscout/react-unicons/icons/uil-plus';
@@ -8,7 +8,6 @@ import UilClock from '@iconscout/react-unicons/icons/uil-clock';
 import UilAward from '@iconscout/react-unicons/icons/uil-award';
 import UilSync from '@iconscout/react-unicons/icons/uil-sync';
 import ModalVideo from 'react-modal-video';
-import courseData from '../../demoData/course.json';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import { Button } from '../../components/buttons/buttons';
 import '../profile/myProfile/overview/video-modal.css';
@@ -34,6 +33,18 @@ function CourseDetails() {
     courseID: parseInt(id),
     date: '2023-12-06T16:14:01.047Z',
   };
+  const [currentCourse, setCurrentCourse] = useState({});
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await StudentApi.getCourseById(id);
+        setCurrentCourse(res.data);
+      } catch (error) {
+        setCurrentCourse([]);
+      }
+    }
+    fetchData();
+  }, []);
   const addEnroll = async () => {
     try {
       const res = await StudentApi.addEnrollment(values);
@@ -46,21 +57,21 @@ function CourseDetails() {
     alert('Added');
     await addEnroll();
   };
+
   const [isOpen, setOpen] = useState(false);
-  const currentCourse = courseData.find((x) => x.id.toString() === id);
   return (
     <>
       <ModalVideo channel="youtube" autoplay isOpen={isOpen} videoId="L61p2uyiMSo" onClose={() => setOpen(false)} />
       <PageHeader
         className="flex items-center justify-between px-8 xl:px-[15px] pt-2 pb-6 sm:pb-[30px] bg-transparent sm:flex-col"
-        title="Course"
+        title="Course Detail"
         routes={PageRoutes}
       />
       <main className="min-h-[715px] lg:min-h-[580px] px-8 xl:px-[15px] pb-[30px] bg-transparent">
         <Row gutter={25}>
           <Col lg={12} xs={24} className="lg:mb-[30px]">
             <div>
-              <h2 className="text-3xl font-semibold text-dark dark:text-white87">{currentCourse.title}</h2>
+              <h2 className="text-3xl font-semibold text-dark dark:text-white87">{currentCourse.courseName}</h2>
               <div>
                 <p className="text-base text-body dark:text-white60 mb-[28px]">
                   Many support queries and technical questions will already be answered in supporting documentation such
@@ -78,53 +89,43 @@ function CourseDetails() {
                 />
                 <div>
                   <h5 className="text-dark dark:text-white87 mb-[3px] text-base font-medium leading-[20px]">
-                    David Warner
+                    Do Dong Dong
                   </h5>
-                  <span className="text-[15px] text-body dark:text-white60">
-                    Senior UI/UX Designer at Dribble, Top Rated Freelancer at Upwork
-                  </span>
+                  <span className="text-[15px] text-body dark:text-white60">Cựu trẻ em</span>
                 </div>
               </div>
               <h2 className="text-dark dark:text-white87 mt-[30px] mb-[14px] text-[22px] font-semibold">
                 About This Course
               </h2>
-              <p className="text-base text-body dark:text-white60 mb-[28px]">
-                User interface design or user interface engineering is the design of user interfaces for machines and
-                software, such as computers, home appliances, mobile devices, and other electronic devices, with the
-                focus on maximizing usability and the user experience.
-              </p>
-              <p className="mb-0 text-base text-body dark:text-white60">
-                User interface design or user interface engineering is the design of user interfaces for machines and
-                software, such as computers, home appliances, mobile devices, and other electronic devices, with the
-                focus on maximizing.
-              </p>
+              <p className="text-base text-body dark:text-white60 mb-[28px]">{currentCourse.courseDescription}</p>
+              <p className="mb-0 text-base text-body dark:text-white60">Đoạn này cho vào cho dài!</p>
               <h2 className="text-dark dark:text-white87 mt-[30px] mb-[14px] text-[22px] font-semibold">
                 What You Will Learn
               </h2>
               <ul className="flex flex-col gap-3 mb-0">
                 <li className="relative pl-4 text-body dark:text-white60 text-base after:absolute after:left-0 after:top-1/2 after:-translate-y-1/2 after:w-1.5 after:h-1.5 after:bg-dark dark:after:bg-whiteDark after:rounded-full">
-                  Basic to Advance knowledge of UI/UX Design
+                  {`Basic about ${currentCourse.courseName}`}
                 </li>
                 <li className="relative pl-4 text-body dark:text-white60 text-base after:absolute after:left-0 after:top-1/2 after:-translate-y-1/2 after:w-1.5 after:h-1.5 after:bg-dark dark:after:bg-whiteDark after:rounded-full">
-                  UI/UX Design Fundamental
+                  {`Basic about ${currentCourse.courseName}`}
                 </li>
                 <li className="relative pl-4 text-body dark:text-white60 text-base after:absolute after:left-0 after:top-1/2 after:-translate-y-1/2 after:w-1.5 after:h-1.5 after:bg-dark dark:after:bg-whiteDark after:rounded-full">
-                  Colour Theory
+                  {`Basic about ${currentCourse.courseName}`}
                 </li>
                 <li className="relative pl-4 text-body dark:text-white60 text-base after:absolute after:left-0 after:top-1/2 after:-translate-y-1/2 after:w-1.5 after:h-1.5 after:bg-dark dark:after:bg-whiteDark after:rounded-full">
-                  Typography
+                  {`Basic about ${currentCourse.courseName}`}
                 </li>
                 <li className="relative pl-4 text-body dark:text-white60 text-base after:absolute after:left-0 after:top-1/2 after:-translate-y-1/2 after:w-1.5 after:h-1.5 after:bg-dark dark:after:bg-whiteDark after:rounded-full">
-                  Design Systems
+                  {`Basic about ${currentCourse.courseName}`}
                 </li>
                 <li className="relative pl-4 text-body dark:text-white60 text-base after:absolute after:left-0 after:top-1/2 after:-translate-y-1/2 after:w-1.5 after:h-1.5 after:bg-dark dark:after:bg-whiteDark after:rounded-full">
-                  Alignment
+                  {`Basic about ${currentCourse.courseName}`}
                 </li>
                 <li className="relative pl-4 text-body dark:text-white60 text-base after:absolute after:left-0 after:top-1/2 after:-translate-y-1/2 after:w-1.5 after:h-1.5 after:bg-dark dark:after:bg-whiteDark after:rounded-full">
-                  User Research
+                  {`Basic about ${currentCourse.courseName}`}
                 </li>
                 <li className="relative pl-4 text-body dark:text-white60 text-base after:absolute after:left-0 after:top-1/2 after:-translate-y-1/2 after:w-1.5 after:h-1.5 after:bg-dark dark:after:bg-whiteDark after:rounded-full">
-                  User Flow
+                  {`Basic about ${currentCourse.courseName}`}
                 </li>
               </ul>
               <h2 className="text-dark dark:text-white87 mt-[30px] mb-[14px] text-[22px] font-semibold">FAQ </h2>
@@ -251,7 +252,7 @@ function CourseDetails() {
               </ul>
               <div className="mt-[30px] text-center flex flex-wrap justify-center">
                 <span className="block mb-3 text-3xl font-semibold text-dark dark:text-white87 w-[100%]">
-                  ${currentCourse.price}
+                  {currentCourse.cost} VND
                 </span>
                 <Button
                   size="default"

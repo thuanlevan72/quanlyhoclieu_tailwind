@@ -55,7 +55,9 @@ function Ordersummary({ subtotal, checkout }) {
             <ul className="mb-0">
               <li className="flex items-center justify-between mb-[18px]">
                 <span className="font-medium text-body dark:text-white60">Subtotal :</span>
-                <span className="font-medium text-dark dark:text-white87">{`${subtotal}VND`}</span>
+                <span className="font-medium text-dark dark:text-white87">{`${subtotal.toLocaleString(
+                  'en-US',
+                )}VND`}</span>
               </li>
               <li className="flex items-center justify-between mb-[18px]">
                 <span className="font-medium text-body dark:text-white60">Discount :</span>
@@ -102,7 +104,7 @@ function Ordersummary({ subtotal, checkout }) {
             </Form>
             <Heading className="inline-flex items-center justify-between w-full" as="h4">
               <span className="text-base font-semibold text-dark dark:text-white87">Total : </span>
-              <span className="text-lg font-semibold text-primary">{`${subtotal}VND`}</span>
+              <span className="text-lg font-semibold text-primary">{`${subtotal.toLocaleString('en-US')}VND`}</span>
             </Heading>
             {!checkout && (
               <Button

@@ -131,7 +131,7 @@ const ThemeLayout = (WrappedComponent) => {
               <div className="flex flex-row items-center flex-1 h-full">
                 <div className=" rtl:ssm:pr-[15px] ltr:pr-5 rtl:pl-5 ltr:ssm:pl-[15px] ltr:ssm:pr-[15px] rtl:ssm::pl:[15px] ltr:pl-[30px] rtl:pr-[30px] xs:ltr:pl-[20px] xs:rtl:pr-[20px] min-w-[280px] ssm:min-w-[220px] xs:min-w-[170px] h-full grid align-middle dark:bg-[#323541]">
                   <div className="flex items-center justify-between">
-                    <Link to="/student">
+                    <Link to="/tutor">
                       <img
                         className="w-full max-w-[120px] xs:max-w-[100px]"
                         src={

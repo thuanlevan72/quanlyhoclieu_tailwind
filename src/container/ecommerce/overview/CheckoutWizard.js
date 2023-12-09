@@ -192,22 +192,26 @@ function CheckOut() {
                         <ul className="flex flex-col mt-5 mb-[10px]">
                           <li className="inline-flex justify-between">
                             <span className="text-dark dark:text-white87 text-[15px] font-medium">Subtotal :</span>
-                            <span className="text-dark dark:text-white87 text-[15px] font-medium">{`$${subtotal}`}</span>
+                            <span className="text-dark dark:text-white87 text-[15px] font-medium">{`${subtotal.toLocaleString(
+                              'en-US',
+                            )}VND`}</span>
                           </li>
                           <li className="inline-flex justify-between">
                             <span className="text-dark dark:text-white87 text-[15px] font-medium">Discount :</span>
-                            <span className="text-dark dark:text-white87 text-[15px] font-medium">{`$${0}`}</span>
+                            <span className="text-dark dark:text-white87 text-[15px] font-medium">{`${0}VND`}</span>
                           </li>
                           <li className="inline-flex justify-between">
                             <span className="text-dark dark:text-white87 text-[15px] font-medium">
                               Shipping Charge :
                             </span>
-                            <span className="text-dark dark:text-white87 text-[15px] font-medium">{`$${0}`}</span>
+                            <span className="text-dark dark:text-white87 text-[15px] font-medium">{`${0}VND`}</span>
                           </li>
                         </ul>
                         <Heading className="flex justify-between" as="h4">
                           <span className="text-base font-medium text-dark dark:text-white87">Total : </span>
-                          <span className="text-lg font-semibold text-primary">{`$${subtotal}`}</span>
+                          <span className="text-lg font-semibold text-primary">{`${subtotal.toLocaleString(
+                            'en-US',
+                          )}VND`}</span>
                         </Heading>
                       </div>
                     </Col>
@@ -235,7 +239,7 @@ function CheckOut() {
                       Total Money
                     </Heading>
                   </div>
-                  <div className="mb-2 text-[15px] font-medium">{totalMoney} VND</div>
+                  <div className="mb-2 text-[15px] font-medium">{totalMoney.toLocaleString('en-US')} VND</div>
                 </div>
                 <div className="bg-regularBG dark:bg-white10 mb-[25px] p-[25px] rounded-[15px]">
                   <div className="border-b table-responsive table-bg-transparent table-head-none hover-tr-none table-td-border-none border-regular dark:border-white10">
@@ -247,22 +251,26 @@ function CheckOut() {
                         <ul className="flex flex-col mt-5 mb-[10px]">
                           <li className="inline-flex justify-between">
                             <span className="text-dark dark:text-white87 text-[15px] font-medium">Subtotal :</span>
-                            <span className="text-dark dark:text-white87 text-[15px] font-medium">{`$${subtotal}`}</span>
+                            <span className="text-dark dark:text-white87 text-[15px] font-medium">{`${subtotal.toLocaleString(
+                              'en-US',
+                            )}VND`}</span>
                           </li>
                           <li className="inline-flex justify-between">
                             <span className="text-dark dark:text-white87 text-[15px] font-medium">Discount :</span>
-                            <span className="text-dark dark:text-white87 text-[15px] font-medium">{`$${0}`}</span>
+                            <span className="text-dark dark:text-white87 text-[15px] font-medium">{`${0}VND`}</span>
                           </li>
                           <li className="inline-flex justify-between">
                             <span className="text-dark dark:text-white87 text-[15px] font-medium">
                               Shipping Charge :
                             </span>
-                            <span className="text-dark dark:text-white87 text-[15px] font-medium">{`$${0}`}</span>
+                            <span className="text-dark dark:text-white87 text-[15px] font-medium">{`${0}VND`}</span>
                           </li>
                         </ul>
                         <Heading className="flex justify-between" as="h4">
                           <span className="text-base font-medium text-dark dark:text-white87">Total : </span>
-                          <span className="text-lg font-semibold text-primary">{`$${subtotal}`}</span>
+                          <span className="text-lg font-semibold text-primary">{`${subtotal.toLocaleString(
+                            'en-US',
+                          )}VND`}</span>
                         </Heading>
                       </div>
                     </Col>

@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 
 function CourseCard({ courseData }) {
   const { courseID, courseName, cost } = courseData;
-  const string = cost.toLocaleString();
   const decentralization = Cookies.get('decentralization');
   return (
     <Col xxl={6} lg={8} sm={12} xs={24}>
@@ -35,7 +34,9 @@ function CourseCard({ courseData }) {
             </div>
             <div className="flex items-center justify-between gap-[10px]">
               <div>
-                <span className="mb-3 text-xl font-semibold text-success 3xl:text-lg">{string} VND</span>
+                <span className="mb-3 text-xl font-semibold text-success 3xl:text-lg">
+                  {cost.toLocaleString('en-US')} VND
+                </span>
               </div>
               <ul className="flex items-center gap-2.5 2xl:gap-[5px] mb-0">
                 <li className="inline-flex items-center gap-[3px] bg-secondary-transparent text-secondary h-8 px-5 3xl:px-2.5 rounded-[20px]">

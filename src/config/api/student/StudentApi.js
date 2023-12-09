@@ -14,6 +14,10 @@ export const StudentApi = {
     const url = `/Lecture/forStudent?pageSize=${pageSize}&pageNumber=${pageNumber}`;
     return DataService.get(url);
   },
+  getPaymentHistory: ({ pageSize, pageNumber }) => {
+    const url = `/PaymentHistory/forStudent?pageSize=${pageSize}&pageNumber=${pageNumber}`;
+    return DataService.get(url);
+  },
   updateProfile: (fullName, contactNumber, provinceID, districtID, communeID) => {
     const url = `/Student/updateInfomation`;
     const data = {
@@ -71,6 +75,10 @@ export const StudentApi = {
   },
   getCourseDetail: ({ pageNumber, pageSize }) => {
     const url = `/Course/getDetail?pageSize=${pageSize}&pageNumber=${pageNumber}`;
+    return DataService.get(url);
+  },
+  getCourseById: (id) => {
+    const url = `/Course/${id}`;
     return DataService.get(url);
   },
 };
