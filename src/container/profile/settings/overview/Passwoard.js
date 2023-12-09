@@ -23,6 +23,7 @@ function Password() {
         });
         console.log(response.data);
         message.success('Password changed successfully!');
+        localStorage.setItem('hide', values.new);
       }
     } catch (error) {
       console.error('Lỗi khi gửi yêu cầu:', error);

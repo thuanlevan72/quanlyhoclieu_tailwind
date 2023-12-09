@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import { message } from 'antd';
 import actions from './actions';
 // import * as layoutActions from '../themeLayout/actions'; // Sử dụng tên không gian tên "layoutActions" cho thư viện từ '../themeLayout/actions';
 
@@ -74,6 +75,7 @@ const register = (values, callback) => {
       });
       console.log(response);
       if (response.data.succeed) {
+        message.success('Tạo thành công!');
         callback();
       } else {
         dispatch(loginSuccess(false));

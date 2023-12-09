@@ -97,11 +97,10 @@ export default class creditCard extends React.Component {
                     <div className="mb-6">
                       <div className="block text-gray-800 font-bold mb-2">Email</div>
                       <input
-                        value={`${authInfoObject.email}`}
+                        placeholder={authInfoObject.userName}
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="email"
                         type="email"
-                        placeholder="johndoe@example.com"
                         disabled
                       />
                     </div>
@@ -150,7 +149,7 @@ export default class creditCard extends React.Component {
                         required
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="amount"
-                        placeholder="0$"
+                        placeholder="0VND"
                         type="tel"
                         name="amount"
                         onChange={this.handleInputChange}

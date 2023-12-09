@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Row, Col, Collapse } from 'antd';
+import { Row, Col, Collapse, message } from 'antd';
 import UilPlus from '@iconscout/react-unicons/icons/uil-plus';
 import UilMinus from '@iconscout/react-unicons/icons/uil-minus';
 import UilBook from '@iconscout/react-unicons/icons/uil-book-alt';
@@ -43,7 +43,7 @@ function CourseDetails() {
     }
   };
   const onHandleClick = async () => {
-    alert('Added');
+    message.success('added');
     await addEnroll();
   };
   const [isOpen, setOpen] = useState(false);
