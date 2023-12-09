@@ -65,7 +65,7 @@ function FeeTable() {
         const res = await StudentApi.getFee(pagination);
         setFee(res.data.result.data);
       } catch (error) {
-        alert('Sai rồi kìadf');
+        alert('Sai rồi kìa');
       }
     }
     fetchData();
@@ -129,7 +129,7 @@ function FeeTable() {
               </figure>
             </div>
           ),
-          price: <span className="text-body dark:text-white60 text-[15px]">{cost}VND</span>,
+          price: <span className="text-body dark:text-white60 text-[15px]">{cost.toLocaleString('en-US')}VND</span>,
           date: <span className="text-body dark:text-white60 text-[15px]">28/10/2023</span>,
           remove: (
             <UilTrash
