@@ -34,7 +34,7 @@ hr{
 .grid-style .ant-row .ant-col, .grid-style .ant-row-flex .ant-col,
 .grid-style-gutter .ant-row .ant-col .gutter-box, .grid-style-gutter .ant-row-flex .ant-col .gutter-box,
 .grid-style-offset .ant-row .ant-col, .grid-style-offset .ant-row-flex .ant-col {
-  @apply bg-primary text-white h-[50px] leading-[50px] mb-[15px] text-center;
+  @apply bg-[#ffa502] text-white h-[50px] leading-[50px] mb-[15px] text-center;
 }
 
 .grid-style .ant-row .ant-col:nth-child(even), .grid-style .ant-row-flex .ant-col:nth-child(even) {
@@ -122,7 +122,7 @@ hr{
 }
 
 .ant-page-header-heading-extra .ant-space-horizontal {
-  @apply justify-center flex-wrap;
+  @apply flex-wrap justify-center;
 }
 
 /* Chart */
@@ -546,7 +546,7 @@ hr{
 }
 
 .ant-menu-submenu .ant-menu .ant-menu-submenu .ant-menu-submenu-title{
-  @apply text-theme-gray hover:text-primary dark:text-white60;
+  @apply text-theme-gray hover:text-[#ffa502] dark:text-white60;
 }
 .ant-menu-submenu .ant-menu .ant-menu-submenu .ant-menu-submenu-title .ant-menu-title-content + i{
   @apply text-light-extra;
@@ -555,10 +555,10 @@ hr{
   @apply dark:!bg-transparent;
 }
 .ant-menu-submenu .ant-menu .ant-menu-submenu:hover .ant-menu-submenu-title .ant-menu-title-content + i{
-  @apply text-primary dark:text-white87;
+  @apply text-[#ffa502] dark:text-white87;
 }
 .ant-menu-submenu .ant-menu .ant-menu-submenu:hover .ant-menu-submenu-title .ant-menu-title-content{
-  @apply text-primary dark:text-white87;
+  @apply text-[#ffa502] dark:text-white87;
 }
 
 .ant-menu-rtl.ant-menu-inline,
@@ -649,7 +649,7 @@ hr{
   @apply !border-none;
 }
 .ant-picker-today-btn{
-  @apply !text-primary font-semibold;
+  @apply !text-[#ffa502] font-semibold;
 }
 .ant-picker.ant-picker-disabled,
 .ant-picker{
@@ -758,7 +758,7 @@ hr{
 }
 
 .ant-pagination-custom-style .ant-pagination li{
-  @apply border-1 border-regular dark:border-white30 flex items-center justify-center;
+  @apply flex items-center justify-center border-1 border-regular dark:border-white30;
 }
 .ant-pagination-custom-style .ant-pagination-options .ant-select-selector{
   @apply border-1 border-regular dark:border-white30;

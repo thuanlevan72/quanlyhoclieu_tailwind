@@ -18,7 +18,7 @@ function TopMenu() {
         <ul>
           <li className="">
             <Link to={`${path}/course`} className={`${activeLink('/course')} hover:text-[#ffa502]`}>
-              Course
+              Courses
             </Link>
           </li>
           <li className="">
