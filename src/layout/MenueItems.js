@@ -126,75 +126,119 @@ function MenuItems({ toggleCollapsed }) {
   };
 
   const items = [
-    getItem(t('dashboard'), 'dashboard', !topMenu && <UilCreateDashboard />, [
+    getItem(
+      <NavLink onClick={toggleCollapsed} to="/admin">
+        {t('dashboard')}
+      </NavLink>,
+      'dashboard',
+      !topMenu && <UilCreateDashboard />,
+    ),
+    // [
+    //   getItem(
+    //     <NavLink onClick={toggleCollapsed} to={`${path}`}>
+    //       {t('demo')} {t('1')}
+    //     </NavLink>,
+    //     'demo-1',
+    //     null,
+    //   ),
+    //   getItem(
+    //     <NavLink onClick={toggleCollapsed} to={`${path}/demo-2`}>
+    //       {t('demo')} {t('2')}
+    //     </NavLink>,
+    //     'demo-2',
+    //     null,
+    //   ),
+    //   getItem(
+    //     <NavLink onClick={toggleCollapsed} to={`${path}/demo-3`}>
+    //       {t('demo')} {t('3')}
+    //     </NavLink>,
+    //     'demo-3',
+    //     null,
+    //   ),
+    //   getItem(
+    //     <NavLink onClick={toggleCollapsed} to={`${path}/demo-4`}>
+    //       {t('demo')} {t('4')}
+    //     </NavLink>,
+    //     'demo-4',
+    //     null,
+    //   ),
+    //   getItem(
+    //     <NavLink onClick={toggleCollapsed} to={`${path}/demo-5`}>
+    //       {t('demo')} {t('5')}
+    //     </NavLink>,
+    //     'demo-5',
+    //     null,
+    //   ),
+    //   getItem(
+    //     <NavLink onClick={toggleCollapsed} to={`${path}/demo-6`}>
+    //       {t('demo')} {t('6')}
+    //     </NavLink>,
+    //     'demo-6',
+    //     null,
+    //   ),
+    //   getItem(
+    //     <NavLink onClick={toggleCollapsed} to={`${path}/demo-7`}>
+    //       {t('demo')} {t('7')}
+    //     </NavLink>,
+    //     'demo-7',
+    //     null,
+    //   ),
+    //   getItem(
+    //     <NavLink onClick={toggleCollapsed} to={`${path}/demo-8`}>
+    //       {t('demo')} {t('8')}
+    //     </NavLink>,
+    //     'demo-8',
+    //     null,
+    //   ),
+    //   getItem(
+    //     <NavLink onClick={toggleCollapsed} to={`${path}/demo-9`}>
+    //       {t('demo')} {t('9')}
+    //     </NavLink>,
+    //     'demo-9',
+    //     null,
+    //   ),
+    //   getItem(
+    //     <NavLink onClick={toggleCollapsed} to={`${path}/demo-10`}>
+    //       {t('demo')} {t('10')}
+    //     </NavLink>,
+    //     'demo-10',
+    //     null,
+    //   ),
+    // ]),
+    getItem(t('Manage'), 'manage', !topMenu && <UilCreateDashboard />, [
       getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}`}>
-          {t('demo')} {t('1')}
+        <NavLink onClick={toggleCollapsed} to={`${path}/manage/student`}>
+          Student
         </NavLink>,
-        'demo-1',
+        'student',
         null,
       ),
       getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/demo-2`}>
-          {t('demo')} {t('2')}
+        <NavLink onClick={toggleCollapsed} to={`${path}/manage/tutor`}>
+          Tutor
         </NavLink>,
-        'demo-2',
+        'tutor',
         null,
       ),
       getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/demo-3`}>
-          {t('demo')} {t('3')}
+        <NavLink onClick={toggleCollapsed} to={`${path}/manage/course`}>
+          Course
         </NavLink>,
-        'demo-3',
+        'course',
         null,
       ),
       getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/demo-4`}>
-          {t('demo')} {t('4')}
+        <NavLink onClick={toggleCollapsed} to={`${path}/manage/enrollment`}>
+          Enrollment
         </NavLink>,
-        'demo-4',
+        'enrollment',
         null,
       ),
       getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/demo-5`}>
-          {t('demo')} {t('5')}
+        <NavLink onClick={toggleCollapsed} to={`${path}/manage/fee`}>
+          Fee
         </NavLink>,
-        'demo-5',
-        null,
-      ),
-      getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/demo-6`}>
-          {t('demo')} {t('6')}
-        </NavLink>,
-        'demo-6',
-        null,
-      ),
-      getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/demo-7`}>
-          {t('demo')} {t('7')}
-        </NavLink>,
-        'demo-7',
-        null,
-      ),
-      getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/demo-8`}>
-          {t('demo')} {t('8')}
-        </NavLink>,
-        'demo-8',
-        null,
-      ),
-      getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/demo-9`}>
-          {t('demo')} {t('9')}
-        </NavLink>,
-        'demo-9',
-        null,
-      ),
-      getItem(
-        <NavLink onClick={toggleCollapsed} to={`${path}/demo-10`}>
-          {t('demo')} {t('10')}
-        </NavLink>,
-        'demo-10',
+        'fee',
         null,
       ),
     ]),

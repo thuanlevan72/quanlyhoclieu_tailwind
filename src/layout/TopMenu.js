@@ -62,11 +62,11 @@ function TopMenu() {
     <TopMenuStyle>
       <div className="hexadash-top-menu ltr:pl-[20px] rtl:pr-[20px] xl:ltr:pl-[10px] xl:rtl:pr-[10px]">
         <ul>
-          <li className="has-subMenu">
+          <li className="">
             <Link to="#" className="parent">
               Dashboard
             </Link>
-            <ul className="subMenu">
+            {/* <ul className="subMenu">
               <li>
                 <NavLink to={`${path}/admin`} onClick={addParentActive}>
                   Demo 1
@@ -115,6 +115,38 @@ function TopMenu() {
               <li>
                 <NavLink to={`${path}/demo-10`} onClick={addParentActive}>
                   Demo 10
+                </NavLink>
+              </li>
+            </ul> */}
+          </li>
+          <li className="has-subMenu">
+            <Link to="#" className="parent">
+              Manage
+            </Link>
+            <ul className="subMenu">
+              <li>
+                <NavLink to={`${path}/manage/student`} onClick={addParentActive}>
+                  Student
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={`${path}/admin`} onClick={addParentActive}>
+                  Tutor
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={`${path}/admin`} onClick={addParentActive}>
+                  Course
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={`${path}/admin`} onClick={addParentActive}>
+                  Enrollment
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={`${path}/admin`} onClick={addParentActive}>
+                  Fee
                 </NavLink>
               </li>
             </ul>

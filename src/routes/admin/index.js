@@ -10,8 +10,10 @@ import Pages from './pages';
 import Users from './users';
 import Widgets from './widgets';
 import withAdminLayout from '../../layout/withAdminLayout';
+import ComingSoon from '../../container/pages/ComingSoon';
 
 const Charts = lazy(() => import('./charts'));
+const Students = lazy(() => import('../../container/users/Users'));
 const KnowledgeBase = lazy(() => import('../../container/pages/knowledgeBase/Index'));
 const AllArticle = lazy(() => import('../../container/pages/knowledgeBase/AllArticle'));
 const KnowledgeSingle = lazy(() => import('../../container/pages/knowledgeBase/SingleKnowledge'));
@@ -43,6 +45,7 @@ const JobDetails = lazy(() => import('../../container/jobSearch/JobSearchDetails
 const JobApply = lazy(() => import('../../container/jobSearch/JobApplication'));
 const Firebase = lazy(() => import('./firestore'));
 const NotFound = lazy(() => import('../../container/pages/404'));
+const StudentDetail = lazy(() => import('../../page/admin/StudentDetail'));
 
 const Admin = React.memo(() => {
   const { pathname } = useLocation();
@@ -97,6 +100,12 @@ const Admin = React.memo(() => {
         <Route path="app/job/apply" element={<JobApply />} />
         <Route path="app/jobDetails/:id" element={<JobDetails />} />
         <Route path="widgets/*" element={<Widgets />} />
+        <Route path="manage/student" element={<Students />} />
+        <Route path="manage/tutor" element={<ComingSoon />} />
+        <Route path="manage/course" element={<ComingSoon />} />
+        <Route path="manage/enrollment" element={<ComingSoon />} />
+        <Route path="manage/fee" element={<ComingSoon />} />
+        <Route path="manage/student/:id" element={<StudentDetail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

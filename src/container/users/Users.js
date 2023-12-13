@@ -1,61 +1,68 @@
-import React, { useState, lazy, Suspense } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, lazy, Suspense, useEffect } from 'react';
 import { Row, Col, Skeleton, Button, Pagination, Input } from 'antd';
 import UilPlus from '@iconscout/react-unicons/icons/uil-plus';
-import UilApps from '@iconscout/react-unicons/icons/uil-apps';
-import UilListUl from '@iconscout/react-unicons/icons/uil-list-ul';
-import UilUsersAlt from '@iconscout/react-unicons/icons/uil-users-alt';
+// import UilApps from '@iconscout/react-unicons/icons/uil-apps';
+// import UilListUl from '@iconscout/react-unicons/icons/uil-list-ul';
+// import UilUsersAlt from '@iconscout/react-unicons/icons/uil-users-alt';
 import { SearchOutlined } from '@ant-design/icons';
-import UilExpandArrowsAlt from '@iconscout/react-unicons/icons/uil-expand-arrows-alt';
-import { Link, Routes, Route, NavLink } from 'react-router-dom';
+// import UilExpandArrowsAlt from '@iconscout/react-unicons/icons/uil-expand-arrows-alt';
+import { Link, Routes, Route } from 'react-router-dom';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import { AutoComplete } from '../../components/autoComplete/autoComplete';
 import { Cards } from '../../components/cards/frame/cards-frame';
 import { PaginationStyle } from '../styled';
+import { AdminApi } from '../../config/api/admin/AdminApi';
 
 const User = lazy(() => import('../pages/overview/UserCard'));
-const UserCardStyle = lazy(() => import('../pages/overview/UserCardStyle'));
-const UserCardList = lazy(() => import('../pages/overview/UserCardList'));
-const UserCardGroup = lazy(() => import('../pages/overview/UserCardGroup'));
+// const UserCardStyle = lazy(() => import('../pages/overview/UserCardStyle'));
+// const UserCardList = lazy(() => import('../pages/overview/UserCardList'));
+// const UserCardGroup = lazy(() => import('../pages/overview/UserCardGroup'));
 
 function Users() {
-  const { searchData, users, userGroup } = useSelector((state) => {
-    return {
-      searchData: state.headerSearchData,
-      users: state.users,
-      userGroup: state.userGroup,
-    };
+  const [pagination, setPagination] = useState({
+    pageNumber: 1,
+    pageSize: 10,
   });
+  const [users, setUsers] = useState([]);
+  const [userslst, setUserslst] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setPagination({
+          pageNumber: 1,
+          pageSize: 8,
+        });
+        const res = await AdminApi.getStudent(pagination);
+        setUsers(res.data.data);
+        setUserslst(res.data.data);
+      } catch (error) {
+        alert('hehe');
+      }
+    }
+    fetchData();
+  }, []);
 
-  const path = '.';
-
-  const [state, setState] = useState({
-    notData: searchData,
-    current: 0,
-    pageSize: 0,
-    page: 0,
-  });
-
-  const { notData } = state;
+  // const path = '.';
 
   const handleSearch = (searchText) => {
-    const data = searchData.filter((item) => item.title.toUpperCase().startsWith(searchText.toUpperCase()));
-    setState({
-      ...state,
-      notData: data,
-    });
+    if (searchText.length !== 0) {
+      const data = users.filter((item) => item.fullName.toUpperCase().startsWith(searchText.toUpperCase()));
+      setUserslst(data);
+    } else {
+      setUserslst([...users]);
+    }
   };
 
-  const onShowSizeChange = (current, pageSize) => {
-    setState({ ...state, current, pageSize });
-  };
+  // const onShowSizeChange = (current, pageSize) => {
+  //   setState({ ...state, current, pageSize });
+  // };
 
-  const onChange = (page) => {
-    setState({ ...state, page });
-  };
+  // const onChange = (page) => {
+  //   setState({ ...state, page });
+  // };
 
   const GridView = React.memo(() => {
-    return users.map((user) => {
+    return userslst.map((user) => {
       const { id } = user;
 
       return (
@@ -74,65 +81,65 @@ function Users() {
     });
   });
 
-  const ListView = React.memo(() => {
-    return users.map((user) => {
-      const { id } = user;
+  // const ListView = React.memo(() => {
+  //   return users.map((user) => {
+  //     const { id } = user;
 
-      return (
-        <Col key={id} xxl={12} xl={12} sm={24} xs={24} className="mb-[25px]">
-          <Suspense
-            fallback={
-              <Cards headless>
-                <Skeleton avatar active />
-              </Cards>
-            }
-          >
-            <UserCardList user={user} />
-          </Suspense>
-        </Col>
-      );
-    });
-  });
+  //     return (
+  //       <Col key={id} xxl={12} xl={12} sm={24} xs={24} className="mb-[25px]">
+  //         <Suspense
+  //           fallback={
+  //             <Cards headless>
+  //               <Skeleton avatar active />
+  //             </Cards>
+  //           }
+  //         >
+  //           <UserCardList user={user} />
+  //         </Suspense>
+  //       </Col>
+  //     );
+  //   });
+  // });
 
-  const GridStyle = React.memo(() => {
-    return users.map((user) => {
-      const { id } = user;
+  // const GridStyle = React.memo(() => {
+  //   return users.map((user) => {
+  //     const { id } = user;
 
-      return (
-        <Col key={id} xxl={6} xl={8} sm={12} xs={24} className="mb-[25px]">
-          <Suspense
-            fallback={
-              <Cards headless>
-                <Skeleton avatar active />
-              </Cards>
-            }
-          >
-            <UserCardStyle user={user} />
-          </Suspense>
-        </Col>
-      );
-    });
-  });
+  //     return (
+  //       <Col key={id} xxl={6} xl={8} sm={12} xs={24} className="mb-[25px]">
+  //         <Suspense
+  //           fallback={
+  //             <Cards headless>
+  //               <Skeleton avatar active />
+  //             </Cards>
+  //           }
+  //         >
+  //           <UserCardStyle user={user} />
+  //         </Suspense>
+  //       </Col>
+  //     );
+  //   });
+  // });
 
-  const GridGroup = React.memo(() => {
-    return userGroup.map((user) => {
-      const { id } = user;
+  // const GridGroup = React.memo(() => {
+  //   return users.map((user) => {
+  //     const { id } = user;
 
-      return (
-        <Col key={id} xxl={8} md={12} sm={24} xs={24} className="mb-[25px]">
-          <Suspense
-            fallback={
-              <Cards headless>
-                <Skeleton avatar active />
-              </Cards>
-            }
-          >
-            <UserCardGroup user={user} />
-          </Suspense>
-        </Col>
-      );
-    });
-  });
+  //     return (
+  //       <Col key={id} xxl={8} md={12} sm={24} xs={24} className="mb-[25px]">
+  //         <Suspense
+  //           fallback={
+  //             <Cards headless>
+  //               <Skeleton avatar active />
+  //             </Cards>
+  //           }
+  //         >
+  //           <UserCardGroup user={user} />
+  //         </Suspense>
+  //       </Col>
+  //     );
+  //   });
+  // });
 
   return (
     <>
@@ -142,18 +149,18 @@ function Users() {
         title={
           <>
             <span className="text-[22px] font-semibold text-dark dark:text-white87 relative min-md:ltr:pr-[24px] min-md:ltr:mr-[24px] min-md:rtl:pl-[24px] min-md:rtl:ml-[24px] capitalize leading-[32px] after:absolute ltr:after:right-0 rtl:after:left-0 after:top-0 after:h-full after:w-[1px] after:content-[''] after:bg-normal dark:after:bg-white10 md:after:hidden">
-              User card
+              Student Manage
             </span>
           </>
         }
         subTitle={
           <div className="flex items-center font-medium text-theme-gray dark:text-white60 min-md:gap-[25px] gap-[15px]">
-            <span className="title-counter">274 Users</span>
+            <span className="title-counter">{users.length} Students</span>
             <div className="flex items-center [&>div>div]:h-[46px] [&>.ant-select>.ant-select-selector>span>input]:!h-[46px] [&>div>div]:rounded-[20px] min-lg:[&>div>div]:w-[305px] [&>div>div]:bg-transparent [&>div>div]:border-none [&>div>div]:shadow-none bg-white dark:bg-white10 rounded-[20px]">
               <AutoComplete
                 dropdownMatchSelectWidth={false}
                 onSearch={handleSearch}
-                dataSource={notData}
+                // dataSource={notData}
                 width="100%"
                 placeholder="Search by Name"
               >
@@ -175,10 +182,10 @@ function Users() {
                 to="/admin/users/add-user/info"
                 className=" text-[14px] font-semibold text-sm  bg-primary text-white flex items-center justify-center gap-[5px]"
               >
-                <UilPlus className="w-[15px] h-[15px]" /> Add New User
+                <UilPlus className="w-[15px] h-[15px]" /> Add New Student
               </Link>
             </Button>
-
+            {/* 
             <div className="flex items-center flex-wrap gap-[5px]">
               <NavLink
                 className="inline-flex items-center justify-center w-[40px] h-[40px] rounded-full text-light [&.active]:bg-white dark:[&.active]:bg-white10 [&.active]:text-primary "
@@ -211,26 +218,27 @@ function Users() {
               >
                 <UilUsersAlt className="w-[14px] h-[14px]" />
               </NavLink>
-            </div>
+            </div> */}
           </div>,
         ]}
       />
       <div className="min-h-[715px] lg:min-h-[580px] px-8 xl:px-[15px] pb-[30px] bg-transparent hexadash-calendar-wrap">
         <Row gutter={25}>
           <Routes>
-            <Route path="grid" element={<GridView />} />
+            <Route path="/" element={<GridView />} />
+            {/* <Route path="grid" element={<GridView />} />
             <Route path="list" element={<ListView />} />
             <Route path="grid-group" element={<GridGroup />} />
-            <Route path="grid-style" element={<GridStyle />} />
+            <Route path="grid-style" element={<GridStyle />} /> */}
           </Routes>
 
           <Col xs={24}>
             <PaginationStyle>
               <div className="ant-pagination-custom-style mb-[34px] min-md:text-end text-center">
                 <Pagination
-                  onChange={onChange}
+                  // onChange={onChange}
                   showSizeChanger
-                  onShowSizeChange={onShowSizeChange}
+                  // onShowSizeChange={onShowSizeChange}
                   defaultCurrent={6}
                   total={500}
                 />
