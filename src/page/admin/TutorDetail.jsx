@@ -1,51 +1,28 @@
 import { Suspense, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Col, Input, Row, Table, message } from 'antd';
+import { Col, Form, Row, Select, Table, message } from 'antd';
 import UilUser from '@iconscout/react-unicons/icons/uil-user';
 import UilEnvelope from '@iconscout/react-unicons/icons/uil-envelope';
 import UilPhone from '@iconscout/react-unicons/icons/uil-phone';
-import UilDoller from '@iconscout/react-unicons/icons/uil-dollar-alt';
+import UilPlus from '@iconscout/react-unicons/icons/uil-file-plus-alt';
 import { AdminApi } from '../../config/api/admin/AdminApi';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import { Button } from '../../components/buttons/buttons';
 import { Modal } from '../../components/modals/antd-modals';
 
-function StudentDetail() {
+function TutorDetail() {
+  const { Option } = Select;
   const params = useParams([]);
-  const [student, setStudent] = useState({});
-  const [course, setCourse] = useState([]);
+  const [assignment, setAssignment] = useState([]);
   const [values, setValues] = useState({
     pageSize: 100,
     pageNumber: 1,
     id: parseInt(params.id),
   });
   const [tutor, setTutor] = useState([]);
-  const [state, setState] = useState({
-    enrollment: [],
-    status: [],
-  });
+  const [course, setCourse] = useState([]);
   const [visible, setVisible] = useState(false);
-  const [inputValue, setInputValue] = useState('');
-
-  const fetchDataM = async () => {
-    try {
-      const moneyVal = {
-        id: parseInt(params.id),
-        amount: inputValue,
-      };
-      const res = await AdminApi.addMoney(moneyVal);
-      return res;
-    } catch (error) {
-      alert('hehe');
-    }
-  };
-  const onHandleOK = () => {
-    const res = fetchDataM();
-    setVisible(false);
-    if (res === 'Done') message.success('Added');
-    else message.warning('Failed');
-  };
   const courseTableData = [];
   const courseColumns = [
     {
@@ -59,16 +36,12 @@ function StudentDetail() {
       key: 'courseName',
     },
     {
-      title: 'Tutor',
-      dataIndex: 'tutor',
-      key: 'tutor',
-    },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
+      title: 'Number of student',
+      dataIndex: 'students',
+      key: 'students',
     },
   ];
+  const [unassign, setUnassign] = useState([]);
   useEffect(() => {
     async function fetchData() {
       try {
@@ -77,38 +50,55 @@ function StudentDetail() {
           pageNumber: 1,
           id: parseInt(params.id),
         });
-        const res1 = await AdminApi.getStudentByID(parseInt(params.id));
-        const res2 = await AdminApi.getCourseByStudentID(values);
-        const tutorRes = await AdminApi.getTutor(values);
-        const enrollRes = await AdminApi.getEnrolment(values);
-        const statusRes = await AdminApi.getStatusType(values);
-        setState({
-          enrollment: enrollRes.data.data,
-          status: statusRes.data.data,
-        });
-        setTutor(tutorRes.data.data);
-        setStudent(res1.data);
-        setCourse(res2.data.data);
+        const res = await AdminApi.getTutorByID(parseInt(params.id));
+        const res2 = await AdminApi.getTutorAssignmentByTutorID(values);
+        const res3 = await AdminApi.getCourse({ pageSize: values.pageSize, pageNumber: values.pageNumber });
+        const res4 = await AdminApi.getUnassign(values);
+        setUnassign(res4.data.data);
+        setTutor(res.data);
+        setAssignment(res2.data.data);
+        setCourse(res3.data.data);
       } catch (error) {
         alert('hehe');
       }
     }
     fetchData();
   }, []);
-  if (course !== null && tutor !== null) {
-    course.map((data) => {
-      const { courseID, courseName, tutorID } = data;
-      const index = tutor.findIndex((x) => x.tutorID === tutorID);
-      const index2 = state.enrollment.findIndex((x) => x.courseID === courseID && x.studentID === parseInt(params.id));
-      const index3 = state.status.findIndex((x) => x.statusTypeID === state.enrollment[index2].statusTypeID);
+  if (assignment !== null && tutor !== null) {
+    assignment.map((data) => {
+      const { courseID, numberOfStudent } = data;
+      const index = course.findIndex((x) => x.courseID === courseID);
       return courseTableData.push({
         courseID: <span className="text-[15px] text-body">{courseID}</span>,
-        courseName: <span className="text-[15px] text-body">{courseName}</span>,
-        tutor: <span className="text-[15px] text-body">{tutor[index].fullName}</span>,
-        status: <span className="text-[15px] text-body">{state.status[index3].statusName}</span>,
+        courseName: <span className="text-[15px] text-body">{course[index].courseName}</span>,
+        students: <span className="text-[15px] text-body">{numberOfStudent}</span>,
       });
     });
   }
+  const [cID, setCID] = useState(0);
+  const fetchDataA = async () => {
+    try {
+      const now = new Date();
+      const aVal = {
+        tutorID: parseInt(params.id),
+        courseID: cID,
+        date: now,
+      };
+      const res = await AdminApi.addTutorAssignment(aVal);
+      return res;
+    } catch (error) {
+      message.warning('Call Failed');
+    }
+  };
+  const onHandleOK = () => {
+    const res = fetchDataA();
+    if (res === 'Added') message.success('Added');
+    else message.warning('Failed');
+    setVisible(false);
+  };
+  const onHandleChange = (value) => {
+    if (value !== cID) setCID(value);
+  };
   return (
     <Suspense fallback="Cho mot ti~">
       <PageHeader
@@ -117,16 +107,36 @@ function StudentDetail() {
         title={
           <>
             <span className="text-[22px] font-semibold text-dark dark:text-white87 relative min-md:ltr:pr-[24px] min-md:ltr:mr-[24px] min-md:rtl:pl-[24px] min-md:rtl:ml-[24px] capitalize leading-[32px] after:absolute ltr:after:right-0 rtl:after:left-0 after:top-0 after:h-full after:w-[1px] after:content-[''] after:bg-normal dark:after:bg-white10 md:after:hidden">
-              Student Manage
+              Tutor Manage
             </span>
           </>
         }
       />
-      <Modal visible={visible} width={700} onCancel={() => setVisible(false)} onOk={() => onHandleOK()}>
-        <div className="py-[40px]">
-          <div className="text-[20px] text-body font-bold">Amount:</div>
-          <Input type="number" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
-        </div>
+      <Modal visible={visible} width={700} onCancel={() => setVisible(false)} onOk={onHandleOK}>
+        New Assignment
+        <Form>
+          <Form.Item
+            className="mb-4 form-label-w-full form-label-text-start dark:text-white-60 [&>div]:flex-col text-dark dark:text-white87 font-medium [&>div>div>label]:!text-dark dark:[&>div>div>label]:!text-white87"
+            name="course"
+            label="Course"
+            rules={[{ required: true, message: '*Required' }]}
+          >
+            <Select style={{ width: '100%' }} value={unassign} onChange={onHandleChange} placeholder="Select course">
+              {unassign.length !== 0 ? (
+                unassign &&
+                unassign.map((value) => {
+                  return (
+                    <Option value={value.courseID}>
+                      {value.courseID}. {value.courseName}
+                    </Option>
+                  );
+                })
+              ) : (
+                <Option value={0}>Null</Option>
+              )}
+            </Select>
+          </Form.Item>
+        </Form>
       </Modal>
       <Row gutter={25} className="flex justify-center">
         <Col xs={20}>
@@ -136,7 +146,7 @@ function StudentDetail() {
           >
             <div className="h-[60px] px-[25px] text-dark dark:text-white87 font-medium text-[17px] border-regular dark:border-white10 border-b">
               <h1 className="mb-0 inline-block py-[16px] overflow-hidden whitespace-nowrap text-ellipsis text-[18px] font-semibold">
-                Student Detail
+                Tutor Detail
               </h1>
             </div>
             <div className="p-[25px]">
@@ -145,7 +155,7 @@ function StudentDetail() {
                   <div className="border rounded-4 text-light mb-[25px]">
                     <div className="px-[20px] py-[8px] flex">
                       <UilUser />
-                      <div className="px-[15px]">{student.fullName}</div>
+                      <div className="px-[15px]">{tutor.fullName}</div>
                     </div>
                   </div>
                 </Col>
@@ -153,7 +163,7 @@ function StudentDetail() {
                   <div className="border rounded-4 text-light mb-[25px]">
                     <div className="px-[20px] py-[8px] flex">
                       <UilEnvelope />
-                      <div className="px-[15px]">{student.email}</div>
+                      <div className="px-[15px]">{tutor.email}</div>
                     </div>
                   </div>
                 </Col>
@@ -161,27 +171,22 @@ function StudentDetail() {
                   <div className="border rounded-4 text-light mb-[25px]">
                     <div className="px-[20px] py-[8px] flex">
                       <UilPhone />
-                      <div className="px-[15px]">{student.contactNumber}</div>
+                      <div className="px-[15px]">{tutor.contactNumber}</div>
                     </div>
                   </div>
-                </Col>
-                <Col lg={12} xs={24} className="flex justify-between mb-25">
-                  <div className="border rounded-4 text-light mb-[25px]">
-                    <div className="px-[20px] py-[8px] flex">
-                      <UilDoller />
-                      <div className="px-[15px]">{student.totalMoney}</div>
-                    </div>
-                  </div>
-                  <Button
-                    className="border-light right-0 mt-[5px] text-light hover:border-[#ffa502] hover:text-white hover:bg-[#eccc68]"
-                    onClick={() => setVisible(true)}
-                  >
-                    <div>Add Money</div>
-                  </Button>
                 </Col>
               </Row>
             </div>
           </div>
+        </Col>
+        <Col xs={20} className="mb-[20px] flex justify-end">
+          <Button
+            className="flex items-center text-[15px] rounded-[23px] bg-[#ffa502] border-[#ffa502] text-white"
+            onClick={() => setVisible(true)}
+          >
+            <UilPlus />
+            <div className="ml-[5px] font-bold">Assignment</div>
+          </Button>
         </Col>
         <Col xs={20} className="mb-[60px]">
           <Table pagination={false} columns={courseColumns} dataSource={courseTableData} />
@@ -191,4 +196,4 @@ function StudentDetail() {
   );
 }
 
-export default StudentDetail;
+export default TutorDetail;

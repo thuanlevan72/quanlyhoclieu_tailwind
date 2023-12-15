@@ -63,7 +63,7 @@ function TopMenu() {
       <div className="hexadash-top-menu ltr:pl-[20px] rtl:pr-[20px] xl:ltr:pl-[10px] xl:rtl:pr-[10px]">
         <ul>
           <li className="">
-            <Link to="#" className="parent">
+            <Link to="/admin" className="parent" onClick={addParentActive}>
               Dashboard
             </Link>
             {/* <ul className="subMenu">
