@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Row, Col, Form, Input, Upload, Select, message } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import UilCamera from '@iconscout/react-unicons/icons/uil-camera';
 import { Button } from '../../../components/buttons/buttons';
 import Heading from '../../../components/heading/heading';
@@ -9,6 +9,7 @@ import { AdminApi } from '../../../config/api/admin/AdminApi';
 
 const { Option } = Select;
 function StudentInfo() {
+  const navigate = useNavigate();
   const [cities, setCities] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [communes, setCommunes] = useState([]);
@@ -106,8 +107,16 @@ function StudentInfo() {
       provinceID: input.province,
     });
     const res = fetchDataM(values);
-    if (res === 'Succeed') message.success('Added');
-    else message.warning('Failed');
+    res
+      .then((result) => {
+        if (result.data === 'Succeed') {
+          message.success('Added');
+          navigate('/admin/manage/student');
+        } else message.warning('Failed');
+      })
+      .catch(() => {
+        message.warning('Failed');
+      });
   };
   return (
     <Row justify="center">

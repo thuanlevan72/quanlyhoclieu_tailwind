@@ -96,6 +96,9 @@ const logOut = (callback) => {
       localStorage.removeItem('authInfo');
       localStorage.removeItem('feelist');
       localStorage.removeItem('subtotal');
+      localStorage.removeItem('courseInfo');
+      localStorage.removeItem('coursePart');
+      localStorage.removeItem('courseInfo');
       dispatch(logoutSuccess(false));
       callback();
     } catch (err) {

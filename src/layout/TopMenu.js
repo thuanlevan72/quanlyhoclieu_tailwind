@@ -130,22 +130,22 @@ function TopMenu() {
                 </NavLink>
               </li>
               <li>
-                <NavLink to={`${path}/admin`} onClick={addParentActive}>
+                <NavLink to={`${path}/manage/tutor`} onClick={addParentActive}>
                   Tutor
                 </NavLink>
               </li>
               <li>
-                <NavLink to={`${path}/admin`} onClick={addParentActive}>
+                <NavLink to={`${path}/manage/course`} onClick={addParentActive}>
                   Course
                 </NavLink>
               </li>
               <li>
-                <NavLink to={`${path}/admin`} onClick={addParentActive}>
+                <NavLink to={`${path}/manage/enrollment`} onClick={addParentActive}>
                   Enrollment
                 </NavLink>
               </li>
               <li>
-                <NavLink to={`${path}/admin`} onClick={addParentActive}>
+                <NavLink to={`${path}/manage/fee`} onClick={addParentActive}>
                   Fee
                 </NavLink>
               </li>

@@ -178,13 +178,13 @@ function Users() {
           <div className="flex items-center flex-wrap gap-[20px] ssm:flex-col ssm:justify-center">
             <Button
               className="px-[14px] text-[14px] font-semibold text-sm rounded-md 
-              h-[40px] bg-[#2ed573] text-white flex items-center justify-center 
-              gap-[5px] shadow-none border-[#2ed573] outline-none hover:scale-105"
+              h-[40px] bg-[#ffa502] text-white flex items-center justify-center 
+              gap-[5px] shadow-none border-[#ffa502] outline-none hover:scale-105 transition-transform duration-300 transform"
               key="1"
             >
               <Link
                 to="/admin/manage/student/add-student"
-                className=" text-[14px] font-semibold text-sm  bg-[#2ed573] text-white flex items-center justify-center gap-[5px]"
+                className=" text-[14px] font-semibold text-sm  bg-[#ffa502] text-white flex items-center justify-center gap-[5px]"
               >
                 <UilPlus className="w-[15px] h-[15px]" /> Add New Student
               </Link>

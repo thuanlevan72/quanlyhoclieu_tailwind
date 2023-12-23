@@ -7,14 +7,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function CourseCard({ courseData }) {
+  const authInfo = localStorage.getItem('authInfo');
+  const authInfoObject = JSON.parse(authInfo);
+  let path = '';
+
   const { courseID, courseName, cost } = courseData;
   const decentralization = Cookies.get('decentralization');
+  if (authInfoObject.decentralization === 'Student') path = `/${decentralization}/course/courseDetails/${courseID}`;
+  else {
+    path = `/${decentralization}/manage/course/courseDetails/${courseID}`;
+  }
   return (
     <Col xxl={6} lg={8} sm={12} xs={24}>
-      <Link
-        className="mb-[25px] [&>.ant-card>.ant-card-body]:p-[18px]"
-        to={`/${decentralization}/course/courseDetails/${courseID}`}
-      >
+      <Link className="mb-[25px] [&>.ant-card>.ant-card-body]:p-[18px]" to={path}>
         <Card
           bordered="false"
           className="transition-transform duration-300 transform hover:bg-[#eccc68] my-[10px] hover:scale-105 hover:shadow-sm"

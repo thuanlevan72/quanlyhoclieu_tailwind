@@ -15,6 +15,9 @@ import Tutors from '../../container/pages/tutor/Tutors';
 import TutorDetail from '../../page/admin/TutorDetail';
 import StudentInfo from '../../container/pages/overview/studentInfo';
 import TutorInfo from '../../container/pages/overview/tutorInfo';
+import Course from '../../page/admin/Course';
+import AddCourse from '../../container/pages/overview/AddCourse';
+import CourseDetailForAdmin from '../../container/course/CourseDetailForAdmin';
 
 const Charts = lazy(() => import('./charts'));
 const Students = lazy(() => import('../../container/users/Users'));
@@ -50,6 +53,7 @@ const JobApply = lazy(() => import('../../container/jobSearch/JobApplication'));
 const Firebase = lazy(() => import('./firestore'));
 const NotFound = lazy(() => import('../../container/pages/404'));
 const StudentDetail = lazy(() => import('../../page/admin/StudentDetail'));
+const AccountTable = lazy(() => import('../../container/table/AccountTable'));
 
 const Admin = React.memo(() => {
   const { pathname } = useLocation();
@@ -106,9 +110,12 @@ const Admin = React.memo(() => {
         <Route path="widgets/*" element={<Widgets />} />
         <Route path="manage/student" element={<Students />} />
         <Route path="manage/tutor" element={<Tutors />} />
-        <Route path="manage/course" element={<ComingSoon />} />
+        <Route path="manage/course" element={<Course />} />
+        <Route path="manage/course/add-course/*" element={<AddCourse />} />
+        <Route path="manage/course/courseDetails/:id" element={<CourseDetailForAdmin />} />
         <Route path="manage/enrollment" element={<ComingSoon />} />
         <Route path="manage/fee" element={<ComingSoon />} />
+        <Route path="manage/account" element={<AccountTable />} />
         <Route path="manage/student/:id" element={<StudentDetail />} />
         <Route path="manage/student/add-student" element={<StudentInfo />} />
         <Route path="manage/tutor/add-tutor" element={<TutorInfo />} />

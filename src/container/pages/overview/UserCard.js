@@ -11,7 +11,10 @@ function UserCards({ user }) {
   const { fullName, totalMoney, contactNumber, studentID } = user;
   return (
     <div className="relative">
-      <div className="bg-white dark:bg-white10 px-[25px] pt-[30px] pb-[18px] rounded-[10px] text-center hover:bg-[#7bed9f] hover:scale-105">
+      <div
+        className="bg-white dark:bg-white10 px-[25px] pt-[30px] pb-[18px] rounded-[10px] text-center 
+      hover:bg-[#eccc68] hover:scale-105 transition-transform duration-300 transform"
+      >
         <Link to={`${studentID}`}>
           <figure className="mb-0">
             <img

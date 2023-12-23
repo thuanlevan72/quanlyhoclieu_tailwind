@@ -131,7 +131,7 @@ function MenuItems({ toggleCollapsed }) {
         {t('dashboard')}
       </NavLink>,
       'dashboard',
-      !topMenu && <UilCreateDashboard />,
+      !topMenu && <UilArrowGrowth />,
     ),
     // [
     //   getItem(
@@ -225,6 +225,13 @@ function MenuItems({ toggleCollapsed }) {
           Course
         </NavLink>,
         'course',
+        null,
+      ),
+      getItem(
+        <NavLink onClick={toggleCollapsed} to={`${path}/manage/account`}>
+          Account
+        </NavLink>,
+        'account',
         null,
       ),
       getItem(

@@ -8,7 +8,10 @@ function TutorCards({ user }) {
   const { fullName, contactNumber, tutorID } = user;
   return (
     <div className="relative">
-      <div className="bg-white dark:bg-white10 px-[25px] pt-[30px] pb-[18px] rounded-[10px] text-center hover:bg-[#70a1ff] hover:scale-105">
+      <div
+        className="bg-white dark:bg-white10 px-[25px] pt-[30px] pb-[18px] rounded-[10px] text-center hover:bg-[#eccc68] 
+      hover:scale-105 transition-transform duration-300 transform"
+      >
         <Link to={`${tutorID}`}>
           <figure className="mb-0">
             <img

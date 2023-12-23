@@ -8,7 +8,6 @@ import UilMassage from '@iconscout/react-unicons/icons/uil-comment-message';
 import UilPlay from '@iconscout/react-unicons/icons/uil-play';
 import UilMinus from '@iconscout/react-unicons/icons/uil-minus';
 import { UilQuestionCircle } from '@iconscout/react-unicons';
-import courseData from '../../demoData/course.json';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import '../profile/myProfile/overview/video-modal.css';
 import { Cards } from '../../components/cards/frame/cards-frame';
@@ -36,26 +35,44 @@ function CourseDetails() {
     pageNumber: 1,
     pageSize: 100,
   });
+  const [course, setCourse] = useState({
+    cost: 0,
+    courseDescription: '',
+    courseID: 0,
+    courseName: '',
+    tutorID: 0,
+  });
+  const { id } = useParams();
   useEffect(() => {
     async function fetchData() {
       try {
         setPagination({
           pageNumber: 1,
-          pageSize: 8,
+          pageSize: 1000,
         });
         const res = await StudentApi.getCourseDetail(pagination);
-        res.data.data[0].classes[0].isAvailable = true;
-        setLectures(res.data.data);
+        const res1 = await StudentApi.getCourseById(parseInt(id));
+        setCourse({
+          ...course,
+          cost: res1.data.cost,
+          courseDescription: res1.data.courseDescription,
+          courseID: res1.data.courseID,
+          courseName: res1.data.courseName,
+          tutorID: res1.data.tutorID,
+        });
+        console.log(res.data.data);
+        const lres = res.data.data.filter((x) => x.courseID === parseInt(id));
+        console.log(lres);
+        if (lres.length > 0 && lres[0].classes.length > 0) lres[0].classes[0].isAvailable = true;
+        setLectures(lres);
       } catch (error) {
-        alert('Sai gòi');
+        alert(error);
       }
     }
     fetchData();
   }, []);
-  const { id } = useParams();
   const [link, setLink] = useState('https://www.youtube.com/embed/PBwzoZ8aFxI?si=JzLOvPTKI6wU5JVG');
-  const currentCourse = courseData.find((x) => x.id.toString() === id);
-  const [currentTitle, setCurrentTitle] = useState(currentCourse.title);
+  const [currentTitle, setCurrentTitle] = useState('LD Academy');
   const [visible, setVisible] = useState(false);
   const activeChoose = (value, title, li, si) => {
     lectures.forEach((data) => {
@@ -157,7 +174,7 @@ function CourseDetails() {
     >
       <PageHeader
         className="flex items-center justify-between px-8 xl:px-[15px] pt-2 pb-6 sm:pb-[30px] bg-transparent sm:flex-col"
-        title={currentCourse.title}
+        title={course.courseName}
         routes={PageRoutes}
       />
       <main className="min-h-[715px] lg:min-h-[580px] px-8 xl:px-[15px] pb-[30px] bg-transparent">
@@ -204,12 +221,9 @@ function CourseDetails() {
                 Message
                 <UilMassage className="ml-[5px]" />
               </div>
-              <h2 className="text-3xl font-semibold text-[#ffa502] dark:text-white87">{currentCourse.title}</h2>
+              <h2 className="text-3xl font-semibold text-[#ffa502] dark:text-white87">{course.courseName}</h2>
               <div>
-                <p className="text-base text-body dark:text-white60 mb-[28px]">
-                  Many support queries and technical questions will already be answered in supporting documentation such
-                  as and comments from previous buyers. Anim pariatur cliche reprehenderit, enim eiusmod
-                </p>
+                <p className="text-base text-body dark:text-white60 mb-[28px]">{course.courseDescription}</p>
               </div>
 
               <h2 className="text-dark dark:text-white87 mt-[30px] mb-[14px] text-[22px] font-semibold">

@@ -81,10 +81,13 @@ function CheckOut() {
     });
   };
   const [totalMoney, setTotalMoney] = useState(authInfo.totalMoney);
+  const [course, setCourse] = useState([]);
   useEffect(() => {
     async function fetchData() {
       try {
         const res = await StudentApi.getTotalMoney();
+        const courseRes = await StudentApi.getAll({ pageSize: 1000, pageNumber: 1 });
+        setCourse(courseRes.data.data);
         setTotalMoney(res.data);
       } catch (error) {
         return 'error';
@@ -119,8 +122,8 @@ function CheckOut() {
       });
     }
   };
-  const courses = localStorage.getItem('courses');
-  const coursesObject = JSON.parse(courses);
+  const coursesObject = course;
+  console.log(coursesObject);
   if (checkedlist.length !== 0) {
     checkedlist.map((data) => {
       const { courseID, feeID, cost } = data;
@@ -128,27 +131,31 @@ function CheckOut() {
       coursesObject.map((value, i) => {
         if (value.courseID === courseID) {
           index = i;
-          return i;
+          return value;
         }
-        return -1;
+        return value;
       });
-      return dataSource.push({
-        key: feeID,
-        name: (
-          <div className="w-[300px]">
-            <div className="flex items-center gap-x-[25px]">
-              <figcaption>
-                <div>
-                  <Heading as="h6" className="mb-2 text-base font-medium text-dark dark:text-white87">
-                    {coursesObject[index].courseName}
-                  </Heading>
-                </div>
-              </figcaption>
+      if (course[index]) {
+        const name = course[index].courseName;
+        return dataSource.push({
+          key: feeID,
+          name: (
+            <div className="w-[300px]">
+              <div className="flex items-center gap-x-[25px]">
+                <figcaption>
+                  <div>
+                    <Heading as="h6" className="mb-2 text-base font-medium text-dark dark:text-white87">
+                      {name}
+                    </Heading>
+                  </div>
+                </figcaption>
+              </div>
             </div>
-          </div>
-        ),
-        price: <span className="text-body dark:text-white60 text-[15px]">{cost}VND</span>,
-      });
+          ),
+          price: <span className="text-body dark:text-white60 text-[15px]">{cost}VND</span>,
+        });
+      }
+      return data;
     });
   }
   const columns = [

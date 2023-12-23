@@ -1,11 +1,13 @@
 import { Suspense, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { Col, Form, Row, Select, Table, message } from 'antd';
 import UilUser from '@iconscout/react-unicons/icons/uil-user';
 import UilEnvelope from '@iconscout/react-unicons/icons/uil-envelope';
 import UilPhone from '@iconscout/react-unicons/icons/uil-phone';
+import UilShow from '@iconscout/react-unicons/icons/uil-list-ol';
 import UilPlus from '@iconscout/react-unicons/icons/uil-file-plus-alt';
+import UilTrash from '@iconscout/react-unicons/icons/uil-trash';
 import { AdminApi } from '../../config/api/admin/AdminApi';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import { Button } from '../../components/buttons/buttons';
@@ -13,6 +15,7 @@ import { Modal } from '../../components/modals/antd-modals';
 
 function TutorDetail() {
   const { Option } = Select;
+  const navigate = useNavigate();
   const params = useParams([]);
   const [assignment, setAssignment] = useState([]);
   const [values, setValues] = useState({
@@ -23,6 +26,7 @@ function TutorDetail() {
   const [tutor, setTutor] = useState([]);
   const [course, setCourse] = useState([]);
   const [visible, setVisible] = useState(false);
+  const [dvisible, setDVisible] = useState(false);
   const courseTableData = [];
   const courseColumns = [
     {
@@ -40,8 +44,40 @@ function TutorDetail() {
       dataIndex: 'students',
       key: 'students',
     },
+    {
+      title: 'Create At',
+      dataIndex: 'createAt',
+      key: 'createAt',
+    },
+    {
+      title: 'Update At',
+      dataIndex: 'updateAt',
+      key: 'updateAt',
+    },
+    {
+      title: 'Show',
+      dataIndex: 'show',
+      key: 'show',
+    },
+  ];
+  const studentColumns = [
+    {
+      title: 'Student ID',
+      dataIndex: 'studentID',
+      key: 'studentID',
+    },
+    {
+      title: 'Student Name',
+      dataIndex: 'fullName',
+      key: 'fullName',
+    },
   ];
   const [unassign, setUnassign] = useState([]);
+  const [state, setState] = useState({
+    student: [],
+    enrollment: [],
+  });
+  const [reload, setReload] = useState(false);
   useEffect(() => {
     async function fetchData() {
       try {
@@ -54,25 +90,71 @@ function TutorDetail() {
         const res2 = await AdminApi.getTutorAssignmentByTutorID(values);
         const res3 = await AdminApi.getCourse({ pageSize: values.pageSize, pageNumber: values.pageNumber });
         const res4 = await AdminApi.getUnassign(values);
+        const res5 = await AdminApi.getStudent({ pageSize: 1000000, pageNumber: 1 });
+        const res6 = await AdminApi.getEnrolment({ pageSize: 1000000, pageNumber: 1 });
         setUnassign(res4.data.data);
         setTutor(res.data);
         setAssignment(res2.data.data);
         setCourse(res3.data.data);
+        setState({
+          student: res5.data.data,
+          enrollment: res6.data.data,
+        });
       } catch (error) {
         alert('hehe');
       }
     }
     fetchData();
-  }, []);
+  }, [reload]);
+  const [lstStudentData, setLstStudentData] = useState([]);
+  const cacheLst = [];
+  const [listVisible, setListVisible] = useState(false);
+  const onHandleShowList = (courseID) => {
+    if (state.student.length > 0 && state.enrollment.length > 0) {
+      const currentEnroll = state.enrollment.filter((x) => x.courseID === courseID);
+      if (currentEnroll) {
+        currentEnroll.map((data) => {
+          const current = state.student.find((x) => x.studentID === data.studentID);
+          return cacheLst.push({
+            studentID: <span className="text-[15px] text-body">{current.studentID}</span>,
+            fullName: (
+              <Link
+                to={`/admin/manage/student/${current.studentID}`}
+                className="text-[15px] text-body hover:text-[#ffa502]"
+              >
+                {current.fullName}
+              </Link>
+            ),
+          });
+        });
+        setLstStudentData(cacheLst);
+      }
+    }
+    setListVisible(true);
+  };
   if (assignment !== null && tutor !== null) {
     assignment.map((data) => {
-      const { courseID, numberOfStudent } = data;
-      const index = course.findIndex((x) => x.courseID === courseID);
-      return courseTableData.push({
-        courseID: <span className="text-[15px] text-body">{courseID}</span>,
-        courseName: <span className="text-[15px] text-body">{course[index].courseName}</span>,
-        students: <span className="text-[15px] text-body">{numberOfStudent}</span>,
-      });
+      const { courseID, numberOfStudent, createAt, updateAt } = data;
+      const index = course.findIndex((x) => x.courseID === data.courseID);
+      if (course[index]) {
+        const name = course[index].courseName;
+        return courseTableData.push({
+          courseID: <span className="text-[15px] text-body">{courseID}</span>,
+          courseName: <span className="text-[15px] text-body">{name}</span>,
+          students: <span className="text-[15px] text-body">{numberOfStudent}</span>,
+          createAt: <span className="text-body dark:text-white60 text-[15px] font-medium">{createAt}</span>,
+          updateAt: <span className="text-body dark:text-white60 text-[15px] font-medium">{updateAt}</span>,
+          show: (
+            <Button
+              className="hover:text-[#ffa502] hover:border-[#ffa502]"
+              onClick={() => onHandleShowList(course[index].courseID)}
+            >
+              <UilShow />
+            </Button>
+          ),
+        });
+      }
+      return data;
     });
   }
   const [cID, setCID] = useState(0);
@@ -92,12 +174,45 @@ function TutorDetail() {
   };
   const onHandleOK = () => {
     const res = fetchDataA();
-    if (res === 'Added') message.success('Added');
-    else message.warning('Failed');
+    res
+      .then((result) => {
+        if (result.data === 'Added') {
+          message.success('Added');
+          setReload((preReload) => !preReload);
+        } else message.warning('Failed');
+      })
+      .catch(() => {
+        message.warning('Failed');
+      });
     setVisible(false);
   };
   const onHandleChange = (value) => {
     if (value !== cID) setCID(value);
+  };
+  const onhandleDelete = () => {
+    setDVisible(true);
+  };
+  const fetchDS = async () => {
+    try {
+      const res = AdminApi.deleteTutor(parseInt(params.id));
+      return res;
+    } catch (error) {
+      alert('hehe');
+    }
+  };
+  const onhandleOkD = () => {
+    const res = fetchDS();
+    res
+      .then((result) => {
+        if (result.data === 'Succeed') {
+          message.success('Deleted');
+          navigate('/admin/manage/tutor');
+        } else message.warning('Failed');
+      })
+      .catch(() => {
+        message.warning('Failed');
+      });
+    setDVisible(false);
   };
   return (
     <Suspense fallback="Cho mot ti~">
@@ -112,6 +227,15 @@ function TutorDetail() {
           </>
         }
       />
+      <Modal
+        visible={listVisible}
+        width={700}
+        onCancel={() => setListVisible(false)}
+        onOk={() => setListVisible(false)}
+      >
+        <div className="text-body mt-[40px] text-[30px]">List student:</div>
+        <Table className="mb-[40px]" pagination={false} columns={studentColumns} dataSource={lstStudentData} />
+      </Modal>
       <Modal visible={visible} width={700} onCancel={() => setVisible(false)} onOk={onHandleOK}>
         New Assignment
         <Form>
@@ -138,7 +262,19 @@ function TutorDetail() {
           </Form.Item>
         </Form>
       </Modal>
+      <Modal visible={dvisible} width={700} onCancel={() => setDVisible(false)} onOk={() => onhandleOkD()}>
+        Are you sure to delete this tutor?
+      </Modal>
       <Row gutter={25} className="flex justify-center">
+        <Col xs={22} className="mb-[20px] flex justify-end">
+          <Button
+            className="flex items-center text-[15px] rounded-[23px] bg-red-500 border-red-500 text-white"
+            onClick={onhandleDelete}
+          >
+            <div className="mr-[5px] font-bold">Delete</div>
+            <UilTrash />
+          </Button>
+        </Col>
         <Col xs={20}>
           <div
             className="bg-white dark:bg-white10 m-0 p-0 text-theme-gray dark:text-white60 

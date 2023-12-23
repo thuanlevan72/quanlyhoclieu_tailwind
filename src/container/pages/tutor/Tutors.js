@@ -107,13 +107,13 @@ function Tutors() {
           <div className="flex items-center flex-wrap gap-[20px] ssm:flex-col ssm:justify-center">
             <Button
               className="px-[14px] text-[14px] font-semibold text-sm rounded-md h-[40px] 
-              bg-[#1e90ff] text-white flex items-center 
-              justify-center gap-[5px] shadow-none border-[#1e90ff] outline-none hover:scale-105"
+              bg-[#ffa502] text-white flex items-center 
+              justify-center gap-[5px] shadow-none border-[#ffa502] outline-none hover:scale-105 transition-transform duration-300 transform"
               key="1"
             >
               <Link
                 to="/admin/manage/tutor/add-tutor"
-                className=" text-[14px] font-semibold text-sm  bg-[#1e90ff] text-white flex items-center justify-center gap-[5px]"
+                className=" text-[14px] font-semibold text-sm  bg-[#ffa502] text-white flex items-center justify-center gap-[5px]"
               >
                 <UilPlus className="w-[15px] h-[15px]" /> Add New Tutor
               </Link>
