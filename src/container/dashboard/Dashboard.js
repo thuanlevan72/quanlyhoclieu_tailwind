@@ -4,10 +4,10 @@ import { PageHeader } from '../../components/page-headers/page-headers';
 import { Cards } from '../../components/cards/frame/cards-frame';
 
 const OverviewDataList = lazy(() => import('./overview/demoTwo/OverviewDataList'));
-const SaleRevenue = lazy(() => import('./overview/demoTwo/SaleRevenue'));
-const NewProduct = lazy(() => import('./overview/demoTwo/NewProduct'));
+// const SaleRevenue = lazy(() => import('./overview/demoTwo/SaleRevenue'));
+const NewCourse = lazy(() => import('./NewCourse'));
 const SourceRevenueGenerated = lazy(() => import('./overview/demoTwo/SourceRevenueGenerated'));
-const BestSeller = lazy(() => import('./overview/demoTwo/BestSeller'));
+// const BestSeller = lazy(() => import('./overview/demoTwo/BestSeller'));
 
 function Dashboard() {
   const PageRoutes = [
@@ -48,7 +48,7 @@ function Dashboard() {
                 </Cards>
               }
             >
-              <SaleRevenue />
+              <NewCourse />
             </Suspense>
           </Col>
           <Col xxl={12} xs={24} className="mb-[25px]">
@@ -60,28 +60,6 @@ function Dashboard() {
               }
             >
               <SourceRevenueGenerated />
-            </Suspense>
-          </Col>
-          <Col xxl={8} xs={24} className="mb-[25px]">
-            <Suspense
-              fallback={
-                <Cards headless>
-                  <Skeleton active />
-                </Cards>
-              }
-            >
-              <NewProduct />
-            </Suspense>
-          </Col>
-          <Col xxl={16} xs={24} className="mb-[25px]">
-            <Suspense
-              fallback={
-                <Cards headless>
-                  <Skeleton active />
-                </Cards>
-              }
-            >
-              <BestSeller />
             </Suspense>
           </Col>
         </Row>

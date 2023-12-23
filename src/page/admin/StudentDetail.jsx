@@ -1,18 +1,21 @@
 import { Suspense, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { Col, Input, Row, Table, message } from 'antd';
 import UilUser from '@iconscout/react-unicons/icons/uil-user';
 import UilEnvelope from '@iconscout/react-unicons/icons/uil-envelope';
 import UilPhone from '@iconscout/react-unicons/icons/uil-phone';
 import UilDoller from '@iconscout/react-unicons/icons/uil-dollar-alt';
+import UilTrash from '@iconscout/react-unicons/icons/uil-trash';
 import { AdminApi } from '../../config/api/admin/AdminApi';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import { Button } from '../../components/buttons/buttons';
 import { Modal } from '../../components/modals/antd-modals';
+import Heading from '../../components/heading/heading';
 
 function StudentDetail() {
   const params = useParams([]);
+  const navigate = useNavigate();
   const [student, setStudent] = useState({});
   const [course, setCourse] = useState([]);
   const [values, setValues] = useState({
@@ -26,6 +29,7 @@ function StudentDetail() {
     status: [],
   });
   const [visible, setVisible] = useState(false);
+  const [dvisible, setDVisible] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
   const fetchDataM = async () => {
@@ -35,15 +39,25 @@ function StudentDetail() {
         amount: inputValue,
       };
       const res = await AdminApi.addMoney(moneyVal);
-      console.log(res);
+      return res;
     } catch (error) {
       alert('hehe');
     }
   };
+  const [reload, setReload] = useState(false);
   const onHandleOK = () => {
-    fetchDataM();
+    const res = fetchDataM();
+    res
+      .then((result) => {
+        if (result.data === 'Done') {
+          message.success('Added');
+          setReload((preReload) => !preReload);
+        } else message.warning('Failed');
+      })
+      .catch(() => {
+        message.warning('Failed');
+      });
     setVisible(false);
-    message.success('added');
   };
   const courseTableData = [];
   const courseColumns = [
@@ -68,6 +82,29 @@ function StudentDetail() {
       key: 'status',
     },
   ];
+  const paymentColumns = [
+    {
+      title: 'Payment ID',
+      dataIndex: 'paymentHistoryID',
+      key: 'paymentHistoryID',
+    },
+    {
+      title: 'Description',
+      dataIndex: 'paymentName',
+      key: 'paymentName',
+    },
+    {
+      title: 'Amount',
+      dataIndex: 'amount',
+      key: 'amount',
+    },
+    {
+      title: 'Create At',
+      dataIndex: 'createAt',
+      key: 'createAt',
+    },
+  ];
+  const [pml, setPml] = useState([]);
   useEffect(() => {
     async function fetchData() {
       try {
@@ -81,6 +118,13 @@ function StudentDetail() {
         const tutorRes = await AdminApi.getTutor(values);
         const enrollRes = await AdminApi.getEnrolment(values);
         const statusRes = await AdminApi.getStatusType(values);
+        const paymentlst = await AdminApi.getPaymentHistoryByStudentID({
+          pageSize: 10000,
+          pageNumber: 1,
+          id: parseInt(params.id),
+        });
+        console.log(paymentlst.data.data);
+        setPml(paymentlst.data.data);
         setState({
           enrollment: enrollRes.data.data,
           status: statusRes.data.data,
@@ -93,7 +137,19 @@ function StudentDetail() {
       }
     }
     fetchData();
-  }, []);
+  }, [reload]);
+  const paymentTableData = [];
+  if (pml) {
+    pml.map((data) => {
+      const { paymentHistoryID, paymentName, amount, createAt } = data;
+      return paymentTableData.push({
+        paymentHistoryID: <span className="text-[15px] text-body">{paymentHistoryID}</span>,
+        paymentName: <span className="text-[15px] text-body">{paymentName}</span>,
+        amount: <span className="text-[15px] text-body">{amount}</span>,
+        createAt: <span className="text-[15px] text-body">{createAt}</span>,
+      });
+    });
+  }
   if (course !== null && tutor !== null) {
     course.map((data) => {
       const { courseID, courseName, tutorID } = data;
@@ -103,11 +159,47 @@ function StudentDetail() {
       return courseTableData.push({
         courseID: <span className="text-[15px] text-body">{courseID}</span>,
         courseName: <span className="text-[15px] text-body">{courseName}</span>,
-        tutor: <span className="text-[15px] text-body">{tutor[index].fullName}</span>,
+        tutor: (
+          <Link
+            to={`/admin/manage/tutor/${tutor[index].tutorID}`}
+            className="text-[15px] text-body hover:text-[#ffa502]"
+          >
+            {tutor[index].fullName}
+          </Link>
+        ),
         status: <span className="text-[15px] text-body">{state.status[index3].statusName}</span>,
       });
     });
   }
+  const onhandleDelete = () => {
+    setDVisible(true);
+  };
+  const fetchDS = async () => {
+    try {
+      const res = AdminApi.deleteStudent(parseInt(params.id));
+      return res;
+    } catch (error) {
+      alert('hehe');
+    }
+  };
+  const onhandleOkD = () => {
+    const res = fetchDS();
+    res
+      .then((result) => {
+        if (result.data === 'Succeed') {
+          message.success('Deleted');
+          navigate('/admin/manage/student');
+        } else message.warning('Failed');
+      })
+      .catch(() => {
+        message.warning('Failed');
+      });
+    setDVisible(false);
+  };
+  const formattedCurrency = new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
+  }).format(student.totalMoney);
   return (
     <Suspense fallback="Cho mot ti~">
       <PageHeader
@@ -122,11 +214,24 @@ function StudentDetail() {
         }
       />
       <Modal visible={visible} width={700} onCancel={() => setVisible(false)} onOk={() => onHandleOK()}>
-        <div className="py-[20px]">
+        <div className="py-[40px]">
+          <div className="text-[20px] text-body font-bold">Amount:</div>
           <Input type="number" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
         </div>
       </Modal>
+      <Modal visible={dvisible} width={700} onCancel={() => setDVisible(false)} onOk={() => onhandleOkD()}>
+        Are you sure to delete this student?
+      </Modal>
       <Row gutter={25} className="flex justify-center">
+        <Col xs={22} className="mb-[20px] flex justify-end">
+          <Button
+            className="flex items-center text-[15px] rounded-[23px] bg-red-500 border-red-500 text-white"
+            onClick={onhandleDelete}
+          >
+            <div className="mr-[5px] font-bold">Delete</div>
+            <UilTrash />
+          </Button>
+        </Col>
         <Col xs={20}>
           <div
             className="bg-white dark:bg-white10 m-0 p-0 text-theme-gray dark:text-white60 
@@ -167,7 +272,7 @@ function StudentDetail() {
                   <div className="border rounded-4 text-light mb-[25px]">
                     <div className="px-[20px] py-[8px] flex">
                       <UilDoller />
-                      <div className="px-[15px]">{student.totalMoney}</div>
+                      <div className="px-[15px]">{formattedCurrency}</div>
                     </div>
                   </div>
                   <Button
@@ -182,7 +287,12 @@ function StudentDetail() {
           </div>
         </Col>
         <Col xs={20} className="mb-[60px]">
+          <Heading className="text-[20px]">Enrollment</Heading>
           <Table pagination={false} columns={courseColumns} dataSource={courseTableData} />
+        </Col>
+        <Col xs={20} className="mb-[60px]">
+          <Heading className="text-[20px]">Payment History</Heading>
+          <Table pagination={false} columns={paymentColumns} dataSource={paymentTableData} />
         </Col>
       </Row>
     </Suspense>

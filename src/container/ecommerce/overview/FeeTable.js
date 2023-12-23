@@ -55,6 +55,7 @@ function FeeTable() {
     }
     fetchData();
   }, []);
+  const [course, setCourse] = useState([]);
   useEffect(() => {
     async function fetchData() {
       try {
@@ -63,6 +64,8 @@ function FeeTable() {
           pageSize: 8,
         });
         const res = await StudentApi.getFee(pagination);
+        const courseRes = await StudentApi.getAll({ pageSize: 1000, pageNumber: 1 });
+        setCourse(courseRes.data.data);
         setFee(res.data.result.data);
       } catch (error) {
         alert('Sai rồi kìa');
@@ -94,8 +97,7 @@ function FeeTable() {
   });
   localStorage.setItem('subtotal', subtotal);
   localStorage.setItem('feelist', JSON.stringify(fee));
-  const courses = localStorage.getItem('courses');
-  const coursesObject = JSON.parse(courses);
+  const coursesObject = course;
   if (fee !== null) {
     fee.map((data) => {
       const { feeID, cost, isChecked, status, courseID } = data;

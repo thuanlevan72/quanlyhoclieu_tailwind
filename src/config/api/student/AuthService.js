@@ -9,8 +9,6 @@ export const AuthService = {
     return DataService.post(url, data);
   },
   resetPassword: (newPassword, comfirmNewPassword) => {
-    console.log(newPassword);
-    console.log(comfirmNewPassword);
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const token = urlParams.get('token');
