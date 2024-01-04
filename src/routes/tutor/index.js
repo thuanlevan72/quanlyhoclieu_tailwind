@@ -3,6 +3,8 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { Spin } from 'antd';
 import Dashboard from './DashboardRoutes';
 import withTutorLayout from '../../layout/tutorLayout/withTutorLayout';
+import Assignment from '../../page/mentor/Assignment';
+import AssignmentDetail from '../../page/mentor/AssignmentDetail';
 
 const NotFound = lazy(() => import('../../container/pages/404'));
 // const StudentDashboard = lazy(() => import('../../page/student/StudentDashboard'));
@@ -21,6 +23,8 @@ const Tutor = React.memo(() => {
     >
       <Routes>
         <Route index path="/*" element={<Dashboard />} />
+        <Route index path="/assignment" element={<Assignment />} />
+        <Route index path="/assignment/assignmentDetails/:id" element={<AssignmentDetail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

@@ -423,7 +423,9 @@ function BannerCta2() {
 function PageHeaderBanner({ type, title, subtitle }) {
   return (
     <div
-      className={type === 'corporate' ? 'bg-white dark:bg-white10 rounded-10' : 'bg-white dark:bg-white10 rounded-10'}
+      className={
+        type === 'corporate' ? 'bg-[#dfe4ea] dark:bg-white10 rounded-10' : 'bg-[#ead38c] dark:bg-white10 rounded-10'
+      }
     >
       <div>
         <Row gutter={25} className="items-center">
@@ -442,7 +444,7 @@ function PageHeaderBanner({ type, title, subtitle }) {
               </Button>
             </figcaption>
           </Col>
-          <Col xs={24} sm={24} md={24} lg={24} xl={14} className="flex justify-center">
+          <Col xs={24} sm={24} md={24} lg={24} xl={14} className="flex justify-center my-[40px]">
             {type === 'corporate' ? (
               <img src={require('../../static/img/corporate.png')} alt="HexaDash Admin Template" />
             ) : (

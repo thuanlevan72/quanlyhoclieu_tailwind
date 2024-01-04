@@ -1,6 +1,6 @@
 export default {
   lightMode: {
-    primary: '#8231D3',
+    primary: '#ffa502',
     'primary-color-rgb': '130, 49, 211', // primary color for all components
     'main-background': '#F8F9FB',
     'main-background-light': '#F8F9FB',
@@ -10,7 +10,7 @@ export default {
     'general-background': '#F4F5F7',
     'brand-background': '#FFFFFF',
     'status-background': '#F8F9FB',
-    'primary-background': '#8231D3',
+    'primary-background': '#ffa502',
     'primary-transparent': '#F2EAFB',
     'light-background': '#F8F9FB',
     'light-border': '#F1F2F6',
@@ -28,7 +28,7 @@ export default {
     'border-color-secondary': '#E3E6EF',
     'border-color-deep': '#C6D0DC',
     'menu-icon-color': '#A0A0A0',
-    'menu-active': '#8231D3',
+    'menu-active': '#ffa502',
     'menu-active-bg': '#F2EAFB',
     'scroll-bg': '#E3E6EF',
     'chat-bg': '#F4F5F7',
@@ -37,7 +37,7 @@ export default {
     'input-bg': '#ffffff',
   },
   darkMode: {
-    primary: '#8231D3',
+    primary: '#ffa502',
     'main-background': '#010413',
     'main-background-light': '#282B37',
     'dark-background': '#282B37',

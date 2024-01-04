@@ -1,28 +1,28 @@
 import React, { useLayoutEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import {
-  UilEnvelope,
-  UilChat,
-  UilShoppingCart,
-  Uil500px,
-  UilBagAlt,
-  UilCalendarAlt,
-  UilUsersAlt,
-  UilAt,
-  UilClipboardAlt,
-  // UilExpandArrowsAlt,
-  UilCheckSquare,
-  UilExchange,
-  UilFile,
-  UilHeadphones,
-  UilChartBar,
-  UilCompactDisc,
-  UilTable,
-  UilSquareFull,
-  UilApps,
-  UilEdit,
-  UilMap,
-} from '@iconscout/react-unicons';
+// import {
+//   UilEnvelope,
+//   UilChat,
+//   UilShoppingCart,
+//   Uil500px,
+//   UilBagAlt,
+//   UilCalendarAlt,
+//   UilUsersAlt,
+//   UilAt,
+//   UilClipboardAlt,
+// UilExpandArrowsAlt,
+//   UilCheckSquare,
+//   UilExchange,
+//   UilFile,
+//   UilHeadphones,
+//   UilChartBar,
+//   UilCompactDisc,
+//   UilTable,
+//   UilSquareFull,
+//   UilApps,
+//   UilEdit,
+//   UilMap,
+// } from '@iconscout/react-unicons';
 import { TopMenuStyle } from './Style';
 
 function TopMenu() {
@@ -140,6 +140,11 @@ function TopMenu() {
                 </NavLink>
               </li>
               <li>
+                <NavLink to={`${path}/manage/account`} onClick={addParentActive}>
+                  Account
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to={`${path}/manage/enrollment`} onClick={addParentActive}>
                   Enrollment
                 </NavLink>
@@ -152,7 +157,7 @@ function TopMenu() {
             </ul>
           </li>
 
-          <li className="has-subMenu">
+          {/* <li className="has-subMenu">
             <Link to="#" className="parent">
               Apps
             </Link>
@@ -370,7 +375,7 @@ function TopMenu() {
                   <UilExpandArrowsAlt />
                   Kanban Board
                 </NavLink>
-              </li> */}
+              </li>
               <li className="has-subMenu-left">
                 <Link to="#" className="parent">
                   <UilExchange />
@@ -1000,7 +1005,8 @@ function TopMenu() {
                 </ul>
               </li>
             </ul>
-          </li>
+          </li> 
+          */}
         </ul>
       </div>
     </TopMenuStyle>

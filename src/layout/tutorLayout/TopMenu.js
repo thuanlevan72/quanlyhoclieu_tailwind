@@ -32,7 +32,7 @@ function TopMenu() {
       <div className="hexadash-top-menu ltr:pl-[20px] rtl:pr-[20px] xl:ltr:pl-[10px] xl:rtl:pr-[10px]">
         <ul>
           <li className="">
-            <Link to={`${path}/assignment`} className={`${activeLink('/course')} hover:text-[#ffa502]`}>
+            <Link to={`${path}/assignment`} className={`${activeLink('/assignment')} hover:text-[#ffa502]`}>
               Assignment
             </Link>
           </li>

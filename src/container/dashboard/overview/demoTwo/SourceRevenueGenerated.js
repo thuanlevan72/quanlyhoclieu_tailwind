@@ -53,7 +53,21 @@ const SourceRevenueGenerated = React.memo(() => {
     datasets: [
       {
         data: dataval,
-        backgroundColor: ['#eccc68', '#7bed9f', '#ff7f50', '#70a1ff', '#ff6b81', '#a4b0be'],
+        backgroundColor: [
+          '#eccc68',
+          '#7bed9f',
+          '#ff7f50',
+          '#70a1ff',
+          '#ff6b81',
+          '#a4b0be',
+          '#ffa502',
+          '#2ed573',
+          '#ff6348',
+          '#1e90ff',
+          '#ff4757',
+          '#3742fa',
+          '#747d8c',
+        ],
       },
     ],
     scales: {
@@ -143,9 +157,12 @@ const SourceRevenueGenerated = React.memo(() => {
           <div className="flex flex-wrap gap-x-[44px] gap-y-[22px] ssm:gap-x-[15px] ssm:gap-y-[15px] ssm:justify-center mt-[30px]">
             {lableval !== null ? (
               lableval.map((value, index) => (
-                <div>
+                <div key={index}>
                   <div className="text-center">
-                    <div className={`w-[50px] h-[10px] bg-[${chartjsPieChart.datasets[0].backgroundColor[index]}]`}>
+                    <div
+                      className="w-[50px] h-[10px]"
+                      style={{ backgroundColor: `${chartjsPieChart.datasets[0].backgroundColor[index % 12]}` }}
+                    >
                       {' '}
                     </div>
                     <div

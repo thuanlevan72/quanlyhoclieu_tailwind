@@ -4,12 +4,13 @@ function IntroductionUs() {
   return (
     <div>
       <h1 className="text-[25px]">
-        Why <span className="text-[#ffa502]">Choose Us!</span>
+        Why <span className="text-[#ffa502] font-bold">Choose Us!</span>
       </h1>
       <img
-        width="800px"
+        width="600px"
         src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y29tcGFueXxlbnwwfHwwfHx8MA%3D%3D"
         alt=""
+        className="rounded-[12px]"
       />
       <p className="mt-10 text-[15px]">
         LD Academy, a subsidiary of LD Group technology corporation, originated as a programming academy established in

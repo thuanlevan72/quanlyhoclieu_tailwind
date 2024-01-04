@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { Row, Col, Radio, Table, Button } from 'antd';
+import { Row, Col, Radio, Table, Button, message } from 'antd';
 import UilCheck from '@iconscout/react-unicons/icons/uil-check';
+import UilDeny from '@iconscout/react-unicons/icons/uil-angry';
 import { useDispatch } from 'react-redux';
 import { Steps } from '../../../components/steps/steps';
 import Heading from '../../../components/heading/heading';
@@ -95,19 +96,25 @@ function CheckOut() {
     }
     fetchData();
   }, [totalMoney]);
+  const [failed, setFailed] = useState(false);
   const processPayment = async () => {
     try {
       await Promise.all(
         feelist.map(async (value) => {
           if (value.isChecked === true) {
             const res = await StudentApi.payFee(value.feeID);
-            return res;
+            if (res.data === 'Done!') {
+              message.success('Done');
+              setFailed(false);
+            } else {
+              message.warning('Failed');
+              setFailed(true);
+            }
           }
-          return null;
         }),
       );
     } catch (error) {
-      console.error('Error processing payment:', error);
+      return false;
     }
   };
   const done = async () => {
@@ -123,7 +130,6 @@ function CheckOut() {
     }
   };
   const coursesObject = course;
-  console.log(coursesObject);
   if (checkedlist.length !== 0) {
     checkedlist.map((data) => {
       const { courseID, feeID, cost } = data;
@@ -170,6 +176,10 @@ function CheckOut() {
       key: 'price',
     },
   ];
+  const formattedCurrency = new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
+  }).format(subtotal);
   const step2Content = () => {
     if (status !== 'finish') {
       if (paymentMethod === 'card') {
@@ -178,7 +188,7 @@ function CheckOut() {
             <Heading as="h4" className="mb-[38px] text-xl md:text-lg ssm:text-base font-semibold ml-[8px]">
               2. Review and confirm Order
             </Heading>
-            <GlobalUtilityStyle>
+            <GlobalUtilityStyle className="mb-[40px]">
               <div className="p-[25px] ssm:px-[15px] rounded-[10px] border border-normal dark:border-white10">
                 <div className="bg-regularBG dark:bg-white10 mb-[25px] p-[25px] rounded-[15px]">
                   <Button
@@ -216,9 +226,7 @@ function CheckOut() {
                         </ul>
                         <Heading className="flex justify-between" as="h4">
                           <span className="text-base font-medium text-dark dark:text-white87">Total : </span>
-                          <span className="text-lg font-semibold text-primary">{`${subtotal.toLocaleString(
-                            'en-US',
-                          )}VND`}</span>
+                          <span className="text-lg font-semibold text-primary">{`${formattedCurrency}`}</span>
                         </Heading>
                       </div>
                     </Col>
@@ -235,7 +243,7 @@ function CheckOut() {
             <Heading as="h4" className="mb-[38px] text-xl md:text-lg ssm:text-base font-semibold ml-[8px]">
               2. Review and confirm Order
             </Heading>
-            <GlobalUtilityStyle>
+            <GlobalUtilityStyle className="mb-[40px]">
               <div className="p-[25px] ssm:px-[15px] rounded-[10px] border border-normal dark:border-white10">
                 <div className="bg-regularBG dark:bg-white10 mb-[25px] p-[25px] rounded-[15px]">
                   <div>
@@ -275,9 +283,7 @@ function CheckOut() {
                         </ul>
                         <Heading className="flex justify-between" as="h4">
                           <span className="text-base font-medium text-dark dark:text-white87">Total : </span>
-                          <span className="text-lg font-semibold text-primary">{`${subtotal.toLocaleString(
-                            'en-US',
-                          )}VND`}</span>
+                          <span className="text-lg font-semibold text-primary">{formattedCurrency}</span>
                         </Heading>
                       </div>
                     </Col>
@@ -289,9 +295,33 @@ function CheckOut() {
         );
       }
     } else {
+      if (failed === false) {
+        return (
+          <Row justify="center" style={{ width: '100%' }}>
+            <Col xl={22} xs={24} className="mb-[320px]">
+              <div className="checkout-successful 3xl:px-[30px]">
+                <Cards
+                  headless
+                  bodyStyle={{
+                    borderRadius: '20px',
+                  }}
+                >
+                  <Cards headless className="bg-green-100">
+                    <span className="text-green-500 icon-success">
+                      <UilCheck />
+                    </span>
+                    <Heading as="h3">Payment Successful</Heading>
+                    <p>Thank you! We have received your Payment</p>
+                  </Cards>
+                </Cards>
+              </div>
+            </Col>
+          </Row>
+        );
+      }
       return (
         <Row justify="center" style={{ width: '100%' }}>
-          <Col xl={22} xs={24}>
+          <Col xl={22} xs={24} className="mb-[320px]">
             <div className="checkout-successful 3xl:px-[30px]">
               <Cards
                 headless
@@ -299,12 +329,12 @@ function CheckOut() {
                   borderRadius: '20px',
                 }}
               >
-                <Cards headless>
-                  <span className="icon-success">
-                    <UilCheck />
+                <Cards headless className="bg-red-100">
+                  <span className="text-red-700 icon-success">
+                    <UilDeny />
                   </span>
-                  <Heading as="h3">Payment Successful</Heading>
-                  <p>Thank you! We have received your Payment</p>
+                  <Heading as="h3">Payment Failed!</Heading>
+                  <p>Contact admin to add money!</p>
                 </Cards>
               </Cards>
             </div>

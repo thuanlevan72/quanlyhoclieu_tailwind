@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Modal, Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
-import UilTimes from '@iconscout/react-unicons/icons/uil-times';
-import UilEdit from '@iconscout/react-unicons/icons/uil-edit';
+// import UilTimes from '@iconscout/react-unicons/icons/uil-times';
+// import UilEdit from '@iconscout/react-unicons/icons/uil-edit';
 import { Cards } from '../../../../components/cards/frame/cards-frame';
 import { Button } from '../../../../components/buttons/buttons';
 import { TableDefaultStyle, GlobalUtilityStyle } from '../../../styled';
@@ -145,20 +145,20 @@ function UpcomingEvents() {
     });
   };
 
-  const showModal = (id, item) => {
-    setState({
-      ...state,
-      visible: true,
-      collapsed: false,
-      taskEditId: id,
-      editableItem: item,
-    });
-  };
+  // const showModal = (id, item) => {
+  //   setState({
+  //     ...state,
+  //     visible: true,
+  //     collapsed: false,
+  //     taskEditId: id,
+  //     editableItem: item,
+  //   });
+  // };
 
-  const handleTaskDelete = (id) => {
-    events[state.tabValue] = events[state.tabValue].filter((item) => item.id !== id);
-    setEventState(eventState.filter((item) => item.id !== id));
-  };
+  // const handleTaskDelete = (id) => {
+  //   events[state.tabValue] = events[state.tabValue].filter((item) => item.id !== id);
+  //   setEventState(eventState.filter((item) => item.id !== id));
+  // };
 
   const dataSource = [];
 
@@ -181,16 +181,16 @@ function UpcomingEvents() {
             </article>
           </div>
         ),
-        actions: (
-          <div className="flex items-center justify-end gap-3">
-            <Link to="#" className="group" onClick={() => showModal(id, { title, time, date, id })}>
-              <UilEdit className="w-[14px] h-[14px] text-light dark:text-white30 group-hover:text-info" />
-            </Link>
-            <Link to="#" className="group" onClick={() => handleTaskDelete(id)}>
-              <UilTimes className="w-[14px] h-[14px] text-light dark:text-white30 group-hover:text-danger" />
-            </Link>
-          </div>
-        ),
+        // actions: (
+        //   <div className="flex items-center justify-end gap-3">
+        //     <Link to="#" className="group" onClick={() => showModal(id, { title, time, date, id })}>
+        //       <UilEdit className="w-[14px] h-[14px] text-light dark:text-white30 group-hover:text-info" />
+        //     </Link>
+        //     <Link to="#" className="group" onClick={() => handleTaskDelete(id)}>
+        //       <UilTimes className="w-[14px] h-[14px] text-light dark:text-white30 group-hover:text-danger" />
+        //     </Link>
+        //   </div>
+        // ),
       });
     });
 

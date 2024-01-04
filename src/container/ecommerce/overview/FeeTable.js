@@ -33,12 +33,14 @@ function FeeTable() {
   ];
   const [pagination, setPagination] = useState({
     pageNumber: 1,
-    pageSize: 8,
+    pageSize: 10000,
   });
   const [fee, setFee] = useState([]);
   const [enrolls, setEnrolls] = useState([]);
   const authInfo = localStorage.getItem('authInfo');
   const authInfoObject = JSON.parse(authInfo);
+  const [course, setCourse] = useState([]);
+  const [reload, setReload] = useState(false);
   useEffect(() => {
     async function fetchData() {
       try {
@@ -47,32 +49,23 @@ function FeeTable() {
           pageNumber: 1,
           pageSize: 100,
         };
+        setReload((pre) => !pre);
         const res1 = await StudentApi.getEnrollment(values);
         setEnrolls(res1.data.data);
+        setPagination({
+          pageNumber: 1,
+          pageSize: 10000,
+        });
+        const res = await StudentApi.getFee(pagination);
+        const courseRes = await StudentApi.getAll({ pageSize: 1000, pageNumber: 1 });
+        setCourse(courseRes.data.data);
+        setFee(res.data.result.data.reverse());
       } catch (error) {
         return 'error';
       }
     }
     fetchData();
-  }, []);
-  const [course, setCourse] = useState([]);
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setPagination({
-          pageNumber: 1,
-          pageSize: 8,
-        });
-        const res = await StudentApi.getFee(pagination);
-        const courseRes = await StudentApi.getAll({ pageSize: 1000, pageNumber: 1 });
-        setCourse(courseRes.data.data);
-        setFee(res.data.result.data);
-      } catch (error) {
-        alert('Sai rồi kìa');
-      }
-    }
-    fetchData();
-  }, [enrolls]);
+  }, [reload]);
   const onHandleChecked = (key) => {
     setFee((prevFee) => {
       return prevFee.map((item) => {
@@ -86,8 +79,7 @@ function FeeTable() {
   const onHandleRemove = async (key) => {
     const index = enrolls.findIndex((x) => x.courseID === key);
     const res2 = await StudentApi.removeEnrollment(enrolls[index].enrollmentID);
-    const data = fee.filter((x) => x.courseID !== key);
-    setFee([...data]);
+    setReload((pre) => !pre);
     return res2;
   };
   let subtotal = 0;

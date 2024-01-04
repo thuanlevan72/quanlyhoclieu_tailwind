@@ -25,14 +25,14 @@ function AuthorBox() {
         <div className="-mx-3 px-5 pt-[25px] pb-5 text-center border-b border-regular dark:border-white10">
           <figure className="relative max-w-[120px] mx-auto mb-6">
             <img className="mx-auto max-w-[120px]" src={authInfo.avatar} alt="" />
-            <Upload className="absolute right-0 -bottom-2 flex items-center justify-center bg-white dark:bg-white10 w-10 h-10 rounded-full">
-              <Link to="#" className="inline-flex items-center justify-center bg-primary w-8 h-8 rounded-full">
+            <Upload className="absolute right-0 flex items-center justify-center w-10 h-10 bg-white rounded-full -bottom-2 dark:bg-white10">
+              <Link to="#" className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary">
                 <UilCamera className="w-4 h-4 text-white" />
               </Link>
             </Upload>
           </figure>
           <figcaption>
-            <Heading as="h4" className="mb-0 text-dark dark:text-white87 text-lg font-semibold">
+            <Heading as="h4" className="mb-0 text-lg font-semibold text-dark dark:text-white87">
               {authInfo.lastName}
             </Heading>
           </figcaption>
@@ -132,7 +132,7 @@ function AuthorBox() {
                 Notification
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink
                 to={`${decentralization}/payment`}
                 onClick={() => {
@@ -147,7 +147,7 @@ function AuthorBox() {
                 <UilBell className="w-4 h-4 ltr:mr-3 rtl:ml-3 mb-0.5" />
                 Payment
               </NavLink>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </div>
