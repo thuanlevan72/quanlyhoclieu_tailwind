@@ -17,7 +17,7 @@ function Orders() {
   ];
   const [pagination, setPagination] = useState({
     pageNumber: 1,
-    pageSize: 8,
+    pageSize: 1000000,
   });
   const [pm, setPm] = useState([]);
   useEffect(() => {
@@ -25,10 +25,10 @@ function Orders() {
       try {
         setPagination({
           pageNumber: 1,
-          pageSize: 8,
+          pageSize: 1000000,
         });
         const res = await StudentApi.getPaymentHistory(pagination);
-        setPm(res.data.data);
+        setPm(res.data.data.reverse());
       } catch (error) {
         setPm([]);
       }

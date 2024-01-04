@@ -60,9 +60,7 @@ function CourseDetails() {
           courseName: res1.data.courseName,
           tutorID: res1.data.tutorID,
         });
-        console.log(res.data.data);
         const lres = res.data.data.filter((x) => x.courseID === parseInt(id));
-        console.log(lres);
         if (lres.length > 0 && lres[0].classes.length > 0) lres[0].classes[0].isAvailable = true;
         setLectures(lres);
       } catch (error) {
@@ -178,7 +176,7 @@ function CourseDetails() {
         routes={PageRoutes}
       />
       <main className="min-h-[715px] lg:min-h-[580px] px-8 xl:px-[15px] pb-[30px] bg-transparent">
-        <Modal visible={visible} width={700} onCancel={() => setVisible(false)} onOk={() => setVisible(false)}>
+        <Modal visible={visible} width={1200} onCancel={() => setVisible(false)} onOk={() => setVisible(false)}>
           <Test />
         </Modal>
         <Row gutter={25}>

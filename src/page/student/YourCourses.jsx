@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Pagination } from 'antd';
+import { Col, Row } from 'antd';
+import UilSearch from '@iconscout/react-unicons/icons/uil-search';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import CourseWaveCard from '../../components/cards/CourseWaveCard';
-import { PaginationStyle } from '../../container/styled';
+// import { PaginationStyle } from '../../container/styled';
 import { StudentApi } from '../../config/api/student/StudentApi';
 
 function YourCourses() {
@@ -18,18 +19,20 @@ function YourCourses() {
   ];
   const [pagination, setPagination] = useState({
     pageNumber: 1,
-    pageSize: 8,
+    pageSize: 1000,
   });
   const [coursesWave, setCoursesWave] = useState([]);
+  const [data, setData] = useState([]);
   useEffect(() => {
     async function fetchData() {
       try {
         setPagination({
           pageNumber: 1,
-          pageSize: 8,
+          pageSize: 1000,
         });
         const res = await StudentApi.getBoughtCourse(pagination);
-        setCoursesWave(res.data.data);
+        setCoursesWave(res.data.data.reverse());
+        setData(res.data.data.reverse());
       } catch (error) {
         setCoursesWave([]);
       }
@@ -43,6 +46,12 @@ function YourCourses() {
   // const onHandleChange = (current, pageSize) => {
   //   setState({ ...state, current, pageSize });
   // };
+  const onChangeSearch = (event) => {
+    if (event.target.value.length > 0) {
+      const filter = coursesWave.filter((x) => x.courseName.toLowerCase().includes(event.target.value.toLowerCase()));
+      setData(filter);
+    } else setData(coursesWave);
+  };
   return (
     <>
       <PageHeader
@@ -52,22 +61,33 @@ function YourCourses() {
       />
       <main className="min-h-[715px] lg:min-h-[580px] px-8 xl:px-[15px] pb-[30px] bg-transparent">
         <Row gutter={25} className="mt-sm-10">
-          {coursesWave.length ? (
-            coursesWave.map((value, index) => <CourseWaveCard key={index} courseWaveData={value} />)
+          <Col xs={24} className="mb-[20px]">
+            <div className=" max-w-[400px] bg-white border-4 rounded-[12px]">
+              <div className="px-[20px] flex items-center">
+                <UilSearch />
+                <input
+                  placeholder="Course name"
+                  className="outline-none py-[10px] ml-[10px] w-[100%]"
+                  onChange={onChangeSearch}
+                />
+              </div>
+            </div>
+          </Col>
+          {data.length ? (
+            data.map((value, index) => <CourseWaveCard key={index} courseWaveData={value} />)
           ) : (
             <div className="text-center w-[100%] text-[30px]">Empty</div>
           )}
 
-          <Col xs={24} className="mt-[40px]">
+          {/* <Col xs={24} className="mt-[40px]">
             <>
               {coursesWave.length ? (
                 <PaginationStyle>
                   <div className="ant-pagination-custom-style text-end">
                     <Pagination
                       // onChange={onHandleChange}
-                      showSizeChanger
                       // onShowSizeChange={onShowSizeChange}
-                      pageSize={10}
+                      pageSize={8}
                       defaultCurrent={1}
                       total={coursesWave.length}
                     />
@@ -75,7 +95,7 @@ function YourCourses() {
                 </PaginationStyle>
               ) : null}
             </>
-          </Col>
+          </Col> */}
         </Row>
       </main>
     </>

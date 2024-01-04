@@ -53,7 +53,10 @@ const AuthInfo = React.memo(() => {
     }
     fetchData();
   }, [totalMoney]);
-
+  const formattedCurrency = new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
+  }).format(totalMoney);
   const userContent = (
     <div>
       <div className="min-w-[280px] sm:min-w-full pt-4">
@@ -88,7 +91,7 @@ const AuthInfo = React.memo(() => {
               to={`/${decentralization}/total-money`}
               className="inline-flex items-center hover:bg-shadow-transparent text-light dark:text-white60 dark:hover:text-white hover:text-primary dark:hover:bg-white10 dark:rounded-4 hover:pl-6 w-full px-2.5 py-3 text-sm transition-all ease-in-out delay-150"
             >
-              <UilDollarSign className="w-4 h-4 ltr:mr-3 rtl:ml-3" /> Total Money: {totalMoney} VND
+              <UilDollarSign className="w-4 h-4 ltr:mr-3 rtl:ml-3" /> Total Money: {formattedCurrency}
             </Link>
           </li>
           <li>

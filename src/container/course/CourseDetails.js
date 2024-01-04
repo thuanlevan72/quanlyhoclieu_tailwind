@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Row, Col, Collapse, message } from 'antd';
 import UilPlus from '@iconscout/react-unicons/icons/uil-plus';
 import UilMinus from '@iconscout/react-unicons/icons/uil-minus';
@@ -25,6 +25,7 @@ const PageRoutes = [
   },
 ];
 function CourseDetails() {
+  const navigate = useNavigate();
   const authInfo = localStorage.getItem('authInfo');
   const authInfoObject = JSON.parse(authInfo);
   const { id } = useParams();
@@ -34,6 +35,7 @@ function CourseDetails() {
     date: '2023-12-06T16:14:01.047Z',
   };
   const [currentCourse, setCurrentCourse] = useState({});
+  const [reload, setReload] = useState(false);
   useEffect(() => {
     async function fetchData() {
       try {
@@ -44,7 +46,7 @@ function CourseDetails() {
       }
     }
     fetchData();
-  }, []);
+  }, [reload]);
   const addEnroll = async () => {
     try {
       const res = await StudentApi.addEnrollment(values);
@@ -54,10 +56,15 @@ function CourseDetails() {
     }
   };
   const onHandleClick = async () => {
+    setReload((pre) => !pre);
     message.success('added');
     await addEnroll();
+    navigate('/student/course');
   };
-
+  const formattedCurrency = new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
+  }).format(currentCourse.cost);
   const [isOpen, setOpen] = useState(false);
   return (
     <>
@@ -224,7 +231,7 @@ function CourseDetails() {
               </div>
               <ul className="flex items-center justify-center flex-wrap gap-[25px]">
                 <li className="flex flex-col items-center">
-                  <span className="flex items-center justify-center bg-[#8231d320] w-[70px] h-[70px] rounded-[10px]">
+                  <span className="flex items-center justify-center bg-[#ffa50220] w-[70px] h-[70px] rounded-[10px]">
                     <UilBook className="text-primary" />
                   </span>
                   <span className="inline-block text-body dark:text-white60 mt-1.5">
@@ -252,7 +259,7 @@ function CourseDetails() {
               </ul>
               <div className="mt-[30px] text-center flex flex-wrap justify-center">
                 <span className="block mb-3 text-3xl font-semibold text-dark dark:text-white87 w-[100%]">
-                  {currentCourse.cost} VND
+                  {formattedCurrency}
                 </span>
                 <Button
                   size="default"
@@ -260,7 +267,7 @@ function CourseDetails() {
                   className="px-5 text-sm font-semibold h-11 mx-[5px] bg-[#ffa502] border-[#ffa502] hover:scale-105"
                   onClick={onHandleClick}
                 >
-                  <Link to="/student/student-fee">Add To Fees</Link>
+                  Add To Fees
                 </Button>
 
                 <Button

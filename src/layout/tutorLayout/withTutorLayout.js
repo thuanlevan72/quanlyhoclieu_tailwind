@@ -9,7 +9,7 @@ import { Scrollbars } from '@pezhmanparsaee/react-custom-scrollbars';
 import { connect } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import MenueItems from './MenueItems';
+// import MenueItems from './MenueItems';
 import { FooterStyle, LayoutContainer, SmallScreenAuthInfo, TopMenuSearch } from './Style';
 import CustomizerStudentLayout from './CustomizerTutorLayout';
 import TopMenu from './TopMenu';
@@ -58,13 +58,13 @@ const ThemeLayout = (WrappedComponent) => {
         });
       };
 
-      const toggleCollapsedMobile = () => {
-        if (window.innerWidth <= 990) {
-          this.setState({
-            collapsed: !collapsed,
-          });
-        }
-      };
+      // const toggleCollapsedMobile = () => {
+      //   if (window.innerWidth <= 990) {
+      //     this.setState({
+      //       collapsed: !collapsed,
+      //     });
+      //   }
+      // };
 
       const onShowHide = () => {
         this.setState({
@@ -202,7 +202,7 @@ const ThemeLayout = (WrappedComponent) => {
                       renderView={renderView}
                       renderTrackVertical={renderTrackVertical}
                     >
-                      <MenueItems topMenu={topMenu} toggleCollapsed={toggleCollapsedMobile} />
+                      {/* <MenueItems topMenu={topMenu} toggleCollapsed={toggleCollapsedMobile} /> */}
                     </Scrollbars>
                   </Sider>
                 </ThemeProvider>

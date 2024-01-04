@@ -146,7 +146,7 @@ const DetailsRight = React.memo(({ product }) => {
         <div className="ltr:ml-[5px] rtl:mr-[5px]">
           <NavLink to="#" className="ltr:mr-3 rtl:ml-3 group">
             <FontAwesome
-              className="text-sm text-[#666] dark:text-white60 group-hover:text-[#8231d3]"
+              className="text-sm text-[#666] dark:text-white60 group-hover:text-[#ffa502]"
               name="facebook"
               size="2x"
               style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
@@ -154,7 +154,7 @@ const DetailsRight = React.memo(({ product }) => {
           </NavLink>
           <NavLink to="#" className="ltr:mr-3 rtl:ml-3 group">
             <FontAwesome
-              className="text-sm text-[#666] dark:text-white60 group-hover:text-[#8231d3]"
+              className="text-sm text-[#666] dark:text-white60 group-hover:text-[#ffa502]"
               name="twitter"
               size="2x"
               style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
@@ -162,7 +162,7 @@ const DetailsRight = React.memo(({ product }) => {
           </NavLink>
           <NavLink to="#" className="ltr:mr-3 rtl:ml-3 group">
             <FontAwesome
-              className="text-sm text-[#666] dark:text-white60 group-hover:text-[#8231d3]"
+              className="text-sm text-[#666] dark:text-white60 group-hover:text-[#ffa502]"
               name="pinterest-p"
               size="2x"
               style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
@@ -170,7 +170,7 @@ const DetailsRight = React.memo(({ product }) => {
           </NavLink>
           <NavLink to="#" className="ltr:mr-3 rtl:ml-3 group">
             <FontAwesome
-              className="text-sm text-[#666] dark:text-white60 group-hover:text-[#8231d3]"
+              className="text-sm text-[#666] dark:text-white60 group-hover:text-[#ffa502]"
               name="linkedin"
               size="2x"
               style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
@@ -178,7 +178,7 @@ const DetailsRight = React.memo(({ product }) => {
           </NavLink>
           <NavLink to="#" className="ltr:mr-3 rtl:ml-3 group">
             <FontAwesome
-              className="text-sm text-[#666] dark:text-white60 group-hover:text-[#8231d3]"
+              className="text-sm text-[#666] dark:text-white60 group-hover:text-[#ffa502]"
               name="send"
               size="2x"
               style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}

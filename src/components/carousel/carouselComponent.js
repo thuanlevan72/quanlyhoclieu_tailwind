@@ -50,7 +50,6 @@ function CarouselComponent() {
     <Carousel style={carouselStyle} autoplay autoplaySpeed={5000} easing="ease" ref={carouselRef}>
       {slides.map((slide) => (
         <div key={slide.id} style={{ contentStyle }} className="relative">
-          {/* Nội dung của slide */}
           <Button
             onClick={handlePrev}
             className="bottom-[50%] left-[5%] absolute active text-white font-semibold bg-transparent 

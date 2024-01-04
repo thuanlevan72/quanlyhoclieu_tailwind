@@ -109,9 +109,9 @@ function TutorInfo() {
     const res = fetchDataM(values);
     res
       .then((result) => {
-        if (result.data === 'Succeed') {
+        if (result.data === 'Added') {
           message.success('Added');
-          navigate('/admin/manage/student');
+          navigate('/admin/manage/tutor');
         } else message.warning('Failed');
       })
       .catch(() => {

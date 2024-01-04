@@ -81,4 +81,8 @@ export const StudentApi = {
     const url = `/Course/${id}`;
     return DataService.get(url);
   },
+  getAssignmentByCourseId: ({ pageNumber, pageSize, id }) => {
+    const url = `/TutorAssignment/course/${id}?pageSize=${pageSize}&pageNumber=${pageNumber}`;
+    return DataService.get(url);
+  },
 };

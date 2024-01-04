@@ -13,7 +13,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#8231D3',
+        primary: '#ffa502',
         'primary-hover': 'rgb(103, 38, 168)',
         'primary-transparent': 'rgba(130, 49, 211, 0.082)',
         secondary: '#5840FF',
@@ -55,7 +55,7 @@ module.exports = {
         'pending-transparent': 'rgba(250, 139, 12, 0.082)',
         blocked: '#ff0f0f',
         'blocked-transparent': 'rgba(255, 15, 15, 0.082)',
-        early: '#8231d3',
+        early: '#ffa502',
         late: '#fa8b0c',
         progress: '#ff4d4f',
         complete: '#01b81a',

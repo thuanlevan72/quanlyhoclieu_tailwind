@@ -1,7 +1,7 @@
 export const auth0options = {
   theme: {
     logo: './logo_dark.svg',
-    primaryColor: '#8231D3',
+    primaryColor: '#ffa502',
     labeledSubmitButton: true,
   },
   avatar: null,

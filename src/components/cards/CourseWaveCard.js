@@ -34,7 +34,7 @@ function CourseWaveCard({ courseWaveData }) {
                   <UilBook className="w-[14px]" />
                   <span className="text-[13px] 3xl:text-xs font-medium leading-none">15 Lectures</span>
                 </li>
-                <li className="inline-flex items-center gap-[3px] bg-[#fb358626] text-primary h-8 px-5 3xl:px-2.5 rounded-[20px]">
+                <li className="inline-flex items-center gap-[3px] bg-[#fb358626] text-body h-8 px-5 3xl:px-2.5 rounded-[20px]">
                   <UilClock className="w-[14px]" />
                   <span className="text-[13px] 3xl:text-xs font-medium leading-none">60 Hrs</span>
                 </li>

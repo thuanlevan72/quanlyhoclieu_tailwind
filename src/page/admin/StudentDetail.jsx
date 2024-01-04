@@ -12,6 +12,7 @@ import { PageHeader } from '../../components/page-headers/page-headers';
 import { Button } from '../../components/buttons/buttons';
 import { Modal } from '../../components/modals/antd-modals';
 import Heading from '../../components/heading/heading';
+import { PaginationStyle } from '../../container/styled';
 
 function StudentDetail() {
   const params = useParams([]);
@@ -292,7 +293,16 @@ function StudentDetail() {
         </Col>
         <Col xs={20} className="mb-[60px]">
           <Heading className="text-[20px]">Payment History</Heading>
-          <Table pagination={false} columns={paymentColumns} dataSource={paymentTableData} />
+          <PaginationStyle>
+            <div className="ant-pagination-custom-style table-responsive table-head-rounded table-th-shape-none table-th-border-none table-last-th-text-right hover-tr-none table-td-border-none ltr:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:first-child]:rounded-l-10 rtl:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:first-child]:rounded-r-10 rtl:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:first-child]:rounded-none ltr:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:last-child]:rounded-r-10 rtl:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:last-child]:rounded-l-10 rtl:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:last-child]:rounded-none">
+              <Table
+                className="[&>div>div>.ant-table]:mb-7 [&>div>div>.ant-table]:pb-5 [&>div>div>.ant-table]:border-b [&>div>div>.ant-table]:border-regular dark:[&>div>div>.ant-table]:border-white10 ltr:[&>div>div>div>div>div>table>thead>tr>th:first-child]:pl-[20px] ltr:[&>div>div>div>div>div>table>tbody>tr>td:first-child]:pl-[20px] rtl:[&>div>div>div>div>div>table>thead>tr>th:first-child]:pr-[20px] rtl:[&>div>div>div>div>div>table>tbody>tr>td:first-child]:pr-[20px] "
+                dataSource={paymentTableData}
+                columns={paymentColumns}
+                pagination={{ pageSize: 7, showSizeChanger: true, total: pml.length }}
+              />
+            </div>
+          </PaginationStyle>
         </Col>
       </Row>
     </Suspense>

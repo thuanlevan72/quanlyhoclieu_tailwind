@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { useEffect, useState } from 'react';
-import { Row, Col, message, Button, Input, Select } from 'antd';
+import { Row, Col, message, Button, Input, Select, Form } from 'antd';
 import UilLock from '@iconscout/react-unicons/icons/uil-lock';
 // import UilSearch from '@iconscout/react-unicons/icons/uil-search';
 import { PageHeader } from '../../components/page-headers/page-headers';
@@ -13,6 +13,7 @@ import { Modal } from '../../components/modals/antd-modals';
 
 function AccountTable() {
   const [visible, setVisible] = useState(false);
+  const { Option } = Select;
   const PageRoutes = [
     {
       path: 'index',
@@ -80,9 +81,7 @@ function AccountTable() {
         return tableDataScource.push({
           accountID: <span className="text-body dark:text-white60 text-[15px] font-medium">{`#${accountID}`}</span>,
           decentralization:
-            decentralizationId === 1 ? (
-              <span className="text-body dark:text-white60 text-[15px] font-medium">Admin</span>
-            ) : decentralizationId === 2 ? (
+            decentralizationId === 2 ? (
               <span className="text-body dark:text-white60 text-[15px] font-medium">Student</span>
             ) : (
               <span className="text-body dark:text-white60 text-[15px] font-medium">Tutor</span>
@@ -112,7 +111,7 @@ function AccountTable() {
             status === 'Working' ? (
               <span>
                 <Button
-                  className="flex items-center bg-red-100 text-[#ff4757] hover:border-[#ff4757]"
+                  className="flex items-center bg-red-100 text-[#ff4757] hover:border-[#ff4757] min-w-[100px] justify-center"
                   onClick={() => onHandleVisible(1, accountID)}
                 >
                   <UilLock />
@@ -122,7 +121,7 @@ function AccountTable() {
             ) : (
               <span>
                 <Button
-                  className="flex items-center bg-green-100 text-[#2ed573] hover:border-[#2ed573]"
+                  className="flex items-center bg-green-100 text-[#2ed573] hover:border-[#2ed573] min-w-[100px] justify-center"
                   onClick={() => onHandleVisible(2, accountID)}
                   id={accountID}
                 >
@@ -190,6 +189,54 @@ function AccountTable() {
     const current = accounts.filter((x) => x.status.toUpperCase() === value.toUpperCase());
     setDatas(current);
   };
+  const [visibleAdd, setVisibleAdd] = useState(false);
+  const decentralizations = [
+    { decentralizationID: 2, authorityName: 'Student' },
+    { decentralizationID: 3, authorityName: 'Tutor' },
+  ];
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+    decentralizationId: 0,
+  });
+  const onHandleChangeID = (value) => {
+    setData({
+      ...data,
+      decentralizationId: value,
+    });
+  };
+  const onChangeEmail = (event) => {
+    setData({
+      ...data,
+      email: event.target.value,
+    });
+  };
+  const onChangePassword = (event) => {
+    setData({
+      ...data,
+      password: event.target.value,
+    });
+  };
+  const fetchDataAdd = async (value) => {
+    const res = await AdminApi.addAccount(value);
+    return res;
+  };
+  const onhandleAdd = () => {
+    console.log(data);
+    const res = fetchDataAdd(data);
+    console.log(res);
+    res
+      .then((result) => {
+        if (result.data === 'Added!') {
+          message.success('Added');
+          setReload((preReload) => !preReload);
+        } else message.warning('Failed');
+      })
+      .catch(() => {
+        message.warning('Failed');
+      });
+    setVisibleAdd(false);
+  };
   return (
     <>
       <PageHeader
@@ -199,6 +246,53 @@ function AccountTable() {
       />
       <Modal visible={visible} width={700} onCancel={() => setVisible(false)} onOk={() => onhandleOk()}>
         <div className="text-[20px] text-body">{state.text} this account?</div>
+      </Modal>
+      <Modal visible={visibleAdd} width={700} onCancel={() => setVisibleAdd(false)} onOk={() => onhandleAdd()}>
+        <Heading> Add Account:</Heading>
+        <Form>
+          <Form.Item
+            className="mb-4 form-label-w-full form-label-text-start dark:text-white-60 [&>div]:flex-col text-dark dark:text-white87 font-medium [&>div>div>label]:!text-dark dark:[&>div>div>label]:!text-white87"
+            name="email"
+            label="Email"
+            rules={[{ required: true, type: 'email', message: '*Required' }]}
+          >
+            <Input placeholder="Email" type="email" onChange={onChangeEmail} />
+          </Form.Item>
+          <Form.Item
+            className="mb-4 form-label-w-full form-label-text-start dark:text-white-60 [&>div]:flex-col text-dark dark:text-white87 font-medium [&>div>div>label]:!text-dark dark:[&>div>div>label]:!text-white87"
+            name="password"
+            label="Password"
+            rules={[{ required: true, message: '*Required' }]}
+          >
+            <Input placeholder="Password" onChange={onChangePassword} />
+          </Form.Item>
+          <Form.Item
+            className="mb-4 form-label-w-full form-label-text-start dark:text-white-60 [&>div]:flex-col text-dark dark:text-white87 font-medium [&>div>div>label]:!text-dark dark:[&>div>div>label]:!text-white87"
+            name="decentralization"
+            label="Decentralization"
+            rules={[{ required: true, message: '*Required' }]}
+          >
+            <Select
+              style={{ width: '100%' }}
+              value={decentralizations}
+              onChange={onHandleChangeID}
+              placeholder="Select decentralization"
+            >
+              {decentralizations.length !== 0 ? (
+                decentralizations &&
+                decentralizations.map((value) => {
+                  return (
+                    <Option value={value.decentralizationID}>
+                      {value.decentralizationID}. {value.authorityName}
+                    </Option>
+                  );
+                })
+              ) : (
+                <Option value={0}>Null</Option>
+              )}
+            </Select>
+          </Form.Item>
+        </Form>
       </Modal>
       <div className="min-h-[715px] lg:min-h-[580px] flex-1 h-auto px-8 xl:px-[15px] pb-[30px] bg-transparent">
         <GlobalUtilityStyle>
@@ -244,6 +338,14 @@ function AccountTable() {
                           <Select.Option value="Banned">Banned</Select.Option>
                         </Select>
                       </div>
+                    </Col>
+                    <Col xs={24} lg={6} className="mb-[10px]">
+                      <Button
+                        className="hover:scale-105 hover:text-[#ffa502] hover:border-[#ffa502] flex items-center min-h-[36px]"
+                        onClick={() => setVisibleAdd(true)}
+                      >
+                        <div className="mx-[10px]">Add Account</div>
+                      </Button>
                     </Col>
                   </Row>
                 </div>

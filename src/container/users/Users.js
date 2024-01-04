@@ -1,5 +1,5 @@
 import React, { useState, lazy, Suspense, useEffect } from 'react';
-import { Row, Col, Skeleton, Button, Pagination, Input } from 'antd';
+import { Row, Col, Skeleton, Button, Input } from 'antd';
 import UilPlus from '@iconscout/react-unicons/icons/uil-plus';
 // import UilApps from '@iconscout/react-unicons/icons/uil-apps';
 // import UilListUl from '@iconscout/react-unicons/icons/uil-list-ul';
@@ -10,7 +10,7 @@ import { Link, Routes, Route } from 'react-router-dom';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import { AutoComplete } from '../../components/autoComplete/autoComplete';
 import { Cards } from '../../components/cards/frame/cards-frame';
-import { PaginationStyle } from '../styled';
+// import { PaginationStyle } from '../styled';
 import { AdminApi } from '../../config/api/admin/AdminApi';
 
 const User = lazy(() => import('../pages/overview/UserCard'));
@@ -236,7 +236,7 @@ function Users() {
             <Route path="grid-style" element={<GridStyle />} /> */}
           </Routes>
 
-          <Col xs={24}>
+          {/* <Col xs={24}>
             <PaginationStyle>
               <div className="ant-pagination-custom-style mb-[34px] min-md:text-end text-center">
                 <Pagination
@@ -248,7 +248,7 @@ function Users() {
                 />
               </div>
             </PaginationStyle>
-          </Col>
+          </Col> */}
         </Row>
       </div>
     </>

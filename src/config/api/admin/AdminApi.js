@@ -166,4 +166,12 @@ export const AdminApi = {
     const url = `/PaymentHistory/std/${id}?pageSize=${pageSize}&pageNumber=${pageNumber}`;
     return DataService.get(url);
   },
+  addAccount: (value) => {
+    const url = `/Account/addAccount`;
+    return DataService.post(url, {
+      email: value.email,
+      password: value.password,
+      decentralizationId: value.decentralizationId,
+    });
+  },
 };

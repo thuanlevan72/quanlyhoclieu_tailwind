@@ -40,7 +40,7 @@ function DashboardBase() {
                       <Button className="bg-primary hover:bg-hbr-primary border-solid border-1 border-primary text-white dark:text-white87 text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] shadow-btn">
                         Primary
                       </Button>
-                      <span className="block text-dark dark:text-white87 mt-[5px]">#8231D3</span>
+                      <span className="block text-dark dark:text-white87 mt-[5px]">#ffa502</span>
                     </div>
                     <div className="text-center">
                       <Button className="bg-secondary hover:bg-hbr-secondary border-solid border-1 border-secondary text-white dark:text-white87 text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] shadow-btn">
@@ -170,7 +170,7 @@ function DashboardBase() {
                       <Button className="bg-primary-transparent hover:bg-hbr-primary border-none text-primary hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] shadow-btn">
                         Primary
                       </Button>
-                      <span className="block text-dark dark:text-white87 mt-[5px]">#8231D3</span>
+                      <span className="block text-dark dark:text-white87 mt-[5px]">#ffa502</span>
                     </div>
                     <div className="text-center">
                       <Button className="bg-secondary-transparent hover:bg-hbr-secondary border-none text-secondary hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] shadow-btn">
@@ -348,7 +348,7 @@ function DashboardBase() {
                       <Button className="bg-transparent hover:bg-hbr-primary border-1 border-style border-primary text-primary hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] shadow-btn">
                         Primary
                       </Button>
-                      <span className="block text-dark dark:text-white87 mt-[5px]">#8231D3</span>
+                      <span className="block text-dark dark:text-white87 mt-[5px]">#ffa502</span>
                     </div>
                     <div className="text-center">
                       <Button className="bg-transparent hover:bg-hbr-secondary border-1 border-style border-secondary text-secondary hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] shadow-btn">
@@ -405,20 +405,20 @@ function DashboardBase() {
                   <Row gutter={15} className="gap-y-[15px]">
                     <Col md={5}>
                       <div className="bg-gradient-to-r from-primary flex items-center justify-between rounded-[10px] py-[35px] px-[20px] text-white dark:text-white87 h-[100px]">
-                        <span className="me-sm-40 me-0 fs-15">#8231D3</span>
+                        <span className="me-sm-40 me-0 fs-15">#ffa502</span>
                       </div>
                     </Col>
                     <Col md={5}>
                       <div className="bg-gradient-to-r from-primary to-secondary flex items-center justify-between rounded-[10px] py-[35px] px-[20px] text-white dark:text-white87 h-[100px]">
-                        <span className="me-sm-40 me-0 fs-15">#8231D3</span>
+                        <span className="me-sm-40 me-0 fs-15">#ffa502</span>
                         <span className="ms-40 fs-15">#5840FF</span>
                       </div>
                     </Col>
                     <Col md={5}>
                       <div className="bg-gradient-to-r from-primary via-secondary to-primary flex items-center justify-between rounded-[10px] py-[35px] px-[20px] text-white dark:text-white87 h-[100px]">
-                        <span className="me-sm-40 me-0 fs-15">#8231D3</span>
+                        <span className="me-sm-40 me-0 fs-15">#ffa502</span>
                         <span className="ms-40 fs-15">#5840FF</span>
-                        <span className="me-sm-40 me-0 fs-15">#8231D3</span>
+                        <span className="me-sm-40 me-0 fs-15">#ffa502</span>
                       </div>
                     </Col>
                   </Row>

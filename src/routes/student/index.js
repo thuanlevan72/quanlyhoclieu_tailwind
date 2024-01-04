@@ -4,7 +4,7 @@ import { Spin } from 'antd';
 import Dashboard from './DashboardRoutes';
 import withStudentLayout from '../../layout/studentLayout/withStudentLayout';
 import CheckOut from '../../container/ecommerce/overview/CheckoutWizard';
-import Payment from '../../container/profile/settings/overview/Payment';
+// import Payment from '../../container/profile/settings/overview/Payment';
 
 const Profile = lazy(() => import('../../container/profile/settings/overview/Profile'));
 const Account = lazy(() => import('../../container/profile/settings/overview/Account'));
@@ -17,7 +17,7 @@ const Course = lazy(() => import('../../page/student/Course'));
 const CourseDetails = lazy(() => import('../../container/course/CourseDetails'));
 const BoughtCourseDetail = lazy(() => import('../../container/course/BoughtCourseDetail'));
 const PaymentHistory = lazy(() => import('../../page/student/StudentPaymentHistory'));
-const Totalmoney = lazy(() => import('../../page/student/TotalMoney'));
+// const Totalmoney = lazy(() => import('../../page/student/TotalMoney'));
 const Settings = lazy(() => import('../../page/student/StudentProfile'));
 const ComingSoon = lazy(() => import('../../container/pages/ComingSoon'));
 const CalenDar = lazy(() => import('../../container/calendar/Calendar'));
@@ -53,11 +53,11 @@ const Student = React.memo(() => {
           <Route path="password" element={<Password />} />
           <Route path="social" element={<SocialProfiles />} />
           <Route path="notification" element={<Notification />} />
-          <Route path="payment" element={<Payment />} />
+          {/* <Route path="payment" element={<Payment />} /> */}
         </Route>
         <Route path="settings" element={<ComingSoon />} />
         <Route path="payment-history" element={<PaymentHistory />} />
-        <Route path="total-money" element={<Totalmoney />} />
+        <Route path="total-money" element={<ComingSoon />} />
         <Route path="activity" element={<CalenDar />} />
         <Route path="help" element={<FAQ />} />
         <Route path="*" element={<NotFound />} />

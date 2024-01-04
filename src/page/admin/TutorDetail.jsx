@@ -111,21 +111,26 @@ function TutorDetail() {
   const [listVisible, setListVisible] = useState(false);
   const onHandleShowList = (courseID) => {
     if (state.student.length > 0 && state.enrollment.length > 0) {
-      const currentEnroll = state.enrollment.filter((x) => x.courseID === courseID);
+      const currentEnroll = state.enrollment.filter(
+        (x) => x.courseID === courseID && x.tutorID === parseInt(params.id),
+      );
       if (currentEnroll) {
         currentEnroll.map((data) => {
           const current = state.student.find((x) => x.studentID === data.studentID);
-          return cacheLst.push({
-            studentID: <span className="text-[15px] text-body">{current.studentID}</span>,
-            fullName: (
-              <Link
-                to={`/admin/manage/student/${current.studentID}`}
-                className="text-[15px] text-body hover:text-[#ffa502]"
-              >
-                {current.fullName}
-              </Link>
-            ),
-          });
+          if (current) {
+            return cacheLst.push({
+              studentID: <span className="text-[15px] text-body">{current.studentID}</span>,
+              fullName: (
+                <Link
+                  to={`/admin/manage/student/${current.studentID}`}
+                  className="text-[15px] text-body hover:text-[#ffa502]"
+                >
+                  {current.fullName}
+                </Link>
+              ),
+            });
+          }
+          return data;
         });
         setLstStudentData(cacheLst);
       }

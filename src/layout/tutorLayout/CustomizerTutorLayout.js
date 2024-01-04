@@ -55,9 +55,9 @@ function CustomizerStudentLayout() {
     console.log(topMode);
     dispatch(changeMenuMode(topMode));
   };
-  // if (!topMenu) {
-  //   changeNavbar(true);
-  // }
+  if (!topMenu) {
+    changeNavbar(true);
+  }
   const changeLayoutDirection = (rtlMode) => {
     if (rtlMode) {
       const html = document.querySelector('html');
@@ -184,7 +184,7 @@ function CustomizerStudentLayout() {
                   </li>
                 </ul>
               </div>
-              <div className="mb-12">
+              {/* <div className="mb-12">
                 <h4 className="mb-8 text-base font-semibold text-dark dark:text-white87">
                   {t('navbar')} {t('type')}
                 </h4>
@@ -220,7 +220,7 @@ function CustomizerStudentLayout() {
                     </Link>
                   </li>
                 </ul>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
